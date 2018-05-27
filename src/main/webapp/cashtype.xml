@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cashisuper>
+<cash category="normal">
+	<name>正常</name>
+	<type>1</type>
+	<value1>null</value1>
+	<value2>null</value2>
+</cash>
+<cash category="rebate">
+	<name>八折</name>
+	<type>2</type>
+	<value1>0.8</value1>
+	<value2>null</value2>
+</cash>
+<cash category="return">
+	<name>满300减100</name>
+	<type>3</type>
+	<value1>300</value1>
+	<value2>100</value2>
+</cash>
+</cashisuper>

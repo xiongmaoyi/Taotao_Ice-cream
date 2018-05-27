@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd  
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd  
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-3.2.xsd  
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- 处理器映射器 -->
+	<!-- 处理器适配器 所有的处理器适配器都实现handleradapter接口 -->
+	<mvc:annotation-driven conversion-service="conversionService" validator="validator" />
+
+
+	<!-- 视图解析器 解析jsp视图，默认使用jstl标签，classpath下的得有jstl的包 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"></bean>
+
+	<!-- 配置handler -->
+	<context:component-scan base-package="cn.com.g12.controller" />
+
+
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 注入自己写的转换器 -->
+		<property name="converters">
+			<list>
+				<bean class="cn.com.g12.controller.converter.DateConverter"></bean>
+			</list>
+		</property>
+	</bean>
+
+
+<!-- 服务端校验 -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<!--校验提供商 -->
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		<!--指定校验所使用的资源文件 不设置则默认为classpath下的ValidationMessages.properties -->
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+	<!--报错信息配置文件 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<!--资源文件名 -->
+		<property name="basename" value="classpath:ValidationMessages" />
+		<!-- 解决中文乱码 -->
+		<property name="defaultEncoding" value="utf-8" />
+		<!--资源文件编码格式 -->
+		<property name="fileEncodings" value="utf-8" />
+		<!--对资源文件缓存时间，单位为秒 -->
+		<property name="cacheSeconds" value="120" />
+	</bean>
+
+
+</beans>

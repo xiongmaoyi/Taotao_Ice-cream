@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.g12.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.g12.pojo.Course" >
+    
+    <id column="courseid" property="courseid" jdbcType="CHAR" />
+    <result column="coursename" property="coursename" jdbcType="VARCHAR" />
+    <result column="period" property="period" jdbcType="INTEGER" />
+    <result column="build" property="build" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+   
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+      
+    -->
+    courseid, coursename, period, build
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="CourseExample" >
+   
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+   
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where courseid = #{courseid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    
+    delete from course
+    where courseid = #{courseid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="CourseExample" >
+    
+    delete from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="Course" >
+    
+    insert into course (courseid, coursename, period, 
+      build)
+    values (#{courseid,jdbcType=CHAR}, #{coursename,jdbcType=VARCHAR}, #{period,jdbcType=INTEGER}, 
+      #{build,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="Course" >
+    
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseid != null" >
+        courseid,
+      </if>
+      <if test="coursename != null" >
+        coursename,
+      </if>
+      <if test="period != null" >
+        period,
+      </if>
+      <if test="build != null" >
+        build,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseid != null" >
+        #{courseid,jdbcType=CHAR},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null" >
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="build != null" >
+        #{build,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="CourseExample" resultType="java.lang.Integer" >
+    
+    select count(*) from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Wed Apr 11 08:40:28 CST 2018.
+    -->
+    update course
+    <set >
+      <if test="record.courseid != null" >
+        courseid = #{record.courseid,jdbcType=CHAR},
+      </if>
+      <if test="record.coursename != null" >
+        coursename = #{record.coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.period != null" >
+        period = #{record.period,jdbcType=INTEGER},
+      </if>
+      <if test="record.build != null" >
+        build = #{record.build,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+   
+    update course
+    set courseid = #{record.courseid,jdbcType=CHAR},
+      coursename = #{record.coursename,jdbcType=VARCHAR},
+      period = #{record.period,jdbcType=INTEGER},
+      build = #{record.build,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="Course" >
+   
+    update course
+    <set >
+      <if test="coursename != null" >
+        coursename = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null" >
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="build != null" >
+        build = #{build,jdbcType=BIT},
+      </if>
+    </set>
+    where courseid = #{courseid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="Course" >
+    
+    update course
+    set coursename = #{coursename,jdbcType=VARCHAR},
+      period = #{period,jdbcType=INTEGER},
+      build = #{build,jdbcType=BIT}
+    where courseid = #{courseid,jdbcType=CHAR}
+  </update>
+</mapper>
