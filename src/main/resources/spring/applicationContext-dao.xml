@@ -43,7 +43,7 @@
 	<!-- mapper扫描 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
-		<property name="basePackage" value="cn.com.g12.mapper"></property>
+		<property name="basePackage" value="cn.com.ttxg.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
