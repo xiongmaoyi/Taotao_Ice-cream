@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
+    <link href="../css/table.css" rel="stylesheet">
     <title>My JSP 'Purchase.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -23,6 +23,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+  	<form>
+    <table>
+    	<tr><td colspan="5">货品购置</td></tr>
+    	<tr><td>订单编号</td><td>0001</td><td>日期</td><td colspan="2">2017.2.3</td></tr>
+    	<tr><td colspan="5">商品列表 <input type="button" class="button button-rounded button-tiny" value="获取商品"> </td></tr>
+    	<tr><th>商品编号</th><th>商品名称</th><th>商品数量</th><th>小计</th><th>操作</th></tr>
+    	<tr><td></td><td></td><td></td><td></td><td><input type="checkbox"></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td><input type="checkbox"></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td><input type="checkbox"></td></tr>
+    	<tr><td colspan="5" align="right">总计：0</td></tr>
+    	<tr><td colspan="5" align="center"><input type="button" class="button button-rounded button-tiny" value ="删除" > <input type="button" class="button button-rounded button-tiny" value ="确认订单" ></td></tr>
+    
+    
+    </table>
+    
+    </form>
   </body>
 </html>

@@ -18,35 +18,27 @@
 	<!-- 事务管理器 对mybatis操作数据库事务控制 ，spring使用jdbc的事务控制类 -->
 	<bean id="TransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<!-- 数据源 -->
+		<!-- 控制数据源 -->
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<!-- 通知 -->
-	<!-- transaction-manager="TransactionManager表示把事物通知给TransactionManager去处理 -->
+	
+	<!--谁调 用通知？ aop -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* cn.com.ttxg.service.*.*(..))" />
+	</aop:config>
+	
+	
+	<!-- 事物增强 配置事物如何去切入 -->
 	<tx:advice id="txAdvice" transaction-manager="TransactionManager">
 		<tx:attributes>
-			<!-- 传播行为
-			    @Transactional(propagation=Propagation.REQUIRED) 如果有事务, 那么加入事务, 没有的话新建一个(默认情况下) 
-				@Transactional(propagation=Propagation.NOT_SUPPORTED) 容器不为这个方法开启事务 
-				@Transactional(propagation=Propagation.REQUIRES_NEW) 不管是否存在事务,都创建一个新的事务,原来的挂起,新的执行完毕,继续执行老的事务 
-				@Transactional(propagation=Propagation.MANDATORY) 必须在一个已有的事务中执行,否则抛出异常
-			    @Transactional(propagation=Propagation.NEVER)必须在一个没有的事务中执行,否则抛出异常(与Propagation.MANDATORY相反)
-			    @Transactional(propagation=Propagation.SUPPORTS)如果其他bean调用这个方法,在其他bean中声明事务,那就用事务.如果其他bean没有声明事务,那就不用事务. -->
-			<tx:method name="save*" propagation="REQUIRED"></tx:method>
-			<tx:method name="insert*" propagation="REQUIRED"></tx:method>
-			<tx:method name="delete*" propagation="REQUIRED"></tx:method>
-			<tx:method name="update*" propagation="REQUIRED"></tx:method>
-
-			<tx:method name="find*" propagation="SUPPORTS" read-only="true"></tx:method>
-			<tx:method name="select*" propagation="SUPPORTS" read-only="true"></tx:method>
-			<tx:method name="query*" propagation="SUPPORTS" read-only="true"></tx:method>
+			<!-- 所有方法都是事物方法 -->
+			<tx:method name="*"/>
+			<!-- 以get开始的所有方法 比如查询，优化为只读 -->
+			<tx:method name="get*" read-only="true"/>
 
 		</tx:attributes>
 
 	</tx:advice>
-	<!--谁调 用通知？ aop -->
-	<aop:config>
-	<aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.com.g12.service.*.*(..))"/>
-	</aop:config>
 </beans>

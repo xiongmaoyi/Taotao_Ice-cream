@@ -167,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <!-- /. WRAPPER  -->
     <div id="footer-sec">
-        &copy; 2017 Practice 1 groups | 期末实训 - Practical operation - 实训作业
+        &copy; 2018 Practice 1 groups | 期末实训 - Practical operation - 实训作业
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->

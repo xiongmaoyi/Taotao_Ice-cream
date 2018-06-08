@@ -1,6 +1,6 @@
 package cn.com.ttxg.pojo;
 
-public class Goods {
+public class GoodsCustom {
     private Integer goodsid;
 
     private String goodsname;
@@ -12,8 +12,18 @@ public class Goods {
     private String state;
 
     private Integer brandid;
+    
+    private Brand brand;
 
-    public Integer getGoodsid() {
+    public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public Integer getGoodsid() {
         return goodsid;
     }
 

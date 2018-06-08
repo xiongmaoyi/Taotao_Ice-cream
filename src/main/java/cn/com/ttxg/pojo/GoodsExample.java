@@ -3,18 +3,11 @@ package cn.com.ttxg.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-//用于添加条件，相当where后面的部分 
-//xxxExample example = new xxxExample(); 
-//Criteria criteria = new Example().createCriteria();
 public class GoodsExample {
-	
-	
-	
-	//example.setOrderByClause(“字段名 ASC”);	添加升序排列条件，DESC为降序
     protected String orderByClause;
-    //example.setDistinct(false)	去除重复，boolean型，true为选择不重复的记录。
+
     protected boolean distinct;
-    //
+
     protected List<Criteria> oredCriteria;
 
     public GoodsExample() {
@@ -450,6 +443,66 @@ public class GoodsExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andBrandidIsNull() {
+            addCriterion("brandid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidIsNotNull() {
+            addCriterion("brandid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidEqualTo(Integer value) {
+            addCriterion("brandid =", value, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidNotEqualTo(Integer value) {
+            addCriterion("brandid <>", value, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidGreaterThan(Integer value) {
+            addCriterion("brandid >", value, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("brandid >=", value, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidLessThan(Integer value) {
+            addCriterion("brandid <", value, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidLessThanOrEqualTo(Integer value) {
+            addCriterion("brandid <=", value, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidIn(List<Integer> values) {
+            addCriterion("brandid in", values, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidNotIn(List<Integer> values) {
+            addCriterion("brandid not in", values, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidBetween(Integer value1, Integer value2) {
+            addCriterion("brandid between", value1, value2, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandidNotBetween(Integer value1, Integer value2) {
+            addCriterion("brandid not between", value1, value2, "brandid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -545,24 +598,3 @@ public class GoodsExample {
         }
     }
 }
-
-
-/*
-方法	说明
-example.setOrderByClause(“字段名 ASC”);	添加升序排列条件，DESC为降序
-example.setDistinct(false)	去除重复，boolean型，true为选择不重复的记录。
-criteria.andXxxIsNull	添加字段xxx为null的条件
-criteria.andXxxIsNotNull	添加字段xxx不为null的条件
-criteria.andXxxEqualTo(value)	添加xxx字段等于value条件
-criteria.andXxxNotEqualTo(value)	添加xxx字段不等于value条件
-criteria.andXxxGreaterThan(value)	添加xxx字段大于value条件
-criteria.andXxxGreaterThanOrEqualTo(value)	添加xxx字段大于等于value条件
-criteria.andXxxLessThan(value)	添加xxx字段小于value条件
-criteria.andXxxLessThanOrEqualTo(value)	添加xxx字段小于等于value条件
-criteria.andXxxIn(List<？>)	添加xxx字段值在List<？>条件
-criteria.andXxxNotIn(List<？>)	添加xxx字段值不在List<？>条件
-criteria.andXxxLike(“%”+value+”%”)	添加xxx字段值为value的模糊查询条件
-criteria.andXxxNotLike(“%”+value+”%”)	添加xxx字段值不为value的模糊查询条件
-criteria.andXxxBetween(value1,value2)	添加xxx字段值在value1和value2之间条件
-criteria.andXxxNotBetween(value1,value2)	添加xxx字段值不在value1和value2之间条件
-*/

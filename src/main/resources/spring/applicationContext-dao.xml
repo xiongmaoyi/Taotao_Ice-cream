@@ -13,34 +13,52 @@
      http://www.springframework.org/schema/mvc 
      http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 	">
-	<!-- -->
+	<!-- 扫描整个ttxg -->
 	<context:annotation-config />
-	<context:component-scan base-package="cn.com.g12" />
-
-	<!-- 加载配置文件 -->
+	<context:component-scan base-package="cn.com.ttxg">
+		<!-- 不扫描controller -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 加载db.properties配置文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 数据源 使用dbcp连接池 -->
-
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-
-
 	</bean>
 
-	<!-- sqlSessionFactory -->
 
+
+	<!-- 配置mybatis整合 -->
 	<!-- 第一步,创建SqlSessionFactory 单例 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 1.1 配置数据源 -->
+		<!-- 1.1 配置数据源 ref上面用的datasource -->
 		<property name="dataSource" ref="dataSource"></property>
-		<!-- 1.2 指定mybatis的配置文件classpath: 可省略,不建议 -->
-		<property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
+		<!-- 1.2 指定mybatis的配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:cn/com/ttxg/mapper/*.xml"></property>
+
+		<!-- pagehelper配置 -->
+		<!-- <property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						使用下面的方式配置参数，一行配置一个
+						<value>
+							params=value1
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property> -->
+
 	</bean>
 
-	<!-- mapper扫描 -->
+	<!-- mapper扫描 将mabatis接口加入到ioc容器中 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
 		<property name="basePackage" value="cn.com.ttxg.mapper"></property>

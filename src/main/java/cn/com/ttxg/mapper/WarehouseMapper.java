@@ -1,9 +1,12 @@
 package cn.com.ttxg.mapper;
 
-import cn.com.ttxg.pojo.Warehouse;
-import cn.com.ttxg.pojo.WarehouseExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import cn.com.ttxg.pojo.Warehouse;
+import cn.com.ttxg.pojo.WarehouseCustom;
+import cn.com.ttxg.pojo.WarehouseExample;
 
 public interface WarehouseMapper {
     long countByExample(WarehouseExample example);
@@ -27,4 +30,7 @@ public interface WarehouseMapper {
     int updateByPrimaryKeySelective(Warehouse record);
 
     int updateByPrimaryKey(Warehouse record);
+    
+    
+    List<WarehouseCustom> selectByExampleWithGoodsAndBrand(WarehouseExample example);
 }

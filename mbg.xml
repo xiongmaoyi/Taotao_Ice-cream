@@ -52,6 +52,6 @@
 		<table tableName="transaction" domainObjectName="Transaction"></table>
 		<table tableName="user" domainObjectName="User"></table>
 		<table tableName="warehouse" domainObjectName="Warehouse"></table>
-
+		<table tableName="brand" domainObjectName="Brand"></table>
 	</context>
 </generatorConfiguration>

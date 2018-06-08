@@ -14,17 +14,27 @@
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-	<!-- 处理器映射器 -->
-	<!-- 处理器适配器 所有的处理器适配器都实现handleradapter接口 -->
-	<mvc:annotation-driven conversion-service="conversionService" validator="validator" />
+	<context:component-scan base-package="cn.com.ttxg">
+		<!-- 只扫描控制器 -->
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	
+	<!-- 将spring不能处理的交给tomcat -->
+	<mvc:default-servlet-handler />
+	<!-- 配置处理器映射器 映射动态请求/快捷ajax/validator校验 -->
+	<mvc:annotation-driven conversion-service="conversionService"
+		validator="validator" />
 
 
-	<!-- 视图解析器 解析jsp视图，默认使用jstl标签，classpath下的得有jstl的包 -->
+	<!-- 视图解析器 解析jsp视图,方便返回，默认使用jstl标签 -->
 	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"></bean>
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <property name="prefix" value="/jsp/"></property> <property name="suffix" 
+			value=".jsp"></property> -->
+	</bean>
 
-	<!-- 配置handler -->
-	<context:component-scan base-package="cn.com.ttxg.controller" />
 
 
 	<bean id="conversionService"
@@ -38,7 +48,7 @@
 	</bean>
 
 
-<!-- 服务端校验 -->
+	<!-- 服务端校验 -->
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<!--校验提供商 -->

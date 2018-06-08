@@ -36,6 +36,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <input type="button" value="查询成绩name" 
 				onclick="javascrtpt:window.location.href='/SSM_ALL/Grade/showGradeAndName.action'">
     </div>
+    <div align="center">
+    <input type="button" value="仓库" 
+				onclick="javascrtpt:window.location.href='/TTXG/showAllWarehouse.action'">
+    </div>
     </p>
   </body>
 </html>
