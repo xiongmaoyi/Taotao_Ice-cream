@@ -3,14 +3,14 @@ package cn.com.ttxg.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WarehouseExample {
+public class InStorehouseExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public WarehouseExample() {
+    public InStorehouseExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,63 +104,63 @@ public class WarehouseExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andWarehousegoodsidIsNull() {
-            addCriterion("warehousegoodsid is null");
+        public Criteria andMessageidIsNull() {
+            addCriterion("messageid is null");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidIsNotNull() {
-            addCriterion("warehousegoodsid is not null");
+        public Criteria andMessageidIsNotNull() {
+            addCriterion("messageid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidEqualTo(Integer value) {
-            addCriterion("warehousegoodsid =", value, "warehousegoodsid");
+        public Criteria andMessageidEqualTo(Integer value) {
+            addCriterion("messageid =", value, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidNotEqualTo(Integer value) {
-            addCriterion("warehousegoodsid <>", value, "warehousegoodsid");
+        public Criteria andMessageidNotEqualTo(Integer value) {
+            addCriterion("messageid <>", value, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidGreaterThan(Integer value) {
-            addCriterion("warehousegoodsid >", value, "warehousegoodsid");
+        public Criteria andMessageidGreaterThan(Integer value) {
+            addCriterion("messageid >", value, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("warehousegoodsid >=", value, "warehousegoodsid");
+        public Criteria andMessageidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("messageid >=", value, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidLessThan(Integer value) {
-            addCriterion("warehousegoodsid <", value, "warehousegoodsid");
+        public Criteria andMessageidLessThan(Integer value) {
+            addCriterion("messageid <", value, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidLessThanOrEqualTo(Integer value) {
-            addCriterion("warehousegoodsid <=", value, "warehousegoodsid");
+        public Criteria andMessageidLessThanOrEqualTo(Integer value) {
+            addCriterion("messageid <=", value, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidIn(List<Integer> values) {
-            addCriterion("warehousegoodsid in", values, "warehousegoodsid");
+        public Criteria andMessageidIn(List<Integer> values) {
+            addCriterion("messageid in", values, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidNotIn(List<Integer> values) {
-            addCriterion("warehousegoodsid not in", values, "warehousegoodsid");
+        public Criteria andMessageidNotIn(List<Integer> values) {
+            addCriterion("messageid not in", values, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidBetween(Integer value1, Integer value2) {
-            addCriterion("warehousegoodsid between", value1, value2, "warehousegoodsid");
+        public Criteria andMessageidBetween(Integer value1, Integer value2) {
+            addCriterion("messageid between", value1, value2, "messageid");
             return (Criteria) this;
         }
 
-        public Criteria andWarehousegoodsidNotBetween(Integer value1, Integer value2) {
-            addCriterion("warehousegoodsid not between", value1, value2, "warehousegoodsid");
+        public Criteria andMessageidNotBetween(Integer value1, Integer value2) {
+            addCriterion("messageid not between", value1, value2, "messageid");
             return (Criteria) this;
         }
 
@@ -268,6 +268,29 @@ public class WarehouseExample {
             addCriterion("goodscount like", value, "goodscount");
             return (Criteria) this;
         }
+        
+        /**
+         * 定制的example---------------------------------------------------------------------------------------
+         * @param value
+         * @return
+         */
+        
+        public Criteria andGoodsNameLike(String value) {
+            addCriterion("goodsname like", value, "goodsname");
+            return (Criteria) this;
+        }
+        
+        public Criteria andBrandNameLike(String value) {
+            addCriterion("brandname like", value, "brandname");
+            return (Criteria) this;
+        }
+        public Criteria andGoodsidEqualTo(String value) {
+            addCriterion("instorehouse.goodsid =", value, "instorehouse.goodsid");
+            return (Criteria) this;
+        }
+        
+        
+        /**-----------------------------------------------------------------------------------------------------*/
 
         public Criteria andGoodscountNotLike(String value) {
             addCriterion("goodscount not like", value, "goodscount");
@@ -293,13 +316,66 @@ public class WarehouseExample {
             addCriterion("goodscount not between", value1, value2, "goodscount");
             return (Criteria) this;
         }
-        /*自定义criteria方法*/
-        public Criteria andGoodsnameEqualTo(String value) {
-            addCriterion("goods.goodsname =", value, "goods.goodsname");
+
+        public Criteria andStorehouseidIsNull() {
+            addCriterion("storehouseid is null");
             return (Criteria) this;
         }
-        
-        
+
+        public Criteria andStorehouseidIsNotNull() {
+            addCriterion("storehouseid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidEqualTo(Integer value) {
+            addCriterion("storehouseid =", value, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidNotEqualTo(Integer value) {
+            addCriterion("storehouseid <>", value, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidGreaterThan(Integer value) {
+            addCriterion("storehouseid >", value, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("storehouseid >=", value, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidLessThan(Integer value) {
+            addCriterion("storehouseid <", value, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidLessThanOrEqualTo(Integer value) {
+            addCriterion("storehouseid <=", value, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidIn(List<Integer> values) {
+            addCriterion("storehouseid in", values, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidNotIn(List<Integer> values) {
+            addCriterion("storehouseid not in", values, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidBetween(Integer value1, Integer value2) {
+            addCriterion("storehouseid between", value1, value2, "storehouseid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStorehouseidNotBetween(Integer value1, Integer value2) {
+            addCriterion("storehouseid not between", value1, value2, "storehouseid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

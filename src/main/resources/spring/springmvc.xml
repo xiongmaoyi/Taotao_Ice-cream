@@ -19,8 +19,8 @@
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	
-	
+
+
 	<!-- 将spring不能处理的交给tomcat -->
 	<mvc:default-servlet-handler />
 	<!-- 配置处理器映射器 映射动态请求/快捷ajax/validator校验 -->
@@ -31,8 +31,8 @@
 	<!-- 视图解析器 解析jsp视图,方便返回，默认使用jstl标签 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- <property name="prefix" value="/jsp/"></property> <property name="suffix" 
-			value=".jsp"></property> -->
+		<property name="prefix" value="/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
 	</bean>
 
 
@@ -51,21 +51,21 @@
 	<!-- 服务端校验 -->
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-		<!--校验提供商 -->
+		<!-- 校验提供商 -->
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
-		<!--指定校验所使用的资源文件 不设置则默认为classpath下的ValidationMessages.properties -->
+		<!-- 指定校验所使用的资源文件 不设置则默认为classpath下的ValidationMessages.properties -->
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
-	<!--报错信息配置文件 -->
+	<!-- 报错信息配置文件 -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<!--资源文件名 -->
+		<!-- 资源文件名 -->
 		<property name="basename" value="classpath:ValidationMessages" />
 		<!-- 解决中文乱码 -->
 		<property name="defaultEncoding" value="utf-8" />
-		<!--资源文件编码格式 -->
+		<!-- 资源文件编码格式 -->
 		<property name="fileEncodings" value="utf-8" />
-		<!--对资源文件缓存时间，单位为秒 -->
+		<!-- 对资源文件缓存时间，单位为秒 -->
 		<property name="cacheSeconds" value="120" />
 	</bean>
 

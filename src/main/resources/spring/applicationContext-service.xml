@@ -17,7 +17,13 @@
 	">
 		 
 
-
+	
 	<!--    <bean id="gradeServiceImpl" class="cn.com.g12.service.GradeServiceImpl"></bean> --> 
+	
+	<!--配置一个可执行批量操作的sqlSession  -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
+	</bean>
 	 
 	</beans>

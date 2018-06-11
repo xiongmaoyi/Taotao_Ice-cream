@@ -31,6 +31,9 @@ public interface WarehouseMapper {
 
     int updateByPrimaryKey(Warehouse record);
     
-    
+   /* -----------------*/
     List<WarehouseCustom> selectByExampleWithGoodsAndBrand(WarehouseExample example);
+   
+    
+    
 }

@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>涛涛雪糕管理系统</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <ul class="nav" id="main-menu">
                     <li>
                         <div class="user-img-div">
-                            <img src="img/cow.png" class="img-thumbnail" />
+                            <img src="imges/xg01.jpg" class="img-thumbnail" />
 
                             <div class="inner-text">
                                <s:property value="#session.username"/><br>
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>仓库管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a href="2_Purchase/wheat_buy.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
+                                <a href="jsp/ShowWarehouse.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
                             </li>
                             
                             
@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">涛涛雪糕</h1>
+                        <h1 class="page-head-line">涛涛雪糕管理窗口</h1>
                         <h1 class="page-subhead-line"> </h1>
 
                     </div>
@@ -148,12 +148,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <!-- /. ROW  -->
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="alert alert-info">
-                            Niuniu flour factory management system.
+                        <div class="alert alert-info" style="padding: 0;border: 0;">
                             
-                          <br />
-                            
-                           <iframe name="mg" width="100%" height="600px" frameborder="0"  >
+                           <iframe name="mg" width="100%" height="600px" frameborder="0" style="padding: 0;" >
 							</iframe>
 
                         </div>

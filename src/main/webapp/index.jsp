@@ -37,8 +37,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				onclick="javascrtpt:window.location.href='/SSM_ALL/Grade/showGradeAndName.action'">
     </div>
     <div align="center">
+    <input type="button" value="zhuye" 
+				onclick="javascrtpt:window.location.href='/TTXG/ttxg_main.jsp'">
+    </div>
+    <div align="center">
     <input type="button" value="仓库" 
-				onclick="javascrtpt:window.location.href='/TTXG/showAllWarehouse.action'">
+				onclick="javascrtpt:window.location.href='/TTXG/jsp/ShowWarehouse.jsp'">
     </div>
     </p>
   </body>
