@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.com.ttxg.mapper.GoodsMapper;
 import cn.com.ttxg.mapper.InStorehouseMapper;
 import cn.com.ttxg.mapper.WarehouseMapper;
 import cn.com.ttxg.pojo.Warehouse;
@@ -28,7 +29,8 @@ public class MapperTest {
 	
 	@Autowired
 	SqlSession sqlSession;
-	
+	@Autowired
+	GoodsMapper goodsMapper;
 	
 	@Test
 	public void testWhcMapper(){
@@ -53,7 +55,7 @@ public class MapperTest {
 		example.createCriteria().andGoodsnameEqualTo("%1%");
 		System.out.println("qqqqqqqqqqqqq"+warehouseMapper.selectByExampleWithGoodsAndBrand(example)+"qqqqqqqqqqqqq");*/
 		
-		System.out.println("qqqqqqqqqqqqqqq"+InStorehouseMapper.selectWithGoodsAndBrandByExample(null));
+		System.out.println("qqqqqqqqqqqqqqq"+goodsMapper.selectWithBrandByExample(null));
 		
 		
 	}

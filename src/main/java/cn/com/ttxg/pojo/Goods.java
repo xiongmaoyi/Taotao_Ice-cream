@@ -13,6 +13,8 @@ public class Goods {
 
     private Integer brandid;
 
+    private String goodspng;
+
     public Integer getGoodsid() {
         return goodsid;
     }
@@ -59,5 +61,13 @@ public class Goods {
 
     public void setBrandid(Integer brandid) {
         this.brandid = brandid;
+    }
+
+    public String getGoodspng() {
+        return goodspng;
+    }
+
+    public void setGoodspng(String goodspng) {
+        this.goodspng = goodspng == null ? null : goodspng.trim();
     }
 }

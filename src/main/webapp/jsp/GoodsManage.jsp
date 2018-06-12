@@ -12,7 +12,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <base href="<%=basePath%>">
 <!--  <link href="../css/table.css" rel="stylesheet"> -->
-<title>仓库管理</title>
+<title>用户管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -40,7 +40,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>仓库查询</h3>
+				<h3>商品管理</h3>
+				
 			</div>
 		</div>
 		<div class="row"></div>
@@ -49,25 +50,39 @@
 		<!-- 显示表格数据 -->
 		<div class="row">
 			<div class="col-md-12">
-				<form>
+				<!-- <form> -->
 					<table class="table table-striped table-hover table-bordered"
-						id='warehouse_table'>
+						id='inStorehouse_table'>
 
 						<thead>
 							<tr>
-								<td colspan="7" align="center">仓库查询</td>
+								<td colspan="7" align="center">商品管理
+								
+
+
+								</td>
 							</tr>
 
 							<tr>
-								<td colspan="2">货品列表
+								<td colspan="1">商品列表 </td>
+								<td colspan="1">
+								<select class="custom-select" id="searchType" name="searchType">
+										<option selected value="1">按名称搜索</option>
+										<option value="2">按商品编号搜索</option>
+										<option value="3">按品牌搜索</option>
+										
+								</select>
 								</td>
+								
 								<td colspan="5">
 									<div class="input-group">
+										
+
 										<input type="text" class="form-control"
-											placeholder="请输入商品名称关键粗">
+											placeholder="请输入商品名称关键词" id="searchText">
 										<div class="input-group-append">
-											<button class="btn btn-success" type="button">
-												<span class="glyphicons glyphicons-search"></span>搜索库存
+											<button class="btn btn-success" type="button" id="searchBtn">
+												<span class="glyphicons glyphicons-search"></span>搜索商品
 											</button>
 										</div>
 									</div>
@@ -76,82 +91,41 @@
 							<tr>
 								<th scope="row">商品编号</th>
 								<th scope="row">商品名称</th>
-								<th scope="row">商品数量</th>
+								<!-- <th scope="row">商品数量</th> -->
 								<th scope="row">商品进价</th>
 								<th scope="row">品牌名称</th>
 								<th scope="row">商品备注</th>
-								<th scope="row">xx</th>
+								<th scope="row">操作</th>
 							</tr>
 						</thead>
 
-						<%-- <c:forEach items="${page.list}" var="whgoods">
-							<c:forEach items="${whgoods.goodsCustomList}" var="gl">
-								<tr>
-									<td>${whgoods.goodsid}</td>
-									<td>${gl.goodsname}</td>
-									<td>${whgoods.goodscount}</td>
-									<td>${gl.goodsmoney}</td>
-									<td>${gl.brand.brandname}</td>
-									<td>${gl.goodsremarks}</td>
-									<td>xx</td>
-								</tr>
-							</c:forEach>
-						</c:forEach> --%>
-						<tbody id="warehouse_tbody">
+						<tbody id="inStorehouse_tbody">
 
 
 						</tbody>
+						
 						<tr style="background-color: white">
-							<td colspan="7" align="right"></td>
+							<td colspan="6" align="center">
+								<button class="btn btn-danger" type="button" id="deleteGoods">删除</button>
+								<button class="btn btn-success" type="button" id="addGoods">添加商品</button>
+							</td>
 						</tr>
 						
-
-
 					</table>
 
-				</form>
+				<!-- </form> -->
 			</div>
 		</div>
 		<!-- 显示分页信息 -->
 		<div class="row">
 			<div class="col-md-6" id="page_info_col">
-				<%-- <span>当前 ${page.pageNum} 页, 共有${page.pages}页,
-					总计${page.total}条记录</span> --%>
+				
 			</div>
 			<div class="col-md-6" id="page_nav_col">
 				<nav aria-label="Page navigation example">
-				<ul class="pagination" id="page_ul">
-					<%-- <li class="page-item"><a class="page-link"
-						href="/TTXG/showAllWarehouse.action?pn=1">首页</a></li>
-					<c:if test="${page.hasPreviousPage}">
-						<li class="page-item"><a class="page-link"
-							href="/TTXG/showAllWarehouse.action?pn=${page.pageNum-1}"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
-						</a></li>
-					</c:if>
-
-					<c:forEach items="${page.navigatepageNums}" var="page_Num">
-						<c:if test="${page_Num==page.pageNum}">
-							<li class="page-item active"><a class="page-link"
-								href="/TTXG/showAllWarehouse.action?pn=${page_Num}">
-									${page_Num} </a></li>
-						</c:if>
-						<c:if test="${page_Num!=page.pageNum}">
-							<li class="page-item"><a class="page-link"
-								href="/TTXG/showAllWarehouse.action?pn=${page_Num}">${page_Num}</a></li>
-						</c:if>
-					</c:forEach>
-					<c:if test="${page.hasNextPage }">
-						<li class="page-item"><a class="page-link"
-							href="/TTXG/showAllWarehouse.action?pn=${page.pageNum+1}"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-								class="sr-only">Next</span>
-						</a></li>
-					</c:if>
-					<li class="page-item"><a class="page-link"
-						href="/TTXG/showAllWarehouse.action?pn=${page.pages}">末页</a></li> --%>
-				</ul>
+					<ul class="pagination" id="page_ul">
+					
+					</ul>
 				</nav>
 			</div>
 		</div>
@@ -164,18 +138,67 @@
 
 
 	<script>
+		//
 		$(function() {
-			toPage(3)
+			toPage(1)
+			
+			
+		});
+			//声明全局变量 搜索条件 搜索方式
+			var condition;
+			var searchType;
+		
+		//查询类型转换
+		$("#searchType").change(function(){
+			
+			var optionValue = $("#searchType option:selected").val();
+			
+			console.log(optionValue);
+			if(optionValue==1){
+				$("#searchText").attr("placeholder","请输入商品名称关键词");
+				//值变化时候放入searchtext变量
+				searchType=1;
+			}else if(optionValue==2){
+				$("#searchText").attr("placeholder","请输入商品编号");
+				searchType=2;
+			}else if(optionValue==3){
+				$("#searchText").attr("placeholder","请输入品牌关键词");
+				searchType=3;
+			}
+			
+			
+		});
+		//查询的值发生变化时放入condition变量
+		$("#searchText:text").change(function() {
+			condition=$("#searchText").val();
 		});
 	
-		function toPage(pn) {
+		$("#searchBtn").click(function(){
+			console.log(123111111);
+			var data ={"pn":"1","condition":condition,"searchType":searchType};
 			$.ajax({
-				url : "/TTXG/warehouseJson",
-				data : "pn="+pn,
+				url : "/TTXG/showGoodsJsonByCondition",
+				data : data,
 				type : "GET",
 				success : function(result) {
 					console.log(result);
-					buid_warehouse_table(result);
+					buid_inStorehouse_table(result);
+					buid_page_info(result);
+					buid_page_nav(result);
+				}
+			});
+		
+		});
+		
+	
+		function toPage(pn) {
+			$.ajax({
+				url : "/TTXG/showGoodsJsonByCondition",
+				data : {"pn":pn,"condition":condition,"searchType":searchType},
+				type : "GET",
+				success : function(result) {
+					console.log(result);
+					buid_inStorehouse_table(result);
 					buid_page_info(result);
 					buid_page_nav(result);
 				}
@@ -183,31 +206,36 @@
 	
 		}
 	
-		function buid_warehouse_table(result) {
-				$("#warehouse_tbody").empty();
-				var whs = result.extend.page.list;
+		function buid_inStorehouse_table(result) {
+				$("#inStorehouse_tbody").empty();
+				var shl = result.extend.page.list;
 				//jQuery自带的遍历
-				$.each(whs, function(index, item) {
-					$.each(whs[index].goodsCustomList, function(index, gcl) {
+				$.each(shl, function(index, item) {
+					
 						var goodsid_td = $("<td></td>").append(item.goodsid);
-						var goodsname_td = $("<td></td>").append(gcl.goodsname);
-						var goodscount_td = $("<td></td>").append(item.goodscount);
-						var goodsmoney_td = $("<td></td>").append(item.goodsid);
-						var brand_td = $("<td></td>").append(item.goodsid);
-						var goodsremarks_td = $("<td></td>").append(item.goodsid);
-						var xxx_td = $("<td></td>").append(item.goodsid);
-	
+						var goodsname_td = $("<td></td>").append(item.goodsname);
+						/* var goodscount_td = $("<td></td>").append(item.goodscount); */
+						var goodsmoney_td = $("<td></td>").append(item.goodsmoney);
+						var brand_td = $("<td></td>").append(item.brand.brandname);
+						var goodsremarks_td = $("<td></td>").append(item.goodsremarks);
+						console.log(index);
+						
+						var delete_button= $('<button></button>').append("删除").addClass("btn btn-danger").val(item.goodsid);
+						var update_button= $("<button></button>").append("修改").addClass("btn btn-info")
+						console.log(delete_button);
+						var xxx_td = $("<td></td>").append(delete_button);
+						
 						$("<tr></tr>").append(goodsid_td)
 							.append(goodsname_td)
-							.append(goodscount_td)
+							//.append(goodscount_td)
 							.append(goodsmoney_td)
 							.append(brand_td)
 							.append(goodsremarks_td)
 							.append(xxx_td)
-							.appendTo("#warehouse_tbody");
+							.appendTo("#inStorehouse_tbody");
 	
 	
-					});
+					
 	
 				});
 				}
@@ -215,7 +243,7 @@
 	
 			function buid_page_info(result) {
 				$("#page_info_col").empty();
-				$("#page_info_col").append("当前 " + result.extend.page.pageNum + " 页, 共有" + result.extend.page.pages + "页,总计" + result.extend.page.total + "条记录");
+				$("#page_info_col").append("当前<span class='badge badge-secondary'> " + result.extend.page.pageNum + " </span>页, 共有<span class='badge badge-secondary'> " + result.extend.page.pages + " </span> 页,总计 <span class='badge badge-secondary'>" + result.extend.page.total + " </span>条记录");
 			}
 			function buid_page_nav(result) {
 				$("#page_ul").empty();

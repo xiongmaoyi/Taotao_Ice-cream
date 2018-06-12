@@ -96,8 +96,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>仓库管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a href="jsp/ShowWarehouse.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
+                                <a href="jsp/InStorehouse.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
                             </li>
+                            
                             
                             
                            
@@ -118,10 +119,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
                      
                     <li>
-                        <a href="#"><i class="fa fa-yelp "></i>用户管理 <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-yelp "></i>系统管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
                                 <a href="4_Sale/sale_index.jsp" target="mg"><i class="fa fa-circle-o "></i>客户管理</a>
+                            </li>
+                            <li>
+                                <a href="jsp/GoodsManage.jsp" target="mg"><i class="fa fa-key"></i>商品管理</a>
+                            </li>
+                            <li>
+                                <a href="jsp/Instorehouse.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
                             </li>
                              
                         </ul>

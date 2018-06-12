@@ -8,6 +8,7 @@
     <result column="goodsremarks" jdbcType="VARCHAR" property="goodsremarks" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="brandid" jdbcType="INTEGER" property="brandid" />
+    <result column="goodspng" jdbcType="VARCHAR" property="goodspng" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    goodsid, goodsname, goodsmoney, goodsremarks, state, brandid
+    goodsid, goodsname, goodsmoney, goodsremarks, state, brandid, goodspng
   </sql>
   <select id="selectByExample" parameterType="cn.com.ttxg.pojo.GoodsExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="cn.com.ttxg.pojo.Goods">
     insert into goods (goodsid, goodsname, goodsmoney, 
-      goodsremarks, state, brandid
-      )
+      goodsremarks, state, brandid, 
+      goodspng)
     values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{goodsmoney,jdbcType=VARCHAR}, 
-      #{goodsremarks,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{brandid,jdbcType=INTEGER}
-      )
+      #{goodsremarks,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{brandid,jdbcType=INTEGER}, 
+      #{goodspng,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.ttxg.pojo.Goods">
     insert into goods
@@ -129,6 +130,9 @@
       <if test="brandid != null">
         brandid,
       </if>
+      <if test="goodspng != null">
+        goodspng,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="goodsid != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="brandid != null">
         #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="goodspng != null">
+        #{goodspng,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.brandid != null">
         brandid = #{record.brandid,jdbcType=INTEGER},
       </if>
+      <if test="record.goodspng != null">
+        goodspng = #{record.goodspng,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       goodsmoney = #{record.goodsmoney,jdbcType=VARCHAR},
       goodsremarks = #{record.goodsremarks,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=VARCHAR},
-      brandid = #{record.brandid,jdbcType=INTEGER}
+      brandid = #{record.brandid,jdbcType=INTEGER},
+      goodspng = #{record.goodspng,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="brandid != null">
         brandid = #{brandid,jdbcType=INTEGER},
       </if>
+      <if test="goodspng != null">
+        goodspng = #{goodspng,jdbcType=VARCHAR},
+      </if>
     </set>
     where goodsid = #{goodsid,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,69 @@
       goodsmoney = #{goodsmoney,jdbcType=VARCHAR},
       goodsremarks = #{goodsremarks,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
-      brandid = #{brandid,jdbcType=INTEGER}
+      brandid = #{brandid,jdbcType=INTEGER},
+      goodspng = #{goodspng,jdbcType=VARCHAR}
     where goodsid = #{goodsid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 定制的内容 -->
+	
+	<resultMap type="GoodsCustom" id="withBrandResultMap">
+  		
+    		<id column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    		<result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
+    		<result column="goodsmoney" jdbcType="VARCHAR" property="goodsmoney" />
+    		<result column="goodsremarks" jdbcType="VARCHAR" property="goodsremarks" />
+    		<result column="state" jdbcType="VARCHAR" property="state" />
+    		<result column="brandid" jdbcType="INTEGER" property="brandid" />
+    		<association property="brand" javaType="Brand">
+    			<id column="brandid" jdbcType="INTEGER" property="brandid" />
+    			<result column="brandname" jdbcType="VARCHAR" property="brandname" />
+    		</association>
+    	
+    	
+  </resultMap>
+	
+	
+
+	<sql id="WithGoods_Column_List">
+		goods.goodsid,goods.goodsname,goods.goodsmoney,brand.brandname,goods.goodsremarks
+	</sql>
+
+	<select id="selectWithBrandByExample" parameterType="GoodsExample" resultMap="withBrandResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="WithGoods_Column_List" ></include>
+			FROM goods LEFT JOIN brand ON goods.brandid=brand.brandid
+		<if test="_parameter != null">
+      		<include refid="Example_Where_Clause" />
+    	</if>
+		 <if test="orderByClause != null">
+     		order by ${orderByClause}
+    	</if>
+	</select>
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

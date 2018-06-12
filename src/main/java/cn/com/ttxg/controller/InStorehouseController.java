@@ -24,45 +24,18 @@ import cn.com.ttxg.service.InStorehouseService;
 public class InStorehouseController {
 	
 	@Autowired
-	private InStorehouseService InStorehouseService;
+	private InStorehouseService inStorehouseService;
 	
 	
-	@RequestMapping("inStorehouseJson")
-	@ResponseBody
-	public ReturnMsg showWarehoseJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
-		/*InStorehouseExample example = new InStorehouseExample();*/
-		/*example.createCriteria().andGoodsnameEqualTo("%老%");*/
-		// 从pn页开始查，每页显示5个数据，start后面紧跟的查询就是分页查询
-		PageHelper.startPage(pn, 5);
-		List<InStorehouseCustom> inStorehouseCustoms = InStorehouseService.getInStorehouseCustoms(null);
-		// 封装为page，并设定每次连续显示5页
-		PageInfo<InStorehouseCustom> page = new PageInfo<InStorehouseCustom>(inStorehouseCustoms, 5);
-		
-		return ReturnMsg.success().add("page", page);
-
-	}
+	
 	
 	@RequestMapping("inStorehouseJsonByCondition")
 	@ResponseBody
 	public ReturnMsg showWarehoseJsonByName(@RequestParam(value = "pn", defaultValue = "1") Integer pn,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType) {
-		InStorehouseExample example = new InStorehouseExample();
-		//条件不为空的时候在example中插入条件
-		if(!StringUtils.isEmpty(condition)){
-			if(searchType==1){
-				example.createCriteria().andGoodsNameLike("%"+condition+"%");
-			}else if(searchType==2){
-				example.createCriteria().andGoodsidEqualTo(condition);
-			}else if(searchType==3){
-				example.createCriteria().andBrandNameLike("%"+condition+"%");
-			}
-			
-		}
 		
-		// 从pn页开始查，每页显示5个数据，start后面紧跟的查询就是分页查询
-		PageHelper.startPage(pn, 5);
-		List<InStorehouseCustom> inStorehouseCustoms = InStorehouseService.getInStorehouseCustoms(example);
-		// 封装为page，并设定每次连续显示5页
-		PageInfo<InStorehouseCustom> page = new PageInfo<InStorehouseCustom>(inStorehouseCustoms, 5);
+		
+		
+		PageInfo<InStorehouseCustom> page = inStorehouseService.getInStorehouseCustomsPage(pn, condition, searchType);
 		
 		return ReturnMsg.success().add("page", page);
 

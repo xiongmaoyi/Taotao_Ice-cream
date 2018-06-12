@@ -3,6 +3,8 @@ package cn.com.ttxg.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.com.ttxg.pojo.InStorehouseExample.Criteria;
+
 public class GoodsExample {
     protected String orderByClause;
 
@@ -208,6 +210,37 @@ public class GoodsExample {
             addCriterion("goodsname like", value, "goodsname");
             return (Criteria) this;
         }
+        
+        
+        
+        
+        /**
+         * 定制的example---------------------------------------------------------------------------------------
+         * @param value
+         * @return
+         */
+        
+        public Criteria andGoodsNameLike(String value) {
+            addCriterion("goodsname like", value, "goodsname");
+            return (Criteria) this;
+        }
+        
+        public Criteria andBrandNameLike(String value) {
+            addCriterion("brandname like", value, "brandname");
+            return (Criteria) this;
+        }
+        public Criteria andGoodsidEqualTo(String value) {
+            addCriterion("goodsid =", value, "goodsid");
+            return (Criteria) this;
+        }
+        
+        
+        /**-----------------------------------------------------------------------------------------------------*/
+
+        
+        
+        
+        
 
         public Criteria andGoodsnameNotLike(String value) {
             addCriterion("goodsname not like", value, "goodsname");
@@ -501,6 +534,76 @@ public class GoodsExample {
 
         public Criteria andBrandidNotBetween(Integer value1, Integer value2) {
             addCriterion("brandid not between", value1, value2, "brandid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngIsNull() {
+            addCriterion("goodspng is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngIsNotNull() {
+            addCriterion("goodspng is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngEqualTo(String value) {
+            addCriterion("goodspng =", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngNotEqualTo(String value) {
+            addCriterion("goodspng <>", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngGreaterThan(String value) {
+            addCriterion("goodspng >", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngGreaterThanOrEqualTo(String value) {
+            addCriterion("goodspng >=", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngLessThan(String value) {
+            addCriterion("goodspng <", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngLessThanOrEqualTo(String value) {
+            addCriterion("goodspng <=", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngLike(String value) {
+            addCriterion("goodspng like", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngNotLike(String value) {
+            addCriterion("goodspng not like", value, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngIn(List<String> values) {
+            addCriterion("goodspng in", values, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngNotIn(List<String> values) {
+            addCriterion("goodspng not in", values, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngBetween(String value1, String value2) {
+            addCriterion("goodspng between", value1, value2, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodspngNotBetween(String value1, String value2) {
+            addCriterion("goodspng not between", value1, value2, "goodspng");
             return (Criteria) this;
         }
     }

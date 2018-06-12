@@ -1,6 +1,7 @@
 package cn.com.ttxg.mapper;
 
 import cn.com.ttxg.pojo.Goods;
+import cn.com.ttxg.pojo.GoodsCustom;
 import cn.com.ttxg.pojo.GoodsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,8 @@ public interface GoodsMapper {
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
+    
+    
+    List<GoodsCustom> selectWithBrandByExample(GoodsExample example);
+    
 }

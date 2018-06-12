@@ -47,13 +47,14 @@
 		</javaClientGenerator>
 		
 		<!-- 指定每个表的生成策略  -->
-<!-- 		<table tableName="goods" domainObjectName="Goods"></table>
+ 		<table tableName="goods" domainObjectName="Goods"></table>
+ 		<!--
 		<table tableName="order" domainObjectName="Order"></table>
 		<table tableName="transaction" domainObjectName="Transaction"></table>
 		<table tableName="user" domainObjectName="User"></table>
 		<table tableName="warehouse" domainObjectName="Warehouse"></table>
 		<table tableName="brand" domainObjectName="Brand"></table> -->
-		<table tableName="storehouse" domainObjectName="Storehouse"></table>
-		<table tableName="instorehouse" domainObjectName="InStorehouse"></table>
+		<!-- <table tableName="storehouse" domainObjectName="Storehouse"></table>
+		<table tableName="instorehouse" domainObjectName="InStorehouse"></table> -->
 	</context>
 </generatorConfiguration>
