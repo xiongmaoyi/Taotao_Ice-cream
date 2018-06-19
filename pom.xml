@@ -243,7 +243,7 @@
 			<version>2.1.3-b06</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- 服务端验证jar包 -->
+		<!-- 服务端验证jar包  jsr303 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

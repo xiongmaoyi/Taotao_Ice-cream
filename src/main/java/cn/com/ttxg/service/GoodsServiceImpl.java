@@ -1,5 +1,8 @@
 package cn.com.ttxg.service;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +13,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.com.ttxg.mapper.GoodsMapper;
+import cn.com.ttxg.pojo.Goods;
 import cn.com.ttxg.pojo.GoodsCustom;
 import cn.com.ttxg.pojo.GoodsExample;
+import cn.com.ttxg.pojo.GoodsExample.Criteria;
 
 
 @Service
@@ -41,6 +46,53 @@ public class GoodsServiceImpl implements GoodsService {
 		PageInfo<GoodsCustom> page = new PageInfo<GoodsCustom>(goodsCustoms, 5);
 		
 		return page;
+	}
+	@Override
+	public int deleteByPrimaryKey(Integer goodsid) {
+		
+		return goodsMapper.deleteByPrimaryKey(goodsid);
+	}
+	@Override
+	public int insertGoods(Goods record) {
+		
+		return goodsMapper.insertSelective(record);
+	}
+	@Override
+	public boolean checkGoodsName(String goodsname) {
+		GoodsExample example = new GoodsExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andGoodsnameEqualTo(goodsname);
+		
+		long count =goodsMapper.countByExample(example);
+		
+		
+		return count==0;
+	}
+	@Override
+	public Goods getGoosById(Integer id) {
+		// TODO Auto-generated method stub
+		return goodsMapper.selectByPrimaryKey(id);
+	}
+	@Override
+	public int updateGoodsById(Goods record) {
+	
+		return goodsMapper.updateByPrimaryKeySelective(record);
+	}
+	@Override
+	public int deleteByIds(String ids) {
+		List<Integer> idList = new ArrayList<Integer>();
+		//按照-分割为字符串数组
+		String[] str_ids = ids.split("-");
+		//遍历字符串数组
+		for(String string:str_ids){
+			idList.add(Integer.parseInt(string));
+		}
+	
+		GoodsExample example = new GoodsExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andGoodsidIn(idList);
+		
+		return goodsMapper.deleteByExample(example);
 	}
 
 }
