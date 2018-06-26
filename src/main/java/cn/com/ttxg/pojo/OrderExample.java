@@ -661,6 +661,76 @@ public class OrderExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andDeliveryIsNull() {
+            addCriterion("delivery is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryIsNotNull() {
+            addCriterion("delivery is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryEqualTo(String value) {
+            addCriterion("delivery =", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryNotEqualTo(String value) {
+            addCriterion("delivery <>", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryGreaterThan(String value) {
+            addCriterion("delivery >", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryGreaterThanOrEqualTo(String value) {
+            addCriterion("delivery >=", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryLessThan(String value) {
+            addCriterion("delivery <", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryLessThanOrEqualTo(String value) {
+            addCriterion("delivery <=", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryLike(String value) {
+            addCriterion("delivery like", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryNotLike(String value) {
+            addCriterion("delivery not like", value, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryIn(List<String> values) {
+            addCriterion("delivery in", values, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryNotIn(List<String> values) {
+            addCriterion("delivery not in", values, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryBetween(String value1, String value2) {
+            addCriterion("delivery between", value1, value2, "delivery");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeliveryNotBetween(String value1, String value2) {
+            addCriterion("delivery not between", value1, value2, "delivery");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

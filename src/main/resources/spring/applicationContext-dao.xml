@@ -42,20 +42,6 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations" value="classpath:cn/com/ttxg/mapper/*.xml"></property>
 
-		<!-- pagehelper配置 -->
-		<!-- <property name="plugins">
-			<array>
-				<bean class="com.github.pagehelper.PageInterceptor">
-					<property name="properties">
-						使用下面的方式配置参数，一行配置一个
-						<value>
-							params=value1
-						</value>
-					</property>
-				</bean>
-			</array>
-		</property> -->
-
 	</bean>
 
 	<!-- mapper扫描 将mabatis接口加入到ioc容器中 -->
@@ -64,5 +50,145 @@
 		<property name="basePackage" value="cn.com.ttxg.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
+	
+	
+	<!-- =========================================================
+         Shiro Core Components - Not Spring Specific - Shiro核心组件
+         ========================================================= -->
+    <!-- Shiro's main business-tier object for web-enabled applications
+         (use DefaultSecurityManager instead when there is no web environment)
+         ****************配置securityManager********************
+         -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="cacheManager"/>
+        <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead.
+        <property name="sessionMode" value="native"/> -->
+        <property name="realm" ref="jdbcRealm"/>
+    </bean>
+
+    <!-- Let's use some enterprise caching support for better performance.  You can replace this with any enterprise
+         caching framework implementation that you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc 
+         *************配置cacheManager************************
+         *加入ehcatch 的配置文件
+         -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!-- Set a net.sf.ehcache.CacheManager instance here if you already have one.  If not, a new one
+             will be creaed with a default config:
+             <property name="cacheManager" ref="ehCacheManager"/> -->
+        <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance to inject, but you want
+             a specific Ehcache configuration to be used, specify that here.  If you don't, a default
+             will be used.:-->
+        <property name="cacheManagerConfigFile" value="classpath:shiro/ehcache.xml"/> 
+    </bean>
+
+    <!-- Used by the SecurityManager to access security data (users, roles, etc).
+         Many other realm implementations can be used too (PropertiesRealm,
+         LdapRealm, etc.-->
+    <!-- 
+    ***配置realm*** 
+    	连接到实现了realm接口的bean
+    -->
+         
+          
+     <bean id="jdbcRealm" class="cn.com.ttxg.shiro.realms.ShiroRealm">
+        <!-- <property name="name" value="jdbcRealm"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="credentialsMatcher">
+            The 'bootstrapDataPopulator' Sha256 hashes the password
+                 (using the username as the salt) then base64 encodes it:
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="SHA-256"/>
+                true means hex encoded, false means base64 encoded
+                <property name="storedCredentialsHexEncoded" value="false"/>
+            </bean>
+        </property> -->
+    </bean> 
+
+    <!-- =========================================================
+         Shiro Spring-specific integration   Spring相关
+         ========================================================= -->
+    <!-- Post processor that automatically invokes init() and destroy() methods
+         for Spring-configured Shiro objects so you don't have to
+         1) specify an init-method and destroy-method attributes for every bean
+            definition and
+         2) even know which Shiro objects require these methods to be
+            called. -->
+            
+    <!-- 
+    	 配置生命周期处理器 
+    	 可以自动的调用，配置在Spring IOC 容器中 有关 Shiro bean 生命周期的方法
+    	 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after
+         the lifecycleBeanProcessor has run: -->
+    <!-- 启用Shiro注解（前置条件是，配置了生命周期处理器） -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!-- Secure Spring remoting:  Ensure any Spring Remoting method invocations can be associated
+         with a Subject for security checks. 远程调用
+    <bean id="secureRemoteInvocationExecutor" class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+	-->
+	
+	
+    <!-- Define the Shiro Filter here (as a FactoryBean) instead of directly in web.xml -
+         web.xml uses the DelegatingFilterProxy to access this bean.  This allows us
+         to wire things with more control as well utilize nice Spring things such as
+         PropertiesPlaceholderConfigurer and abstract beans or anything else we might need: -->
+    <!-- 
+    	配置ShiroFilter 
+    	id必须和 web.xml 中DelegatingFilterProxy的 filter-name 一致
+    	 	
+    	-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/ttxg_login.jsp"/>
+        <property name="successUrl" value="/ttxg_main.jsp"/>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean
+             defined will be automatically acquired and available via its beanName in chain
+             definitions, but you can perform overrides or parent/child consolidated configuration
+             here if you like: -->
+        <!-- <property name="filters">
+            <util:map>
+                <entry key="aName" value-ref="someFilterPojo"/>
+            </util:map>
+        </property> -->
+        <!-- 配置哪些页面受保护 以及访问页面的权限
+        	anon 可以被匿名访问
+        	authc 登陆才可访问
+        	logout 注销
+        	roles 角色过滤器
+        	
+        
+        -->
+        <property name="filterChainDefinitions">
+            <value>
+                /ttxg_login.jsp = anon
+                /index.jsp =anon
+                /js/** = anon
+                /css/** = anon
+                /imges/** = anon
+                /user/logout = logout
+                /loginByUser =anon
+                
+                /jsp/InStorehouse.jsp = roles[admin]
+                
+                # allow WebStart to pull the jars for the swing app:
+                /*.jar = anon
+                # everything else requires authentication:
+                /** = authc
+            </value>
+        </property>
+    </bean>
+	
+	
+	
 
 </beans>

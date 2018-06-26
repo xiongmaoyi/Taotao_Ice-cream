@@ -10,6 +10,7 @@
     <result column="orderstate" jdbcType="VARCHAR" property="orderstate" />
     <result column="userid" jdbcType="INTEGER" property="userid" />
     <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="delivery" jdbcType="VARCHAR" property="delivery" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    orderid, ordertype, ordermoney, orderremarks, orderdate, orderstate, userid, state
+    orderid, ordertype, ordermoney, orderremarks, orderdate, orderstate, userid, state, 
+    delivery
   </sql>
   <select id="selectByExample" parameterType="cn.com.ttxg.pojo.OrderExample" resultMap="BaseResultMap">
     select
@@ -105,10 +107,12 @@
   <insert id="insert" parameterType="cn.com.ttxg.pojo.Order">
     insert into order (orderid, ordertype, ordermoney, 
       orderremarks, orderdate, orderstate, 
-      userid, state)
+      userid, state, delivery
+      )
     values (#{orderid,jdbcType=INTEGER}, #{ordertype,jdbcType=VARCHAR}, #{ordermoney,jdbcType=VARCHAR}, 
       #{orderremarks,jdbcType=VARCHAR}, #{orderdate,jdbcType=DATE}, #{orderstate,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR})
+      #{userid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{delivery,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.ttxg.pojo.Order">
     insert into order
@@ -137,6 +141,9 @@
       <if test="state != null">
         state,
       </if>
+      <if test="delivery != null">
+        delivery,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
@@ -162,6 +169,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="delivery != null">
+        #{delivery,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +208,9 @@
       <if test="record.state != null">
         state = #{record.state,jdbcType=VARCHAR},
       </if>
+      <if test="record.delivery != null">
+        delivery = #{record.delivery,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +225,8 @@
       orderdate = #{record.orderdate,jdbcType=DATE},
       orderstate = #{record.orderstate,jdbcType=VARCHAR},
       userid = #{record.userid,jdbcType=INTEGER},
-      state = #{record.state,jdbcType=VARCHAR}
+      state = #{record.state,jdbcType=VARCHAR},
+      delivery = #{record.delivery,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +255,9 @@
       <if test="state != null">
         state = #{state,jdbcType=VARCHAR},
       </if>
+      <if test="delivery != null">
+        delivery = #{delivery,jdbcType=VARCHAR},
+      </if>
     </set>
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
@@ -252,7 +269,8 @@
       orderdate = #{orderdate,jdbcType=DATE},
       orderstate = #{orderstate,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=INTEGER},
-      state = #{state,jdbcType=VARCHAR}
+      state = #{state,jdbcType=VARCHAR},
+      delivery = #{delivery,jdbcType=VARCHAR}
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
 </mapper>

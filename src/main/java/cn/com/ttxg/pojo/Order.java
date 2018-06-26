@@ -19,6 +19,8 @@ public class Order {
 
     private String state;
 
+    private String delivery;
+
     public Integer getOrderid() {
         return orderid;
     }
@@ -81,5 +83,13 @@ public class Order {
 
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
+    }
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery == null ? null : delivery.trim();
     }
 }

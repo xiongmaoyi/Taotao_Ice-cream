@@ -12,7 +12,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <base href="<%=basePath%>">
 <!--  <link href="../css/table.css" rel="stylesheet"> -->
-<title>商品管理</title>
+<title>品牌管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -37,13 +37,13 @@ body {
 </head>
 
 <body>
-	<!-- -----------------------------------------商品添加的modal框--------------------------------------- -->
-	<div class="modal fade" id="addGoodsModal" tabindex="-1" role="dialog"
+	<!-- -----------------------------------------品牌添加的modal框--------------------------------------- -->
+	<div class="modal fade" id="addBrandModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModal3Label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModal3Label">添加商品</h5>
+					<h5 class="modal-title" id="exampleModal3Label">添加品牌</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -53,54 +53,23 @@ body {
 					<form class="form-horizontal">
 
 						<div class="form-group row">
-							<label for="write_goodsname" class="col-sm-3 col-form-label"
-								>商品名称</label>
+							<label for="write_brandname" class="col-sm-3 col-form-label"
+								>品牌名称</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="write_goodsname" name="goodsname" maxlength="20"
-									placeholder="请输入商品名称">
-								<div class="invalid-feedback" id="goodsname-feedback"></div>
+								<input type="text" class="form-control" id="write_brandname" name="brandname" maxlength="20"
+									placeholder="请输入品牌名称">
+								<div class="invalid-feedback" id="brandname-feedback"></div>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="select_brand" class="col-sm-3 col-form-label">商品品牌</label>
-							<div class="col-sm-9">
-								<select class="custom-select" id="brand_select" name="brandid">
-									
-
-								</select>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="write_goodsmoney" class="col-sm-3 col-form-label">商品进价</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" id="write_goodsmoney" maxlength="15"
-									name="goodsmoney" placeholder="请输入单价">
-								<div class="invalid-feedback" id="goodsmoney-feedback"></div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="upload_goodspng" class="col-sm-3 col-form-label">上传图片</label>
-							<div class="col-sm-9">
-								<input type="file" class="form-control-file"
-									id="upload_goodspng" name="goodspng">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="write_goodsremarks" class="col-sm-3 col-form-label">备注</label>
-							<div class="col-sm-9">
-								<textarea class="form-control" id="write_goodsremarks" maxlength="400"
-									name="goodsremarks" rows="3"></textarea>
-							</div>
-
-						</div>
+						
+						
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary"
-						id="insertGoods_btn" >添加</button>
+						id="insertBrand_btn" >添加</button>
 				</div>
 			</div>
 		</div>
@@ -115,12 +84,12 @@ body {
 	<!-- -----------------------------------------商品修改的modal框--------------------------------------- -->
 	
 	
-	<div class="modal fade" id="updateGoodsModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="updateBrandModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModal3Label" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModal3Label">修改商品</h5>
+					<h5 class="modal-title" id="exampleModal3Label">修改品牌</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -130,62 +99,31 @@ body {
 					<form class="form-horizontal">
 						
 						<div class="form-group row">
-							<label for="goodsid-static" class="col-sm-3 col-form-label"
-								>商品编号</label>
+							<label for="brandid-static" class="col-sm-3 col-form-label"
+								>品牌编号</label>
 							<div class="col-sm-9">
 								<!-- <input type="text" class="form-control" id="update_goodsid" name="goodsid"
 									> -->
-								<p class="form-control-static" id="goodsid-static">111</p>
+								<p class="form-control-static" id="brandid-static">111</p>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="update_goodsname" class="col-sm-3 col-form-label"
-								>商品名称</label>
+							<label for="update_brandname" class="col-sm-3 col-form-label"
+								>品牌名称</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="update_goodsname" name="goodsname"
-									placeholder="请输入商品名称">
-								<div class="invalid-feedback" id="goodsname-feedback2"></div>
+								<input type="text" class="form-control" id="update_brandname" name="brandname"
+									placeholder="请输入品牌名称">
+								<div class="invalid-feedback" id="brandname-feedback2"></div>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="select_brand" class="col-sm-3 col-form-label">商品品牌</label>
-							<div class="col-sm-9">
-								<select class="custom-select" id="brand_select" name="brandid">
-									
-								</select>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="update_goodsmoney" class="col-sm-3 col-form-label">商品进价</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" id="update_goodsmoney"
-									name="goodsmoney" placeholder="请输入单价">
-								<div class="invalid-feedback" id="goodsmoney-feedback2"></div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="update_goodspng" class="col-sm-3 col-form-label">上传图片</label>
-							<div class="col-sm-9">
-								<input type="file" class="form-control-file"
-									id="update_goodspng" name="goodspng">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="update_goodsremarks" class="col-sm-3 col-form-label">备注</label>
-							<div class="col-sm-9">
-								<textarea class="form-control" id="update_goodsremarks" 
-									name="goodsremarks" rows="3"></textarea>
-							</div>
-
-						</div>
+				
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary"
-						id="updateGoods_btn">修改</button>
+						id="updateBrand_btn">修改</button>
 				</div>
 			</div>
 		</div>
@@ -207,7 +145,7 @@ body {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>商品管理</h3>
+				<h3>品牌管理</h3>
 
 			</div>
 		</div>
@@ -223,28 +161,24 @@ body {
 
 					<thead>
 						<tr>
-							<td colspan="7" align="center">商品管理</td>
+							<td colspan="4" align="center">品牌管理</td>
 						</tr>
 
 						<tr>
-							<td colspan="1">商品列表</td>
+							<td colspan="1">品牌列表</td>
 							<td colspan="1"><select class="custom-select"
 								id="searchType" name="searchType">
-									<option selected value="1">按名称搜索</option>
-									<option value="2">按商品编号搜索</option>
-									<option value="3">按品牌搜索</option>
-
+									<option selected value="1">品牌编号搜索</option>
+									<option value="2">按名称搜索</option>
 							</select></td>
 
-							<td colspan="5">
+							<td colspan="2">
 								<div class="input-group">
-
-
 									<input type="text" class="form-control"
-										placeholder="请输入商品名称关键词" id="searchText">
+										placeholder="请输入品牌编号" id="searchText">
 									<div class="input-group-append">
 										<button class="btn btn-success" type="button" id="searchBtn">
-											<i class="fa fa-search fa-lg"></i> 搜索商品
+											<i class="fa fa-search fa-lg"></i> 搜索品牌
 										</button>
 									</div>
 								</div>
@@ -252,35 +186,31 @@ body {
 						</tr>
 						<tr>
 							<th scope="row"> <input type="checkbox" id="check_all"/> </th>
-							<th scope="row">商品编号</th>
-							<th scope="row">商品名称</th>
-							<!-- <th scope="row">商品数量</th> -->
-							<th scope="row">商品进价</th>
+							<th scope="row">品牌编号</th>
 							<th scope="row">品牌名称</th>
-							<th scope="row">商品备注</th>
 							<th scope="row">操作</th>
 						</tr>
 					</thead>
 
-					<tbody id="goods_tbody">
+					<tbody id="item_tbody">
 
 
 					</tbody>
 
 					<tr style="background-color: white">
 						<td colspan="7" align="center">
-							<button class="btn btn-success" type="button" id="addGoods">
-								<i class="fa fa-plus fa-lg"></i> 添加商品
+							<button class="btn btn-success" type="button" id="addItem">
+								<i class="fa fa-plus fa-lg"></i> 添加品牌
 							</button>
-							<button class="btn btn-danger" type="button" id="deleteSelectedGoods">
-								<i class="fa fa-trash-o fa-lg"></i> 删除商品
+							<button class="btn btn-danger" type="button" id="deleteSelectedItem">
+								<i class="fa fa-trash-o fa-lg"></i> 删除品牌
 							</button>
 						</td>
 					</tr>
 
 				</table>
 
-				<!-- </form> -->
+			
 			</div>
 		</div>
 		<!-- 显示分页信息 -->
@@ -312,12 +242,12 @@ body {
 		//转到第pn页
 		function toPage(pn) {
 			$.ajax({
-				url : "/TTXG/showGoodsJsonByCondition",
+				url : "/TTXG/showBrandPageByCondition",
 				data : {"pn":pn,"condition":condition,"searchType":searchType},
 				type : "GET",
 				success : function(result) {
 					console.log(result);
-					buid_goods_table(result);
+					buid_item_table(result);
 					buid_page_info(result);
 					buid_page_nav(result);
 				}
@@ -327,7 +257,7 @@ body {
 			//声明全局变量 搜索条件 搜索方式
 			var condition;
 			var searchType;			
-			var goodsNameIsTrue = true;
+			var brandNameIsTrue = true;
 			var currentPage;		
 		//---------------------------------------------查询---------------------------------------------------------
 		
@@ -338,15 +268,12 @@ body {
 			
 			console.log(optionValue);
 			if(optionValue==1){
-				$("#searchText").attr("placeholder","请输入商品名称关键词");
+				$("#searchText").attr("placeholder","请输入品牌编号");
 				//值变化时候放入searchtext变量
 				searchType=1;
 			}else if(optionValue==2){
-				$("#searchText").attr("placeholder","请输入商品编号");
+				$("#searchText").attr("placeholder","请输入品牌名");
 				searchType=2;
-			}else if(optionValue==3){
-				$("#searchText").attr("placeholder","请输入品牌关键词");
-				searchType=3;
 			}
 			
 			
@@ -360,14 +287,15 @@ body {
 			
 			var data ={"pn":"1","condition":condition,"searchType":searchType};
 			$.ajax({
-				url : "/TTXG/showGoodsJsonByCondition",
+				url : "/TTXG/showBrandPageByCondition",
 				data : data,
 				type : "GET",
 				success : function(result) {
 					console.log(result);
-					buid_goods_table(result);
+					buid_item_table(result);
 					buid_page_info(result);
 					buid_page_nav(result);
+					
 				}
 			});
 		
@@ -377,19 +305,19 @@ body {
 		//绑定删除按钮点击事件
 		$(document).on("click",".delete-btn",function(){
 			//父元素tr的第二个td内的内容
-			var goodsname = $(this).parents("tr").find("td:eq(2)").text();
+			var brandname = $(this).parents("tr").find("td:eq(2)").text();
 			//1、显示是否删除
-			if(confirm("确认删除【"+goodsname+"】？")){
-				deleteById($(this).attr("goods-id"));
+			if(confirm("确认删除【"+brandname+"】？")){
+				deleteById($(this).attr("brand-id"));
 			}
 		
 		});
 			
 		//删除函数
-		function deleteById(goodsid){
+		function deleteById(brandid){
 		
 			$.ajax({
-				url : "/TTXG/deleteGoodsById/"+goodsid,
+				url : "/TTXG/deleteBrandById/"+brandid,
 				type : "DELETE",
 				success : function(result) {				
 					toPage(currentPage);
@@ -400,7 +328,7 @@ body {
 		function deleteByIds(ids){
 		
 			$.ajax({
-				url : "/TTXG/deleteGoodsById/"+ids,
+				url : "/TTXG/deleteBrandById/"+ids,
 				type : "DELETE",
 				success : function(result) {	
 					toPage(currentPage);
@@ -423,24 +351,24 @@ body {
 		});
 		
 		//批量删除按钮绑定单击事件
-		$("#deleteSelectedGoods").click(function() {
+		$("#deleteSelectedItem").click(function() {
 			if ($(".check_item:checked").length == 0) {
 				alert("请选择要删除的条目。");
 			} else {
-				var goodsnames = '';
+				var brandnames = '';
 				var ids = '';
 				$.each($(".check_item:checked"), function() {
 					//组装name
-					goodsnames = goodsnames + $(this).parents("tr").find("td:eq(2)").text() + ",";
+					brandnames = brandnames + $(this).parents("tr").find("td:eq(2)").text() + ",";
 					//组装ids以-分割
 					ids = ids + $(this).parents("tr").find("td:eq(1)").text() + "-";
 				});
 	
 				//去除多余的分割号
-				goodsnames = goodsnames.substring(0, goodsnames.length - 1);
+				brandnames = brandnames.substring(0, brandnames.length - 1);
 				ids = ids.substring(0, ids.length - 1);
 	
-				if (confirm("确认删除【" + goodsnames + "】吗？")) {
+				if (confirm("确认删除【" + brandnames + "】吗？")) {
 					deleteByIds(ids);
 				}
 			}
@@ -456,13 +384,12 @@ body {
 		}
 		
 		//弹出添加框按钮
-		$("#addGoods").click(function(){
+		$("#addItem").click(function(){
 			//初始化
-			reset_form("#addGoodsModal form");	
-			//查询品牌信息
-			getBrand("#addGoodsModal select");		
+			reset_form("#addBrandModal form");	
+				
 			//显示modal框
-			$("#addGoodsModal").modal({
+			$("#addBrandModal").modal({
 				//点击背景不会消失
 				backdrop:"static"
 			});	
@@ -470,7 +397,7 @@ body {
 		
 		
 		//查询品牌信息
-		function getBrand(selectid){
+		/* function getBrand(selectid){
 			//每次点击清空下拉菜单里的信息，以免重复添加
 			$(selectid).empty();
 			var data;
@@ -486,78 +413,57 @@ body {
 					});
 				}
 			});
-		}
+		} */
 		
 		//----------------------------------------添加：校验-----------------------------------------------
 		
 		//商品添加的表单前端校验方法
-		function validate_addGoods(){
+		function validate_addBrand(){
 			var r = true;
 			//拿到用户输入的要校验的数据
-			var goodsname = $("#write_goodsname").val();
-			var goodsmoney = $("#write_goodsmoney").val();
-			
+			var brandname = $("#write_brandname").val();
+				
 			//编写正则表达式
 			//验证中文字符字母数组的正则
-			var reg_goodsname =/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
-			//验证数组或小数的正则
-			var reg_goodsmoney =/^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/;
+			var reg_brandname =/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
 			
-			if(!reg_goodsname.test(goodsname)){
-				$("#goodsname-feedback").empty();//清空显示内容
-            	$("#goodsname-feedback").append("请输入正确的商品名称");//修改显示的内容
-            	$("#write_goodsname").removeClass("is-valid");//清除合法状态
-            	$("#write_goodsname").addClass("is-invalid");//添加非法状态
+			
+			if(!reg_brandname.test(brandname)){
+				$("#brandname-feedback").empty();//清空显示内容
+            	$("#brandname-feedback").append("请输入正确的商品名称");//修改显示的内容
+            	$("#write_brandname").removeClass("is-valid");//清除合法状态
+            	$("#write_brandname").addClass("is-invalid");//添加非法状态
 				r = false;			
 			}else{
-				$("#goodsname-feedback").empty();//清空显示内容
-				$("#write_goodsname").removeClass("is-invalid");
-				$("#write_goodsname").addClass("is-valid");//改为合法状态
+				$("#brandname-feedback").empty();//清空显示内容
+				$("#write_brandname").removeClass("is-invalid");
+				$("#write_brandname").addClass("is-valid");//改为合法状态
 			}
 			
-			
-			
-			if(!reg_goodsmoney.test(goodsmoney)){			
-				$("#goodsmoney-feedback").empty().append("请输入正确的商品价格");
-            	$("#write_goodsmoney").removeClass("is-valid").addClass("is-invalid");				
-				r = false;			
-			}else{
-				$("#goodsmoney-feedback").empty();//清空显示内容
-				$("#write_goodsmoney").removeClass("is-invalid").addClass("is-valid");//改为合法状态
-			}	
-			
-			if(goodsNameIsTrue == false){
-				$("#goodsname-feedback").empty().append("库中已有该商品");
-            	$("#write_goodsname").removeClass("is-valid").addClass("is-invalid");
-				r = false;
-			}
-			
-			
-				
+					
 			return r;
 		}
 		
 		//商品名称数据库校验
-		$("#write_goodsname").change(function(){
-			goodsNameIsTrue = true;
-			validate_goodsName();
-					
+		$("#write_brandname").change(function(){
+			brandNameIsTrue = true;
+			validate_brandName();					
 		});
 		
-		function validate_goodsName(){
-			var data ={"goodsname":$("#write_goodsname").val()}; 
+		function validate_brandName(){
+			var data ={"brandname":$("#write_brandname").val()}; 
 			$.ajax({
-				url:"/TTXG/checkGoodsName",
+				url:"/TTXG/checkBrandName",
 				data:data,
 				type:"POST",
 				success:function(result){
 					if(result.code==100){
-						$("#goodsname-feedback").empty();//清空显示内容
-						$("#write_goodsname").removeClass("is-valid")
+						$("#brandname-feedback").empty();//清空显示内容
+						$("#write_brandname").removeClass("is-valid is-invalid")
 					}else{
-						$("#goodsname-feedback").empty().append("库中已有该商品");
-            			$("#write_goodsname").removeClass("is-valid").addClass("is-invalid");
-            			goodsNameIsTrue = false;
+						$("#brandname-feedback").empty().append("库中已存在");
+            			$("#write_brandname").removeClass("is-valid").addClass("is-invalid");
+            			brandNameIsTrue = false;
 					}						
 				}						
 			});
@@ -567,44 +473,44 @@ body {
 		
 		
 		//确认添加按钮
-		$("#insertGoods_btn").click(function(){
+		$("#insertBrand_btn").click(function(){
 					
 			//jquery获得表单数据的方法（获得表单提交的数据key：name value：value）
-			var data = $("#addGoodsModal form").serialize();
-			
-			
+			var data = $("#addBrandModal form").serialize();
 			
 			//执行函数，校验通过才能继续执行
-			if(!validate_addGoods()){
+			if(!validate_addBrand()){
 				return false;
 			}
 			
-			
+			if(brandNameIsTrue == false){
+				$("#brandname-feedback").empty().append("库中已存在");
+            	$("#write_brandname").removeClass("is-valid").addClass("is-invalid");
+				return false;
+			}
 			
 			$.ajax({
-				url : "/TTXG/addGoods",
+				url : "/TTXG/addBrand",
 				data : data,
 				type : "POST",
 				success : function(result) {
+					console.log(result);
 					//初始化
-					$("#addGoodsModal form input").removeClass("is-valid is-invalid");
-					$("#goodsmoney-feedback").empty();
-					$("#goodsname-feedback").empty();
+					$("#addBrandModal form input").removeClass("is-valid is-invalid");
+					
+					$("#brandname-feedback").empty();
 					if(result.code == 100){
 						//关闭模态框
-						$("#addGoodsModal").modal("hide");
+						$("#addBrandModal").modal("hide");
 						//调到最后一页
 						toPage(result.extend.page.pages);					
 					}else{
 						//后端校验不通过则显示错误信息
-						if(result.extend.errorMap.goodsname){
-							$("#goodsname-feedback").empty().append(result.extend.errorMap.goodsname);
-            				$("#write_goodsname").removeClass("is-valid").addClass("is-invalid");
+						if(result.extend.errorMap.brandname){
+							$("#brandname-feedback").empty().append(result.extend.errorMap.brandname);
+            				$("#write_brandname").removeClass("is-valid").addClass("is-invalid");
 						}
-						if(result.extend.errorMap.goodsmoney){
-							$("#goodsmoney-feedback").empty().append(result.extend.errorMap.goodsmoney);
-            				$("#write_goodsmoney").removeClass("is-valid").addClass("is-invalid");
-						}
+						
 					}
 					
 				}
@@ -613,7 +519,7 @@ body {
 		});
 		
 //------------------------------------------------------------修改-----------------------------------------		
-		//updateGoodsModal
+		
 		//为后来添加的元素绑定事件
 		$(document).on("click",".update-btn",function(){
 		
@@ -622,121 +528,101 @@ body {
 			//显示修改模态框
 			
 			//初始化
-			reset_form("#updateGoodsModal form");	
-			//$("#goodsid-static").empty();
-			//查询品牌信息
-			getBrand("#updateGoodsModal select");
-			//向查询函数传入id
-			getGoodsById($(this).attr("goods-id"));
-			//将id绑定在模态框的修改按钮上
-			$("#updateGoods_btn").attr("goods-id",$(this).attr("goods-id"));
+			reset_form("#updateBrandModal form");	
 			
-			$("#updateGoodsModal").modal({
+		
+			//向查询函数传入id
+			getBrandById($(this).attr("brand-id"));
+			//将id绑定在模态框的修改按钮上
+			$("#updateBrand_btn").attr("brand-id",$(this).attr("brand-id"));
+			
+			$("#updateBrandModal").modal({
 				//点击背景不会消失
 				backdrop:"static"
 			});
 		});
 		
-		function getGoodsById(id){
+		function getBrandById(id){
 			$.ajax({
-				url:"/TTXG/getGoodsById/"+id,
+				url:"/TTXG/getBrandById/"+id,
 				type:"GET",
 				success:function(result){
 					//数据回显			
-					$("#goodsid-static").text(result.extend.goods.goodsid)
-					$("#update_goodsname").val(result.extend.goods.goodsname);
-					$("#update_goodsmoney").val(result.extend.goods.goodsmoney);
-					$("#update_goodsremarks").val(result.extend.goods.goodsremarks);
-					$("#updateGoodsModal select").val(result.extend.goods.brandid);
+					$("#brandid-static").text(result.extend.brand.brandid);
+					$("#update_brandname").val(result.extend.brand.brandname);
 				}
 			
 			});
 
 		}
 		//确认修改
-		$("#updateGoods_btn").click(function(){
+		$("#updateBrand_btn").click(function(){
 			//获得表单数据，吧方法设为put
-			var data = $("#updateGoodsModal form").serialize()+"&_method=PUT";
-			if(!validate_updateGoods()){
+			var data = $("#updateBrandModal form").serialize()+"&_method=PUT";
+			if(!validate_updateBrand()){
 				return false;
 			}
 			//发送put请求
 			$.ajax({
-				url:"/TTXG/updateGoodsById/"+$(this).attr("goods-id"),
+				url:"/TTXG/updateBrandById/"+$(this).attr("brand-id"),
 				data:data,
 				type:"POST",
 				success:function(result){
-					$("#updateGoodsModal").modal("hide");
+					$("#updateBrandModal").modal("hide");
 					toPage(currentPage);
 				}			
 			});
 		});
 		
 		//验证
-		function validate_updateGoods(){
+		function validate_updateBrand(){
 			var r = true;
 			//拿到用户输入的要校验的数据
-			var goodsname = $("#update_goodsname").val();
-			var goodsmoney = $("#update_goodsmoney").val();
+			var brandname = $("#update_brandname").val();
+		
 			
 			//编写正则表达式
 			//验证中文字符字母数组的正则
-			var reg_goodsname =/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
-			//验证数组或小数的正则
-			var reg_goodsmoney =/^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/;
-			
-			if(!reg_goodsname.test(goodsname)){
-				$("#goodsname-feedback2").empty();//清空显示内容
-            	$("#goodsname-feedback2").append("请输入正确的商品名称");//修改显示的内容
-            	$("#update_goodsname").removeClass("is-valid");//清除合法状态
-            	$("#update_goodsname").addClass("is-invalid");//添加非法状态
+			var reg_brandname =/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
+	
+			if(!reg_brandname.test(brandname)){
+				$("#brandname-feedback2").empty();//清空显示内容
+            	$("#brandname-feedback2").append("请输入正确的商品名称");//修改显示的内容
+            	$("#update_brandname").removeClass("is-valid");//清除合法状态
+            	$("#update_brandname").addClass("is-invalid");//添加非法状态
 				r = false;			
 			}else{
-				$("#goodsname-feedback2").empty();//清空显示内容
-				$("#update_goodsname").removeClass("is-invalid");
-				$("#update_goodsname").addClass("is-valid");//改为合法状态
+				$("#brandname-feedback2").empty();//清空显示内容
+				$("#update_brandname").removeClass("is-invalid");
+				$("#update_brandname").addClass("is-valid");//改为合法状态
 			}
 			
 			
-			if(!reg_goodsmoney.test(goodsmoney)){			
-				$("#goodsmoney-feedback2").empty().append("请输入正确的商品价格");
-            	$("#update_goodsmoney").removeClass("is-valid").addClass("is-invalid");				
-				r = false;			
-			}else{
-				$("#goodsmoney-feedback2").empty();//清空显示内容
-				$("#update_goodsmoney").removeClass("is-invalid").addClass("is-valid");//改为合法状态
-			}		
 			return r;
 		}
 		
 //------------------------------------------------------------显示表格-----------------------------------------
-		function buid_goods_table(result) {
-				$("#goods_tbody").empty();
+		function buid_item_table(result) {
+				$("#item_tbody").empty();
 				var shl = result.extend.page.list;
 				//jQuery自带的遍历each
 				$.each(shl, function(index, item) {
 						var checkbox_td = $('<td><input type="checkbox" class="check_item"></td>');
-						var goodsid_td = $("<td></td>").append(item.goodsid);
-						var goodsname_td = $("<td></td>").append(item.goodsname);
-						/* var goodscount_td = $("<td></td>").append(item.goodscount); */
-						var goodsmoney_td = $("<td></td>").append(item.goodsmoney);
-						var brand_td = $("<td></td>").append(item.brand.brandname);
-						var goodsremarks_td = $("<td></td>").append(item.goodsremarks);
+						var brandid_td = $("<td></td>").append(item.brandid);
+						var brandname_td = $("<td></td>").append(item.brandname);
+						
 						console.log(index);
 						
-						var delete_button= $('<button></button>').append("<i class='fa fa-trash-o'></i> 删除").addClass("btn btn-danger delete-btn").val(item.goodsid).attr("goods-id",item.goodsid);//.click(function(){deleteById(item.goodsid);});
-						var update_button= $("<button></button>").append("<i class='fa fa-pencil'></i> 修改").addClass("btn btn-info update-btn").val(item.goodsid).attr("goods-id",item.goodsid);
+						var delete_button= $('<button></button>').append("<i class='fa fa-trash-o'></i> 删除").addClass("btn btn-danger delete-btn").val(item.brandid).attr("brand-id",item.brandid);
+						var update_button= $("<button></button>").append("<i class='fa fa-pencil'></i> 修改").addClass("btn btn-info update-btn").val(item.brandid).attr("brand-id",item.brandid);
 						console.log(delete_button);
 						var xxx_td = $("<td></td>").append(delete_button).append(" ").append(update_button);
 						
 						$("<tr></tr>").append(checkbox_td)
-							.append(goodsid_td)
-							.append(goodsname_td)
-							.append(goodsmoney_td)
-							.append(brand_td)
-							.append(goodsremarks_td)
+							.append(brandid_td)
+							.append(brandname_td)
 							.append(xxx_td)
-							.appendTo("#goods_tbody");
+							.appendTo("#item_tbody");
 
 				});
 				}

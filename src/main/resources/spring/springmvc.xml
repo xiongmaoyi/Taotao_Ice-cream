@@ -31,8 +31,8 @@
 	<!-- 视图解析器 解析jsp视图,方便返回，默认使用jstl标签 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/jsp/"></property>
-		<property name="suffix" value=".jsp"></property>
+		<!-- <property name="prefix" value="/jsp/"></property>
+		<property name="suffix" value=".jsp"></property> -->
 	</bean>
 
 

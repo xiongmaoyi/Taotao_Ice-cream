@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %> 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -72,6 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                             <br >
                                 <small>factory management system  </small>  
+                                <shiro:user>
+                                <small> 欢迎<shiro:principal/>     <a href="user/logout">LoginOut</a>  </small>
+                                </shiro:user>
                                 <br>  
                             </div>
                         </div>
@@ -92,6 +96,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             
                         </ul>
                     </li>
+                     
+                     
+                    <!--  
+                    	hasRole有就显示
+                    	hasAnyRoles有任何一个角色就能显示
+                    	lacksRole 没有时显示
+                    	
+                    	hasPermition name=“user：creat” 有权限则显示
+                    	lacksPermission 没有这个权限时显示
+                     -->
+                     <shiro:hasAnyRoles name="admin,user">
                      <li>
                         <a href="#"><i class="fa fa-yelp "></i>仓库管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
@@ -104,6 +119,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                         </ul>
                     </li>
+                    
+                   </shiro:hasAnyRoles>
                     
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>批发销售管理 <span class="fa arrow"></span></a>
@@ -122,14 +139,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>系统管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a href="4_Sale/sale_index.jsp" target="mg"><i class="fa fa-circle-o "></i>客户管理</a>
+                                <a href="jsp/UserManage.jsp" target="mg"><i class="fa fa-circle-o "></i>用户管理</a>
                             </li>
                             <li>
                                 <a href="jsp/GoodsManage.jsp" target="mg"><i class="fa fa-key"></i>商品管理</a>
                             </li>
                             <li>
-                                <a href="jsp/Instorehouse.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
+                                <a href="jsp/BrandManage.jsp" target="mg"><i class="fa fa-key"></i>品牌管理</a>
                             </li>
+                           
                              
                         </ul>
                     </li>

@@ -33,8 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				onclick="javascrtpt:window.location.href='/SSM_ALL/Grade/showGrade.action'">
     </div>
     <div align="center">
-    <input type="button" value="查询成绩name" 
-				onclick="javascrtpt:window.location.href='/SSM_ALL/Grade/showGradeAndName.action'">
+    <input type="button" value="登陆页面" 
+				onclick="javascrtpt:window.location.href='/TTXG/ttxg_login.jsp'">
     </div>
     <div align="center">
     <input type="button" value="zhuye" 
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div align="center">
     <input type="button" value="仓库" 
-				onclick="javascrtpt:window.location.href='/TTXG/jsp/ShowWarehouse.jsp'">
+				onclick="javascrtpt:window.location.href='/TTXG/jsp/InStorehouse.jsp'">
     </div>
     </p>
   </body>

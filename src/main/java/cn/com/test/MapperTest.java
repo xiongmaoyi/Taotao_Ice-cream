@@ -1,10 +1,5 @@
 package cn.com.test;
 
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
-import java.util.Random;
-
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.com.ttxg.mapper.BrandMapper;
 import cn.com.ttxg.mapper.GoodsMapper;
 import cn.com.ttxg.mapper.InStorehouseMapper;
-import cn.com.ttxg.mapper.WarehouseMapper;
-import cn.com.ttxg.pojo.Goods;
+import cn.com.ttxg.mapper.UserMapper;
+import cn.com.ttxg.pojo.UserExample;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring/applicationContext-*.xml"})
@@ -26,8 +20,7 @@ public class MapperTest {
  * 测试dao层工作
  * 单元测试 
  */
-	@Autowired
-	WarehouseMapper warehouseMapper;
+
 	
 	@Autowired
 	InStorehouseMapper InStorehouseMapper;
@@ -37,7 +30,7 @@ public class MapperTest {
 	@Autowired
 	GoodsMapper goodsMapper;
 	@Autowired
-	BrandMapper brandMapper;
+	UserMapper userMapper;
 	
 	@Test
 	public void testWhcMapper(){
@@ -61,7 +54,8 @@ public class MapperTest {
 		/*WarehouseExample example = new WarehouseExample();
 		example.createCriteria().andGoodsnameEqualTo("%1%");
 		System.out.println("qqqqqqqqqqqqq"+warehouseMapper.selectByExampleWithGoodsAndBrand(example)+"qqqqqqqqqqqqq");*/
-		System.out.println("qqqqq"+brandMapper.selectByExample(null));
+		UserExample example = new UserExample();
+		System.out.println("qqqqq"+userMapper.selectByExample(example));
 	
 		
 	}

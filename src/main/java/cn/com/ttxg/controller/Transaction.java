@@ -1,5 +1,5 @@
 package cn.com.ttxg.controller;
 
-public class OrderController {
+public class Transaction {
 
 }
