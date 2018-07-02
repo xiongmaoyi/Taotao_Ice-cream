@@ -29,7 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    
+    <link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
     <style type="text/css">
 		body{font-family:"微软雅黑"; 	
 		}
@@ -88,10 +90,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>进货管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a href="1_Grain_flour/putin_index.jsp" target="mg"><i class="fa fa-circle-o"></i>进货入库</a>
+                                <a href="jsp/Purchase.jsp" target="mg"><i class="fa fa-truck"></i>进货入库</a>
                             </li>
                             <li>
-                                <a href="1_Grain_flour/draw_index.jsp" target="mg"><i class="fa fa-circle-o "></i>进货订单查询</a>
+                                <a href="1_Grain_flour/draw_index.jsp" target="mg"><i class="fa fa-search"></i>进货订单查询</a>
                             </li>
                             
                         </ul>
@@ -111,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>仓库管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a href="jsp/InStorehouse.jsp" target="mg"><i class="fa fa-key"></i>查询仓库</a>
+                                <a href="jsp/InStorehouse.jsp" target="mg"><i class="fa fa-search"></i>查询仓库</a>
                             </li>
                             
                             
@@ -127,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          <ul class="nav nav-second-level">
                            
                              <li>
-                                <a href="process_showView" target="mg"><i class="fa fa-circle-o "></i>线下销售 </a>
+                                <a href="process_showView" target="mg"><i class="fa fa-cny "></i>线下销售 </a>
                             </li>
                              
                              
@@ -139,13 +141,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>系统管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a href="jsp/UserManage.jsp" target="mg"><i class="fa fa-circle-o "></i>用户管理</a>
+                                <a href="jsp/UserManage.jsp" target="mg"><i class="fa fa-users "></i>用户管理</a>
                             </li>
                             <li>
-                                <a href="jsp/GoodsManage.jsp" target="mg"><i class="fa fa-key"></i>商品管理</a>
+                                <a href="jsp/GoodsManage.jsp" target="mg"><i class="fa fa-cubes"></i>商品管理</a>
                             </li>
                             <li>
-                                <a href="jsp/BrandManage.jsp" target="mg"><i class="fa fa-key"></i>品牌管理</a>
+                                <a href="jsp/BrandManage.jsp" target="mg"><i class="fa fa-cc-diners-club"></i>品牌管理</a>
                             </li>
                            
                              

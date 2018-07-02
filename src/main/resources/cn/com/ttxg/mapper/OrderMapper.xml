@@ -11,6 +11,7 @@
     <result column="userid" jdbcType="INTEGER" property="userid" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="delivery" jdbcType="VARCHAR" property="delivery" />
+    <result column="custom" jdbcType="VARCHAR" property="custom" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     orderid, ordertype, ordermoney, orderremarks, orderdate, orderstate, userid, state, 
-    delivery
+    delivery, custom
   </sql>
   <select id="selectByExample" parameterType="cn.com.ttxg.pojo.OrderExample" resultMap="BaseResultMap">
     select
@@ -80,7 +81,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,31 +92,34 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where orderid = #{orderid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where orderid = #{orderid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cn.com.ttxg.pojo.OrderExample">
-    delete from order
+    delete from `order`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.ttxg.pojo.Order">
-    insert into order (orderid, ordertype, ordermoney, 
+  <insert id="insert" parameterType="cn.com.ttxg.pojo.Order"  useGeneratedKeys="true">
+    insert into `order` (orderid, ordertype, ordermoney, 
       orderremarks, orderdate, orderstate, 
-      userid, state, delivery
-      )
+      userid, state, delivery, 
+      custom)
     values (#{orderid,jdbcType=INTEGER}, #{ordertype,jdbcType=VARCHAR}, #{ordermoney,jdbcType=VARCHAR}, 
       #{orderremarks,jdbcType=VARCHAR}, #{orderdate,jdbcType=DATE}, #{orderstate,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{delivery,jdbcType=VARCHAR}
-      )
+      #{userid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{delivery,jdbcType=VARCHAR}, 
+      #{custom,jdbcType=VARCHAR})
+      <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+    	</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="cn.com.ttxg.pojo.Order">
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
         orderid,
@@ -143,6 +147,9 @@
       </if>
       <if test="delivery != null">
         delivery,
+      </if>
+      <if test="custom != null">
+        custom,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -173,16 +180,19 @@
       <if test="delivery != null">
         #{delivery,jdbcType=VARCHAR},
       </if>
+      <if test="custom != null">
+        #{custom,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="cn.com.ttxg.pojo.OrderExample" resultType="java.lang.Long">
-    select count(*) from order
+    select count(*) from `order`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update order
+    update `order`
     <set>
       <if test="record.orderid != null">
         orderid = #{record.orderid,jdbcType=INTEGER},
@@ -211,13 +221,16 @@
       <if test="record.delivery != null">
         delivery = #{record.delivery,jdbcType=VARCHAR},
       </if>
+      <if test="record.custom != null">
+        custom = #{record.custom,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update order
+    update `order`
     set orderid = #{record.orderid,jdbcType=INTEGER},
       ordertype = #{record.ordertype,jdbcType=VARCHAR},
       ordermoney = #{record.ordermoney,jdbcType=VARCHAR},
@@ -226,13 +239,14 @@
       orderstate = #{record.orderstate,jdbcType=VARCHAR},
       userid = #{record.userid,jdbcType=INTEGER},
       state = #{record.state,jdbcType=VARCHAR},
-      delivery = #{record.delivery,jdbcType=VARCHAR}
+      delivery = #{record.delivery,jdbcType=VARCHAR},
+      custom = #{record.custom,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="cn.com.ttxg.pojo.Order">
-    update order
+    update `order`
     <set>
       <if test="ordertype != null">
         ordertype = #{ordertype,jdbcType=VARCHAR},
@@ -258,11 +272,14 @@
       <if test="delivery != null">
         delivery = #{delivery,jdbcType=VARCHAR},
       </if>
+      <if test="custom != null">
+        custom = #{custom,jdbcType=VARCHAR},
+      </if>
     </set>
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.com.ttxg.pojo.Order">
-    update order
+    update `order`
     set ordertype = #{ordertype,jdbcType=VARCHAR},
       ordermoney = #{ordermoney,jdbcType=VARCHAR},
       orderremarks = #{orderremarks,jdbcType=VARCHAR},
@@ -270,7 +287,109 @@
       orderstate = #{orderstate,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=INTEGER},
       state = #{state,jdbcType=VARCHAR},
-      delivery = #{delivery,jdbcType=VARCHAR}
+      delivery = #{delivery,jdbcType=VARCHAR},
+      custom = #{custom,jdbcType=VARCHAR}
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  <!-- *************************************定制的内容********************************************* -->
+  <resultMap type="OrderCustom" id="withFiveMap">
+  	<id column="orderid" jdbcType="INTEGER" property="orderid" />
+    <result column="ordertype" jdbcType="VARCHAR" property="ordertype" />
+    <result column="ordermoney" jdbcType="VARCHAR" property="ordermoney" />
+    <result column="orderremarks" jdbcType="VARCHAR" property="orderremarks" />
+    <result column="orderdate" jdbcType="DATE" property="orderdate" />
+    <result column="orderstate" jdbcType="VARCHAR" property="orderstate" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="delivery" jdbcType="VARCHAR" property="delivery" />
+    <result column="custom" jdbcType="VARCHAR" property="custom" />
+    <association property="user" javaType="User">
+    	<id column="userid" jdbcType="INTEGER" property="userid" />
+    	<result column="usertype" jdbcType="VARCHAR" property="usertype" />
+    	<result column="username" jdbcType="VARCHAR" property="username" />
+    	<result column="password" jdbcType="VARCHAR" property="password" />
+    	<result column="phone" jdbcType="VARCHAR" property="phone" />
+    	<result column="address" jdbcType="VARCHAR" property="address" />
+    	<result column="name" jdbcType="VARCHAR" property="name" />
+    	<result column="state" jdbcType="VARCHAR" property="state" />
+    </association>
+    <association property="deliver" javaType="User">
+    	<id column="userid" jdbcType="INTEGER" property="userid" />
+    	<result column="usertype" jdbcType="VARCHAR" property="usertype" />
+    	<result column="delivery" jdbcType="VARCHAR" property="username" />
+    	<result column="password" jdbcType="VARCHAR" property="password" />
+    	<result column="phone" jdbcType="VARCHAR" property="phone" />
+    	<result column="address" jdbcType="VARCHAR" property="address" />
+    	<result column="name" jdbcType="VARCHAR" property="name" />
+    	<result column="state" jdbcType="VARCHAR" property="state" />
+    </association>
+    
+    <collection property="flows" ofType="FlowCustom" column="flowid">
+		<id column="flowid" jdbcType="INTEGER" property="flowid" />
+    	<result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    	<result column="goodsnumber" jdbcType="VARCHAR" property="goodsnumber" />
+    	<result column="subtotal" jdbcType="VARCHAR" property="subtotal" />
+    	<result column="orderid" jdbcType="INTEGER" property="orderid" />
+    	<result column="state" jdbcType="VARCHAR" property="state" />
+    	
+    	<association property="goods" javaType="GoodsCustom">
+    		<id column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    			<result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
+    			<result column="goodsmoney" jdbcType="VARCHAR" property="goodsmoney" />
+    			<result column="goodsremarks" jdbcType="VARCHAR" property="goodsremarks" />
+    			<result column="state" jdbcType="VARCHAR" property="state" />
+    			<result column="brandid" jdbcType="INTEGER" property="brandid" />
+    			<association property="brand" javaType="Brand">
+    				<id column="brandid" jdbcType="INTEGER" property="brandid" />
+    				<result column="brandname" jdbcType="VARCHAR" property="brandname" />
+    			</association>
+    	</association>
+    </collection>
+    </resultMap>
+    
+    
+    
+    
+    
+    
+    <sql id="orderFive_Column_List">
+		o.orderid,o.ordertype,f.goodsid,o.orderremarks,g.goodsname,f.goodsnumber,f.subtotal,o.ordermoney,
+		chuliren.username AS username,songhuoren.username AS delivery,
+		o.orderdate 
+	</sql>
+    <select id="selectCompleteOrder" resultMap="withFiveMap" parameterType="OrderExample">
+    	select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="orderFive_Column_List" ></include>
+			FROM (((`order` o
+				LEFT JOIN flow f ON o.orderid=f.orderid) 
+				LEFT JOIN `goods` g ON f.goodsid =g.goodsid) 
+				LEFT JOIN `brand` b ON g.brandid = b.brandid)
+				LEFT JOIN `user`  AS chuliren ON o.userid = chuliren.userid 
+				LEFT JOIN `user`  AS songhuoren ON o.delivery = songhuoren.userid
+		<if test="_parameter != null">
+      		<include refid="Example_Where_Clause" />
+    	</if>
+		 <if test="orderByClause != null">
+     		order by ${orderByClause}
+    	</if>
+    
+    </select>
+    
+    
+
+  
+  
+  
+  
+  
+
+  
+  
 </mapper>

@@ -1,24 +1,24 @@
 package cn.com.ttxg.pojo;
 
-public class Transaction {
-    private Integer transactionid;
+public class Flow {
+    private Integer flowid;
 
     private Integer goodsid;
 
     private String goodsnumber;
 
-    private String goodsmoney;
+    private String subtotal;
 
     private Integer orderid;
 
     private String state;
 
-    public Integer getTransactionid() {
-        return transactionid;
+    public Integer getFlowid() {
+        return flowid;
     }
 
-    public void setTransactionid(Integer transactionid) {
-        this.transactionid = transactionid;
+    public void setFlowid(Integer flowid) {
+        this.flowid = flowid;
     }
 
     public Integer getGoodsid() {
@@ -37,12 +37,12 @@ public class Transaction {
         this.goodsnumber = goodsnumber == null ? null : goodsnumber.trim();
     }
 
-    public String getGoodsmoney() {
-        return goodsmoney;
+    public String getSubtotal() {
+        return subtotal;
     }
 
-    public void setGoodsmoney(String goodsmoney) {
-        this.goodsmoney = goodsmoney == null ? null : goodsmoney.trim();
+    public void setSubtotal(String subtotal) {
+        this.subtotal = subtotal == null ? null : subtotal.trim();
     }
 
     public Integer getOrderid() {

@@ -8,14 +8,8 @@ import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,14 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.portlet.ModelAndView;
 
-import com.alibaba.druid.sql.parser.Token;
 import com.github.pagehelper.PageInfo;
-import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 
-import cn.com.ttxg.pojo.Goods;
-import cn.com.ttxg.pojo.GoodsCustom;
 import cn.com.ttxg.pojo.User;
 import cn.com.ttxg.service.UserService;
 
@@ -168,6 +157,13 @@ public class UserController{
 		int a = userService.updateUserById(user);
 		
 		return ReturnMsg.success();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getUserIdByName",method=RequestMethod.GET)
+	public ReturnMsg getUserIdByName(User user){
+		int userid = userService.getUserIdByName(user);
+		return ReturnMsg.success().add("userid", userid);
 	}
 
 }

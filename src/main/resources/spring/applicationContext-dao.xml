@@ -170,20 +170,22 @@
         -->
         <property name="filterChainDefinitions">
             <value>
+            	# 匿名可访问
                 /ttxg_login.jsp = anon
                 /index.jsp =anon
                 /js/** = anon
                 /css/** = anon
-                /imges/** = anon
-                /user/logout = logout
+                /imges/** = anon               
                 /loginByUser =anon
-                
-                /jsp/InStorehouse.jsp = roles[admin]
-                
+                  
+                # 注销过滤器
+                /user/logout = logout
+                              
                 # allow WebStart to pull the jars for the swing app:
                 /*.jar = anon
                 # everything else requires authentication:
-                /** = authc
+                /unauthorized.jsp=authc
+                /** = roles["sale"]
             </value>
         </property>
     </bean>

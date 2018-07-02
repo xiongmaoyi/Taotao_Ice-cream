@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.com.ttxg.mapper.TransactionMapper">
-  <resultMap id="BaseResultMap" type="cn.com.ttxg.pojo.Transaction">
-    <id column="transactionid" jdbcType="INTEGER" property="transactionid" />
+<mapper namespace="cn.com.ttxg.mapper.FlowMapper">
+  <resultMap id="BaseResultMap" type="cn.com.ttxg.pojo.Flow">
+    <id column="flowid" jdbcType="INTEGER" property="flowid" />
     <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
     <result column="goodsnumber" jdbcType="VARCHAR" property="goodsnumber" />
-    <result column="goodsmoney" jdbcType="VARCHAR" property="goodsmoney" />
+    <result column="subtotal" jdbcType="VARCHAR" property="subtotal" />
     <result column="orderid" jdbcType="INTEGER" property="orderid" />
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    transactionid, goodsid, goodsnumber, goodsmoney, orderid, state
+    flowid, goodsid, goodsnumber, subtotal, orderid, state
   </sql>
-  <select id="selectByExample" parameterType="cn.com.ttxg.pojo.TransactionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.com.ttxg.pojo.FlowExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from transaction
+    from flow
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,32 +87,32 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from transaction
-    where transactionid = #{transactionid,jdbcType=INTEGER}
+    from flow
+    where flowid = #{flowid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from transaction
-    where transactionid = #{transactionid,jdbcType=INTEGER}
+    delete from flow
+    where flowid = #{flowid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.ttxg.pojo.TransactionExample">
-    delete from transaction
+  <delete id="deleteByExample" parameterType="cn.com.ttxg.pojo.FlowExample">
+    delete from flow
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.ttxg.pojo.Transaction">
-    insert into transaction (transactionid, goodsid, goodsnumber, 
-      goodsmoney, orderid, state
+  <insert id="insert" parameterType="cn.com.ttxg.pojo.Flow">
+    insert into flow (flowid, goodsid, goodsnumber, 
+      subtotal, orderid, state
       )
-    values (#{transactionid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{goodsnumber,jdbcType=VARCHAR}, 
-      #{goodsmoney,jdbcType=VARCHAR}, #{orderid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}
+    values (#{flowid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{goodsnumber,jdbcType=VARCHAR}, 
+      #{subtotal,jdbcType=VARCHAR}, #{orderid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.ttxg.pojo.Transaction">
-    insert into transaction
+  <insert id="insertSelective" parameterType="cn.com.ttxg.pojo.Flow">
+    insert into flow
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="transactionid != null">
-        transactionid,
+      <if test="flowid != null">
+        flowid,
       </if>
       <if test="goodsid != null">
         goodsid,
@@ -120,8 +120,8 @@
       <if test="goodsnumber != null">
         goodsnumber,
       </if>
-      <if test="goodsmoney != null">
-        goodsmoney,
+      <if test="subtotal != null">
+        subtotal,
       </if>
       <if test="orderid != null">
         orderid,
@@ -131,8 +131,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="transactionid != null">
-        #{transactionid,jdbcType=INTEGER},
+      <if test="flowid != null">
+        #{flowid,jdbcType=INTEGER},
       </if>
       <if test="goodsid != null">
         #{goodsid,jdbcType=INTEGER},
@@ -140,8 +140,8 @@
       <if test="goodsnumber != null">
         #{goodsnumber,jdbcType=VARCHAR},
       </if>
-      <if test="goodsmoney != null">
-        #{goodsmoney,jdbcType=VARCHAR},
+      <if test="subtotal != null">
+        #{subtotal,jdbcType=VARCHAR},
       </if>
       <if test="orderid != null">
         #{orderid,jdbcType=INTEGER},
@@ -151,17 +151,17 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.ttxg.pojo.TransactionExample" resultType="java.lang.Long">
-    select count(*) from transaction
+  <select id="countByExample" parameterType="cn.com.ttxg.pojo.FlowExample" resultType="java.lang.Long">
+    select count(*) from flow
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update transaction
+    update flow
     <set>
-      <if test="record.transactionid != null">
-        transactionid = #{record.transactionid,jdbcType=INTEGER},
+      <if test="record.flowid != null">
+        flowid = #{record.flowid,jdbcType=INTEGER},
       </if>
       <if test="record.goodsid != null">
         goodsid = #{record.goodsid,jdbcType=INTEGER},
@@ -169,8 +169,8 @@
       <if test="record.goodsnumber != null">
         goodsnumber = #{record.goodsnumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsmoney != null">
-        goodsmoney = #{record.goodsmoney,jdbcType=VARCHAR},
+      <if test="record.subtotal != null">
+        subtotal = #{record.subtotal,jdbcType=VARCHAR},
       </if>
       <if test="record.orderid != null">
         orderid = #{record.orderid,jdbcType=INTEGER},
@@ -184,19 +184,19 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update transaction
-    set transactionid = #{record.transactionid,jdbcType=INTEGER},
+    update flow
+    set flowid = #{record.flowid,jdbcType=INTEGER},
       goodsid = #{record.goodsid,jdbcType=INTEGER},
       goodsnumber = #{record.goodsnumber,jdbcType=VARCHAR},
-      goodsmoney = #{record.goodsmoney,jdbcType=VARCHAR},
+      subtotal = #{record.subtotal,jdbcType=VARCHAR},
       orderid = #{record.orderid,jdbcType=INTEGER},
       state = #{record.state,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ttxg.pojo.Transaction">
-    update transaction
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.ttxg.pojo.Flow">
+    update flow
     <set>
       <if test="goodsid != null">
         goodsid = #{goodsid,jdbcType=INTEGER},
@@ -204,8 +204,8 @@
       <if test="goodsnumber != null">
         goodsnumber = #{goodsnumber,jdbcType=VARCHAR},
       </if>
-      <if test="goodsmoney != null">
-        goodsmoney = #{goodsmoney,jdbcType=VARCHAR},
+      <if test="subtotal != null">
+        subtotal = #{subtotal,jdbcType=VARCHAR},
       </if>
       <if test="orderid != null">
         orderid = #{orderid,jdbcType=INTEGER},
@@ -214,15 +214,40 @@
         state = #{state,jdbcType=VARCHAR},
       </if>
     </set>
-    where transactionid = #{transactionid,jdbcType=INTEGER}
+    where flowid = #{flowid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.ttxg.pojo.Transaction">
-    update transaction
+  <update id="updateByPrimaryKey" parameterType="cn.com.ttxg.pojo.Flow">
+    update flow
     set goodsid = #{goodsid,jdbcType=INTEGER},
       goodsnumber = #{goodsnumber,jdbcType=VARCHAR},
-      goodsmoney = #{goodsmoney,jdbcType=VARCHAR},
+      subtotal = #{subtotal,jdbcType=VARCHAR},
       orderid = #{orderid,jdbcType=INTEGER},
       state = #{state,jdbcType=VARCHAR}
-    where transactionid = #{transactionid,jdbcType=INTEGER}
+    where flowid = #{flowid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  
+  <!-- ***********批量插入************ -->
+  <insert id="insertFlows" useGeneratedKeys="true" parameterType="java.util.List">  
+    <selectKey resultType="long" keyProperty="flowid" order="AFTER">  
+        SELECT  
+        LAST_INSERT_ID()  
+    </selectKey>  
+    insert into flow (goodsid,goodsnumber,subtotal,orderid,state)   
+    values  
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.goodsid},#{item.goodsnumber},#{item.subtotal},#{item.orderid},#{item.state})  
+    </foreach>  
+</insert>  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

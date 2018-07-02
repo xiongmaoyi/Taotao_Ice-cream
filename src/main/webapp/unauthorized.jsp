@@ -23,6 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   无权限 <br>
+  <div align="center">
+   <h1>所属用户等级无权限访问 </h1><br>
+    <a href="user/logout">LoginOut</a>
+    </div>
   </body>
 </html>

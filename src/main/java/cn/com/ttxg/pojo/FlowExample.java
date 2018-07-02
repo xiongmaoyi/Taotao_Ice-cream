@@ -3,14 +3,14 @@ package cn.com.ttxg.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionExample {
+public class FlowExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TransactionExample() {
+    public FlowExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,63 +104,63 @@ public class TransactionExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTransactionidIsNull() {
-            addCriterion("transactionid is null");
+        public Criteria andFlowidIsNull() {
+            addCriterion("flowid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidIsNotNull() {
-            addCriterion("transactionid is not null");
+        public Criteria andFlowidIsNotNull() {
+            addCriterion("flowid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidEqualTo(Integer value) {
-            addCriterion("transactionid =", value, "transactionid");
+        public Criteria andFlowidEqualTo(Integer value) {
+            addCriterion("flowid =", value, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidNotEqualTo(Integer value) {
-            addCriterion("transactionid <>", value, "transactionid");
+        public Criteria andFlowidNotEqualTo(Integer value) {
+            addCriterion("flowid <>", value, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidGreaterThan(Integer value) {
-            addCriterion("transactionid >", value, "transactionid");
+        public Criteria andFlowidGreaterThan(Integer value) {
+            addCriterion("flowid >", value, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("transactionid >=", value, "transactionid");
+        public Criteria andFlowidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("flowid >=", value, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidLessThan(Integer value) {
-            addCriterion("transactionid <", value, "transactionid");
+        public Criteria andFlowidLessThan(Integer value) {
+            addCriterion("flowid <", value, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidLessThanOrEqualTo(Integer value) {
-            addCriterion("transactionid <=", value, "transactionid");
+        public Criteria andFlowidLessThanOrEqualTo(Integer value) {
+            addCriterion("flowid <=", value, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidIn(List<Integer> values) {
-            addCriterion("transactionid in", values, "transactionid");
+        public Criteria andFlowidIn(List<Integer> values) {
+            addCriterion("flowid in", values, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidNotIn(List<Integer> values) {
-            addCriterion("transactionid not in", values, "transactionid");
+        public Criteria andFlowidNotIn(List<Integer> values) {
+            addCriterion("flowid not in", values, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidBetween(Integer value1, Integer value2) {
-            addCriterion("transactionid between", value1, value2, "transactionid");
+        public Criteria andFlowidBetween(Integer value1, Integer value2) {
+            addCriterion("flowid between", value1, value2, "flowid");
             return (Criteria) this;
         }
 
-        public Criteria andTransactionidNotBetween(Integer value1, Integer value2) {
-            addCriterion("transactionid not between", value1, value2, "transactionid");
+        public Criteria andFlowidNotBetween(Integer value1, Integer value2) {
+            addCriterion("flowid not between", value1, value2, "flowid");
             return (Criteria) this;
         }
 
@@ -294,73 +294,73 @@ public class TransactionExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyIsNull() {
-            addCriterion("goodsmoney is null");
+        public Criteria andSubtotalIsNull() {
+            addCriterion("subtotal is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyIsNotNull() {
-            addCriterion("goodsmoney is not null");
+        public Criteria andSubtotalIsNotNull() {
+            addCriterion("subtotal is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyEqualTo(String value) {
-            addCriterion("goodsmoney =", value, "goodsmoney");
+        public Criteria andSubtotalEqualTo(String value) {
+            addCriterion("subtotal =", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyNotEqualTo(String value) {
-            addCriterion("goodsmoney <>", value, "goodsmoney");
+        public Criteria andSubtotalNotEqualTo(String value) {
+            addCriterion("subtotal <>", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyGreaterThan(String value) {
-            addCriterion("goodsmoney >", value, "goodsmoney");
+        public Criteria andSubtotalGreaterThan(String value) {
+            addCriterion("subtotal >", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyGreaterThanOrEqualTo(String value) {
-            addCriterion("goodsmoney >=", value, "goodsmoney");
+        public Criteria andSubtotalGreaterThanOrEqualTo(String value) {
+            addCriterion("subtotal >=", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyLessThan(String value) {
-            addCriterion("goodsmoney <", value, "goodsmoney");
+        public Criteria andSubtotalLessThan(String value) {
+            addCriterion("subtotal <", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyLessThanOrEqualTo(String value) {
-            addCriterion("goodsmoney <=", value, "goodsmoney");
+        public Criteria andSubtotalLessThanOrEqualTo(String value) {
+            addCriterion("subtotal <=", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyLike(String value) {
-            addCriterion("goodsmoney like", value, "goodsmoney");
+        public Criteria andSubtotalLike(String value) {
+            addCriterion("subtotal like", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyNotLike(String value) {
-            addCriterion("goodsmoney not like", value, "goodsmoney");
+        public Criteria andSubtotalNotLike(String value) {
+            addCriterion("subtotal not like", value, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyIn(List<String> values) {
-            addCriterion("goodsmoney in", values, "goodsmoney");
+        public Criteria andSubtotalIn(List<String> values) {
+            addCriterion("subtotal in", values, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyNotIn(List<String> values) {
-            addCriterion("goodsmoney not in", values, "goodsmoney");
+        public Criteria andSubtotalNotIn(List<String> values) {
+            addCriterion("subtotal not in", values, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyBetween(String value1, String value2) {
-            addCriterion("goodsmoney between", value1, value2, "goodsmoney");
+        public Criteria andSubtotalBetween(String value1, String value2) {
+            addCriterion("subtotal between", value1, value2, "subtotal");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsmoneyNotBetween(String value1, String value2) {
-            addCriterion("goodsmoney not between", value1, value2, "goodsmoney");
+        public Criteria andSubtotalNotBetween(String value1, String value2) {
+            addCriterion("subtotal not between", value1, value2, "subtotal");
             return (Criteria) this;
         }
 

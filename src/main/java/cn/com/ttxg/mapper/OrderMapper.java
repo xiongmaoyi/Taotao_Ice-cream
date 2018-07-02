@@ -1,7 +1,10 @@
 package cn.com.ttxg.mapper;
 
 import cn.com.ttxg.pojo.Order;
+import cn.com.ttxg.pojo.OrderCustom;
 import cn.com.ttxg.pojo.OrderExample;
+import net.sf.ehcache.search.impl.OrderComparator;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +30,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    List<OrderCustom> selectCompleteOrder(OrderExample example);
 }

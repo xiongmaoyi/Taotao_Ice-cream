@@ -208,7 +208,7 @@
 				var shl = result.extend.page.list;
 				//jQuery自带的遍历
 				$.each(shl, function(index, item) {
-					
+						
 						var goodsid_td = $("<td></td>").append(item.goodsid);
 						var goodsname_td = $("<td></td>").append(item.goodsCustom.goodsname);
 						var goodscount_td = $("<td></td>").append(item.goodscount);
@@ -216,7 +216,7 @@
 						var brand_td = $("<td></td>").append(item.goodsCustom.brand.brandname);
 						var goodsremarks_td = $("<td></td>").append(item.goodsCustom.goodsremarks);
 						var xxx_td = $("<td></td>").append(item.goodsid);
-	
+						
 						$("<tr></tr>").append(goodsid_td)
 							.append(goodsname_td)
 							.append(goodscount_td)

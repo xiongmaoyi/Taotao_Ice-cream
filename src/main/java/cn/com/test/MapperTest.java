@@ -9,7 +9,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.com.ttxg.mapper.GoodsMapper;
 import cn.com.ttxg.mapper.InStorehouseMapper;
+import cn.com.ttxg.mapper.OrderMapper;
 import cn.com.ttxg.mapper.UserMapper;
+import cn.com.ttxg.pojo.OrderExample;
 import cn.com.ttxg.pojo.UserExample;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,14 +25,7 @@ public class MapperTest {
 
 	
 	@Autowired
-	InStorehouseMapper InStorehouseMapper;
-	
-	@Autowired
-	SqlSession sqlSession;
-	@Autowired
-	GoodsMapper goodsMapper;
-	@Autowired
-	UserMapper userMapper;
+	private OrderMapper orderMapper;
 	
 	@Test
 	public void testWhcMapper(){
@@ -54,8 +49,8 @@ public class MapperTest {
 		/*WarehouseExample example = new WarehouseExample();
 		example.createCriteria().andGoodsnameEqualTo("%1%");
 		System.out.println("qqqqqqqqqqqqq"+warehouseMapper.selectByExampleWithGoodsAndBrand(example)+"qqqqqqqqqqqqq");*/
-		UserExample example = new UserExample();
-		System.out.println("qqqqq"+userMapper.selectByExample(example));
+		OrderExample example = new OrderExample();
+		System.out.println("qqqqq"+orderMapper.selectCompleteOrder(example));
 	
 		
 	}

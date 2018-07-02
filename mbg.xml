@@ -48,7 +48,7 @@
 		
 		<!-- 指定每个表的生成策略  -->
  		<!-- <table tableName="goods" domainObjectName="Goods"></table> -->
- 		
+ 		<table tableName="flow" domainObjectName="Flow"></table>
 		<table tableName="order" domainObjectName="Order"></table>
 		<!-- <table tableName="transaction" domainObjectName="Transaction"></table> -->
 		<!-- <table tableName="user" domainObjectName="User"></table> -->

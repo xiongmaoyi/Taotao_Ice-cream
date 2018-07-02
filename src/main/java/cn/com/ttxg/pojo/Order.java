@@ -21,6 +21,8 @@ public class Order {
 
     private String delivery;
 
+    private String custom;
+
     public Integer getOrderid() {
         return orderid;
     }
@@ -91,5 +93,13 @@ public class Order {
 
     public void setDelivery(String delivery) {
         this.delivery = delivery == null ? null : delivery.trim();
+    }
+
+    public String getCustom() {
+        return custom;
+    }
+
+    public void setCustom(String custom) {
+        this.custom = custom == null ? null : custom.trim();
     }
 }

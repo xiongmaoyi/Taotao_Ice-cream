@@ -21,6 +21,7 @@ public interface UserService {
 	public User getUserById(Integer id);
 
 	public int updateUserById(User user);
-
+	
+	public int getUserIdByName(User user);
 	
 }
