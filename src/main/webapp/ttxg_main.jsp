@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <a href="jsp/Purchase.jsp" target="mg"><i class="fa fa-truck"></i>进货入库</a>
                             </li>
                             <li>
-                                <a href="1_Grain_flour/draw_index.jsp" target="mg"><i class="fa fa-search"></i>进货订单查询</a>
+                                <a href="jsp/SearchPurchase.jsp" target="mg"><i class="fa fa-search"></i>进货订单查询</a>
                             </li>
                             
                         </ul>
@@ -131,7 +131,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                              <li>
                                 <a href="process_showView" target="mg"><i class="fa fa-cny "></i>线下销售 </a>
                             </li>
-                             
+                             <li>
+                                <a href="jsp/SearchSale.jsp" target="mg"><i class="fa fa-search"></i>销售单查询 </a>
+                            </li>
                              
                            
                         </ul>
@@ -142,6 +144,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          <ul class="nav nav-second-level">
                             <li>
                                 <a href="jsp/UserManage.jsp" target="mg"><i class="fa fa-users "></i>用户管理</a>
+                            </li>
+                            <li>
+                                <a href="jsp/OrderManage.jsp" target="mg"><i class="fa fa-search"></i>订单管理</a>
                             </li>
                             <li>
                                 <a href="jsp/GoodsManage.jsp" target="mg"><i class="fa fa-cubes"></i>商品管理</a>

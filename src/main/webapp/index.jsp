@@ -22,28 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    
-  	<p>
-    <div align="center">
-    <input type="button" value="showuser" 
-				onclick="javascrtpt:window.location.href='/SSM_ALL/showUserView.action'">
-    </div>
-    
-    <div align="center">
-    <input type="button" value="查询成绩" 
-				onclick="javascrtpt:window.location.href='/SSM_ALL/Grade/showGrade.action'">
-    </div>
-    <div align="center">
-    <input type="button" value="登陆页面" 
-				onclick="javascrtpt:window.location.href='/TTXG/ttxg_login.jsp'">
-    </div>
-    <div align="center">
-    <input type="button" value="zhuye" 
-				onclick="javascrtpt:window.location.href='/TTXG/ttxg_main.jsp'">
-    </div>
-    <div align="center">
-    <input type="button" value="仓库" 
-				onclick="javascrtpt:window.location.href='/TTXG/jsp/InStorehouse.jsp'">
-    </div>
-    </p>
+  	
   </body>
 </html>

@@ -141,12 +141,17 @@ public class OrderExample {
             addCriterion("orderid is not null");
             return (Criteria) this;
         }
-
-        public Criteria andOrderidEqualTo(Integer value) {
-            addCriterion("o.orderid =", value, "orderid");
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+        public Criteria andOrderidEqualTo(int orderid) {
+            addCriterion("o.orderid =", orderid, "orderid");
             return (Criteria) this;
         }
-
+        public Criteria andOrderidEqualTo(String orderid) {
+            addCriterion("o.orderid =", orderid, "orderid");
+            return (Criteria) this;
+        }
+        
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------
         public Criteria andOrderidNotEqualTo(Integer value) {
             addCriterion("orderid <>", value, "orderid");
             return (Criteria) this;

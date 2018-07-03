@@ -32,4 +32,5 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
     
     List<OrderCustom> selectCompleteOrder(OrderExample example);
+    List<OrderCustom> selectSimpleOrder(OrderExample example );
 }

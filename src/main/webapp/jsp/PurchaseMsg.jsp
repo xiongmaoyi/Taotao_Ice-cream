@@ -71,7 +71,7 @@ body {
 					</tbody>
 					
 					
-					<tr><td colspan="4">总计：<span id="total-money"></span></td></tr>
+					<tr><td colspan="4" align="right">总计：<span id="total-money"></span> 元</td></tr>
 					<tr><td colspan="2">处理人：<span id="user-name"></span></td><td colspan="2">日期：<span id="order-date"></span></td></tr>
 					
 					
@@ -93,7 +93,7 @@ body {
 
 
 	<script>
-		//--------------------------------------------模态框刷新页面入口--------------------------------------------------------
+		//--------------------------------------------刷新页面入口--------------------------------------------------------
 		$(function() {
 			var orderid = <%= request.getParameter("orderid")%>
   			console.log(orderid);			
@@ -135,7 +135,7 @@ body {
 				var goodsid_td = $("<td></td>").append(item.goodsid);
 				var goodsname_td = $("<td></td>").append(item.goods.goodsname);
 				var goodsnumber_td = $("<td></td>").append(item.goodsnumber);
-				var subtotal_td = $("<td></td>").append(item.subtotal);
+				var subtotal_td = $("<td></td>").append(item.subtotal+" 元");
 				
 				$("<tr></tr>").append(goodsid_td)
 							.append(goodsname_td)

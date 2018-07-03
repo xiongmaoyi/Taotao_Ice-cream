@@ -13,7 +13,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <base href="<%=basePath%>">
 <!--  <link href="../css/table.css" rel="stylesheet"> -->
-<title>商品管理</title>
+<title>进货入库</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">

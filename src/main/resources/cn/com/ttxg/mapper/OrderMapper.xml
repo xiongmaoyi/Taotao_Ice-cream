@@ -327,6 +327,16 @@
     	<result column="name" jdbcType="VARCHAR" property="name" />
     	<result column="state" jdbcType="VARCHAR" property="state" />
     </association>
+    <association property="custom" javaType="User">
+    	<id column="userid" jdbcType="INTEGER" property="userid" />
+    	<result column="usertype" jdbcType="VARCHAR" property="usertype" />
+    	<result column="custom" jdbcType="VARCHAR" property="username" />
+    	<result column="password" jdbcType="VARCHAR" property="password" />
+    	<result column="phone" jdbcType="VARCHAR" property="phone" />
+    	<result column="address" jdbcType="VARCHAR" property="address" />
+    	<result column="name" jdbcType="VARCHAR" property="name" />
+    	<result column="state" jdbcType="VARCHAR" property="state" />
+    </association>
     
     <collection property="flows" ofType="FlowCustom" column="flowid">
 		<id column="flowid" jdbcType="INTEGER" property="flowid" />
@@ -357,8 +367,8 @@
     
     
     <sql id="orderFive_Column_List">
-		o.orderid,o.ordertype,f.goodsid,o.orderremarks,g.goodsname,f.goodsnumber,f.subtotal,o.ordermoney,
-		chuliren.username AS username,songhuoren.username AS delivery,
+		o.orderid,o.ordertype,f.goodsid,o.orderremarks,o.orderstate,g.goodsname,f.goodsnumber,f.subtotal,o.ordermoney,
+		chuliren.username AS username,songhuoren.username AS delivery,kehu.username AS custom,
 		o.orderdate 
 	</sql>
     <select id="selectCompleteOrder" resultMap="withFiveMap" parameterType="OrderExample">
@@ -373,6 +383,7 @@
 				LEFT JOIN `brand` b ON g.brandid = b.brandid)
 				LEFT JOIN `user`  AS chuliren ON o.userid = chuliren.userid 
 				LEFT JOIN `user`  AS songhuoren ON o.delivery = songhuoren.userid
+				LEFT JOIN `user`  AS kehu ON o.custom = kehu.userid
 		<if test="_parameter != null">
       		<include refid="Example_Where_Clause" />
     	</if>
@@ -385,7 +396,30 @@
     
 
   
-  
+  <sql id="orderTwo_Column_List">
+		o.orderid,o.ordertype,o.ordermoney,o.orderstate,
+		chuliren.username AS username,
+		songhuoren.username AS delivery,o.orderdate,
+		kehu.username AS custom
+	</sql>
+    <select id="selectSimpleOrder" resultMap="withFiveMap" parameterType="OrderExample">
+    	select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="orderTwo_Column_List" ></include>
+			FROM `order` o
+				LEFT JOIN `user`  AS chuliren ON o.userid = chuliren.userid 
+				LEFT JOIN `user`  AS songhuoren ON o.delivery = songhuoren.userid
+				LEFT JOIN `user`  AS kehu ON o.custom = kehu.userid
+		<if test="_parameter != null">
+      		<include refid="Example_Where_Clause" />
+    	</if>
+		 <if test="orderByClause != null">
+     		order by ${orderByClause}
+    	</if>
+    
+    </select>
   
   
   
