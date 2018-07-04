@@ -72,8 +72,8 @@ body {
 					
 					
 					<tr><td colspan="4" align="right">总计：<span id="total-money"></span> 元</td></tr>
-					<tr><td colspan="2">处理人：<span id="user-name"></span></td><td colspan="2">日期：<span id="order-date"></span></td></tr>
-					
+					<tr><td colspan="2">处理人：<span id="user-name"></span></td><td colspan="2"><span id="custom-name"></span></td></tr>
+					<tr><td colspan="2"><span></span></td><td colspan="2" align="right">日期：<span id="order-date"></span></td></tr>
 					
 					</table>
 					
@@ -125,6 +125,9 @@ body {
 			$("#user-name").html(result.extend.orderCustoms[0].user.username);
 			if(result.extend.orderCustoms[0].orderremarks!=null){
 				$("#order-remarks").html("备注："+result.extend.orderCustoms[0].orderremarks);
+			}
+			if(result.extend.orderCustoms[0].custom!=null){
+				$("#custom-name").html("客户: "+result.extend.orderCustoms[0].customer.username);
 			}
 			
 			var newDate = new Date(result.extend.orderCustoms[0].orderdate);			

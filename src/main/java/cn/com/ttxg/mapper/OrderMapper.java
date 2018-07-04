@@ -33,4 +33,5 @@ public interface OrderMapper {
     
     List<OrderCustom> selectCompleteOrder(OrderExample example);
     List<OrderCustom> selectSimpleOrder(OrderExample example );
+    int selectMaxOrderId();
 }

@@ -26,6 +26,8 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public PageInfo<GoodsCustom> getGoodsCustomsPage(Integer pn, String condition, int searchType) {
 		GoodsExample example = new GoodsExample();
+		
+		example.setOrderByClause("`goodsid`");
 		//条件不为空的时候在example中插入条件
 		if(!StringUtils.isEmpty(condition)){
 			if(searchType==1){
@@ -52,7 +54,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	@Override
 	public int insertGoods(Goods record) {
-		
+		GoodsExample example = new GoodsExample();
+		example.setOrderByClause("`goodsid`");
 		return goodsMapper.insertSelective(record);
 	}
 	@Override

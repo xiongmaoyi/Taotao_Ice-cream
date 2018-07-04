@@ -79,6 +79,14 @@ body {
 							</div>
 						</div>
 						<div class="form-group row">
+							<label for="write_marketprice" class="col-sm-3 col-form-label">市场价格</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="write_marketprice" maxlength="15"
+									name="marketprice" placeholder="请输入市场价格">
+								<div class="invalid-feedback" id="marketprice-feedback"></div>
+							</div>
+						</div>
+						<div class="form-group row">
 							<label for="upload_goodspng" class="col-sm-3 col-form-label">上传图片</label>
 							<div class="col-sm-9">
 								<input type="file" class="form-control-file"
@@ -164,6 +172,14 @@ body {
 							</div>
 						</div>
 						<div class="form-group row">
+							<label for="update_marketprice" class="col-sm-3 col-form-label">市场价格</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="update_marketprice" maxlength="15"
+									name="marketprice" placeholder="请输入市场价格">
+								<div class="invalid-feedback" id="marketprice-feedback2"></div>
+							</div>
+						</div>
+						<div class="form-group row">
 							<label for="update_goodspng" class="col-sm-3 col-form-label">上传图片</label>
 							<div class="col-sm-9">
 								<input type="file" class="form-control-file"
@@ -223,7 +239,7 @@ body {
 
 					<thead>
 						<tr>
-							<td colspan="7" align="center">商品管理</td>
+							<td colspan="8" align="center">商品管理</td>
 						</tr>
 
 						<tr>
@@ -236,7 +252,7 @@ body {
 
 							</select></td>
 
-							<td colspan="5">
+							<td colspan="6">
 								<div class="input-group">
 
 
@@ -252,12 +268,13 @@ body {
 						</tr>
 						<tr>
 							<th scope="row"> <input type="checkbox" id="check_all"/> </th>
-							<th scope="row">商品编号</th>
-							<th scope="row">商品名称</th>
+							<th scope="row">编号</th>
+							<th scope="row">名称</th>
 							<!-- <th scope="row">商品数量</th> -->
-							<th scope="row">商品进价</th>
-							<th scope="row">品牌名称</th>
-							<th scope="row">商品备注</th>
+							<th scope="row">进价</th>
+							<th scope="row">市场价</th>
+							<th scope="row">品牌</th>
+							<th scope="row">备注</th>
 							<th scope="row">操作</th>
 						</tr>
 					</thead>
@@ -268,7 +285,7 @@ body {
 					</tbody>
 
 					<tr style="background-color: white">
-						<td colspan="7" align="center">
+						<td colspan="8" align="center">
 							<button class="btn btn-success" type="button" id="addGoods">
 								<i class="fa fa-plus fa-lg"></i> 添加商品
 							</button>
@@ -496,7 +513,7 @@ body {
 			//拿到用户输入的要校验的数据
 			var goodsname = $("#write_goodsname").val();
 			var goodsmoney = $("#write_goodsmoney").val();
-			
+			var marketprice = $("#write_marketprice").val();
 			//编写正则表达式
 			//验证中文字符字母数组的正则
 			var reg_goodsname =/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
@@ -524,6 +541,15 @@ body {
 			}else{
 				$("#goodsmoney-feedback").empty();//清空显示内容
 				$("#write_goodsmoney").removeClass("is-invalid").addClass("is-valid");//改为合法状态
+			}
+			
+			if(!reg_goodsmoney.test(goodsmoney)){			
+				$("#marketprice-feedback").empty().append("请输入正确的市场价格");
+            	$("#write_marketprice").removeClass("is-valid").addClass("is-invalid");				
+				r = false;			
+			}else{
+				$("#goodsmoney-feedback").empty();//清空显示内容
+				$("#write_goodsmoney").removeClass("is-invalid").addClass("is-valid");//改为合法状态
 			}	
 			
 			if(goodsNameIsTrue == false){
@@ -531,17 +557,14 @@ body {
             	$("#write_goodsname").removeClass("is-valid").addClass("is-invalid");
 				r = false;
 			}
-			
-			
-				
+		
 			return r;
 		}
 		
 		//商品名称数据库校验
 		$("#write_goodsname").change(function(){
 			goodsNameIsTrue = true;
-			validate_goodsName();
-					
+			validate_goodsName();					
 		});
 		
 		function validate_goodsName(){
@@ -561,8 +584,6 @@ body {
 					}						
 				}						
 			});
-		
-		
 		}
 		
 		
@@ -572,6 +593,7 @@ body {
 			//jquery获得表单数据的方法（获得表单提交的数据key：name value：value）
 			var data = $("#addGoodsModal form").serialize();
 			
+			console.log("uuuuuuuuuuuuuuuuuuuuuuuu"+data);
 			
 			
 			//执行函数，校验通过才能继续执行
@@ -646,6 +668,7 @@ body {
 					$("#goodsid-static").text(result.extend.goods.goodsid)
 					$("#update_goodsname").val(result.extend.goods.goodsname);
 					$("#update_goodsmoney").val(result.extend.goods.goodsmoney);
+					$("#update_marketprice").val(result.extend.goods.marketprice);
 					$("#update_goodsremarks").val(result.extend.goods.goodsremarks);
 					$("#updateGoodsModal select").val(result.extend.goods.brandid);
 				}
@@ -678,7 +701,7 @@ body {
 			//拿到用户输入的要校验的数据
 			var goodsname = $("#update_goodsname").val();
 			var goodsmoney = $("#update_goodsmoney").val();
-			
+			var marketprice = $("#update_marketprice").val();
 			//编写正则表达式
 			//验证中文字符字母数组的正则
 			var reg_goodsname =/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/;
@@ -705,7 +728,18 @@ body {
 			}else{
 				$("#goodsmoney-feedback2").empty();//清空显示内容
 				$("#update_goodsmoney").removeClass("is-invalid").addClass("is-valid");//改为合法状态
-			}		
+			}
+			
+			
+			if(!reg_goodsmoney.test(marketprice)){			
+				$("#marketprice-feedback2").empty().append("请输入正确的市场价格");
+            	$("#update_marketprice").removeClass("is-valid").addClass("is-invalid");				
+				r = false;			
+			}else{
+				$("#marketprice-feedback2").empty();//清空显示内容
+				$("#update_marketprice").removeClass("is-invalid").addClass("is-valid");//改为合法状态
+			}
+					
 			return r;
 		}
 		
@@ -720,6 +754,7 @@ body {
 						var goodsname_td = $("<td></td>").append(item.goodsname);
 						/* var goodscount_td = $("<td></td>").append(item.goodscount); */
 						var goodsmoney_td = $("<td></td>").append(item.goodsmoney);
+						var marketprice_td = $("<td></td>").append(item.marketprice);
 						var brand_td = $("<td></td>").append(item.brand.brandname);
 						var goodsremarks_td = $("<td></td>").append(item.goodsremarks);
 						console.log(index);
@@ -733,6 +768,7 @@ body {
 							.append(goodsid_td)
 							.append(goodsname_td)
 							.append(goodsmoney_td)
+							.append(marketprice_td)
 							.append(brand_td)
 							.append(goodsremarks_td)
 							.append(xxx_td)

@@ -71,8 +71,8 @@ body {
 					
 					
 					<tr><td colspan="4" align="right">总计：<span id="total-money">0</span> 元</td></tr>
-					<tr><td colspan="2">处理人：<span id="user-name"></span></td><td colspan="2">日期：<span id="order-date"></span></td></tr>
-					
+					<tr><td colspan="2">处理人：<span id="user-name"></span></td><td colspan="2"><span id="custom-name"></span></td></tr>
+					<tr><td colspan="2"><span></span></td><td colspan="2" align="right">日期：<span id="order-date"></span></td></tr>
 					
 					</table>
 					
@@ -130,6 +130,11 @@ body {
 										<tr>
 											<td colspan="4">订单类型: <span id="order-type2"></span></td>
 										</tr>
+										
+										<tbody id="order-state">
+										
+										</tbody>
+										
 										<tr>
 											<td colspan="4">商品列表</td>
 										</tr>
@@ -536,6 +541,12 @@ body {
 			if(result.extend.orderCustoms[0].orderremarks!=null){
 				$("#order-remarks").html("备注："+result.extend.orderCustoms[0].orderremarks);
 			}
+			
+			if(result.extend.orderCustoms[0].custom!=null){
+				$("#custom-name").html("客户: "+result.extend.orderCustoms[0].customer.username);
+			}
+			
+			
 			var newDate = new Date(result.extend.orderCustoms[0].orderdate);			
 			$("#order-date").html(newDate.toLocaleDateString());
 			
@@ -578,6 +589,7 @@ body {
 
 			//向查询函数传入id,查询并填充
 			findUpdateOrder($(this).attr("order-id"));
+			
 			//将id绑定在模态框的修改按钮上
 			$("#updateOrder_btn").attr("order-id",$(this).attr("order-id"));
 			$("#updateOrderModal").modal({
@@ -621,9 +633,17 @@ body {
 			$("#order-date2").html(newDate.toLocaleDateString());
 			
 			//清空
+			$("#order-state").empty();
 			$("#flows_tbody2").empty();
+			if(result.extend.orderCustoms[0].ordertype==2){
+				var orderstate_select = $("<select class='custom-select' id='orderstate-select' name='orderstate'></select>").append("<option value =1>未接单</option><option value =2>配送中</option><option value =3>已完成</option>").val(result.extend.orderCustoms[0].orderstate);
+
+				var orderstate_td = $("<td colspan='4'></td>").append(orderstate_select);
+				$("<tr></tr>").append(orderstate_td).appendTo("#order-state");
+			}
 			//填充flow
 			$.each(result.extend.orderCustoms[0].flows, function(i, item) {
+				
 				var goodsid_td = $("<td></td>").append(item.goodsid);
 				var goodsname_td = $("<td></td>").append(item.goods.goodsname);
 				var goodsnumber_td = $("<td></td>").append(item.goodsnumber);
@@ -703,7 +723,7 @@ body {
 						if(item.custom==null){
 							var customer_td = $("<td></td>").append("无"); 
 						}else{
-							var customer_td = $("<td></td>").append(item.custom.username); 
+							var customer_td = $("<td></td>").append(item.customer.username); 
 						}
 						
 						var ordermoney_td = $("<td></td>").append(item.ordermoney);

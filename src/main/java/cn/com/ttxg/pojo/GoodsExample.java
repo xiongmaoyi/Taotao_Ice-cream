@@ -3,8 +3,6 @@ package cn.com.ttxg.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.ttxg.pojo.InStorehouseExample.Criteria;
-
 public class GoodsExample {
     protected String orderByClause;
 
@@ -211,9 +209,6 @@ public class GoodsExample {
             return (Criteria) this;
         }
         
-        
-        
-        
         /**
          * 定制的example---------------------------------------------------------------------------------------
          * @param value
@@ -237,9 +232,7 @@ public class GoodsExample {
         
         /**-----------------------------------------------------------------------------------------------------*/
 
-        
-        
-        
+
         
 
         public Criteria andGoodsnameNotLike(String value) {
@@ -604,6 +597,76 @@ public class GoodsExample {
 
         public Criteria andGoodspngNotBetween(String value1, String value2) {
             addCriterion("goodspng not between", value1, value2, "goodspng");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceIsNull() {
+            addCriterion("marketprice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceIsNotNull() {
+            addCriterion("marketprice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceEqualTo(String value) {
+            addCriterion("marketprice =", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceNotEqualTo(String value) {
+            addCriterion("marketprice <>", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceGreaterThan(String value) {
+            addCriterion("marketprice >", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceGreaterThanOrEqualTo(String value) {
+            addCriterion("marketprice >=", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceLessThan(String value) {
+            addCriterion("marketprice <", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceLessThanOrEqualTo(String value) {
+            addCriterion("marketprice <=", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceLike(String value) {
+            addCriterion("marketprice like", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceNotLike(String value) {
+            addCriterion("marketprice not like", value, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceIn(List<String> values) {
+            addCriterion("marketprice in", values, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceNotIn(List<String> values) {
+            addCriterion("marketprice not in", values, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceBetween(String value1, String value2) {
+            addCriterion("marketprice between", value1, value2, "marketprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarketpriceNotBetween(String value1, String value2) {
+            addCriterion("marketprice not between", value1, value2, "marketprice");
             return (Criteria) this;
         }
     }

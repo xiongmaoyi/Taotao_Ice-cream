@@ -28,8 +28,8 @@ public interface GoodsMapper {
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
+
+	List<GoodsCustom> selectWithBrandByExample(GoodsExample example);
     
-    
-    List<GoodsCustom> selectWithBrandByExample(GoodsExample example);
     
 }

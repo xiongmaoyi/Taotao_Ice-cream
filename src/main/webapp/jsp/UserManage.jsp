@@ -385,7 +385,7 @@ body {
 		});
 		//搜索按钮
 		$("#searchBtn").click(function(){
-			
+		
 			var data ={"pn":"1","condition":condition,"searchType":searchType};
 			$.ajax({
 				url : "/TTXG/showUserByCondition",

@@ -1,8 +1,5 @@
 package cn.com.ttxg.controller;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +40,7 @@ public class GoodsController {
 	@ResponseBody
 	@RequestMapping(value="addGoods",method=RequestMethod.POST)
 	public ReturnMsg addGoods(@RequestParam(value = "pn", defaultValue = "1") Integer pn,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType,@Valid Goods goods,BindingResult result){
-		
+		System.out.println("uuuuuuuuuuuuuuuuuu"+goods.getMarketprice());
 		if(result.hasErrors()){
 			List<FieldError> errors = result.getFieldErrors();
 			Map<String, Object> map = new HashMap<String, Object>();

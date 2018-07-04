@@ -72,9 +72,6 @@ public class UserController{
 		}
         
 		
-		
-		
-		
 	}
 	
 	
@@ -85,12 +82,19 @@ public class UserController{
 	
 	@ResponseBody
 	@RequestMapping(value="showUserByCondition",method=RequestMethod.GET)
-	public ReturnMsg showUserByCondition(@RequestParam(value = "pn", defaultValue = "1") Integer pn,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType){
-		
-		PageInfo<User> page = userService.getUserPage(pn, condition, searchType);
-		
+	public ReturnMsg showUserByCondition(@RequestParam(value = "pn", defaultValue = "1") Integer pn,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType){	
+		PageInfo<User> page = userService.getUserPage(pn, condition, searchType);	
 		return ReturnMsg.success().add("page", page);
 	}
+	@ResponseBody
+	@RequestMapping(value="showCustomerByCondition",method=RequestMethod.GET)
+	public ReturnMsg showCustomerByCondition(@RequestParam(value = "pn", defaultValue = "1") Integer pn,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType){	
+		PageInfo<User> page = userService.getCustomerPage(pn, condition, searchType);	
+		return ReturnMsg.success().add("page", page);
+	}
+	
+	
+	
 	
 	@ResponseBody
 	@RequestMapping("checkUserName")

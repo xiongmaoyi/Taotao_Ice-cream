@@ -14,7 +14,7 @@
 		<!-- 配置数据库连接信息 -->
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql:///ttxg" 
+			connectionURL="jdbc:mysql://47.94.12.231:3306/ttxg" 
 			userId="root" 
 			password="root">
 		</jdbcConnection>
@@ -47,9 +47,9 @@
 		</javaClientGenerator>
 		
 		<!-- 指定每个表的生成策略  -->
- 		<!-- <table tableName="goods" domainObjectName="Goods"></table> -->
- 		<table tableName="flow" domainObjectName="Flow"></table>
-		<table tableName="order" domainObjectName="Order"></table>
+ 		<table tableName="goods" domainObjectName="Goods"></table>
+ 		<!-- <table tableName="flow" domainObjectName="Flow"></table>
+		<table tableName="order" domainObjectName="Order"></table> -->
 		<!-- <table tableName="transaction" domainObjectName="Transaction"></table> -->
 		<!-- <table tableName="user" domainObjectName="User"></table> -->
 		<!-- <table tableName="warehouse" domainObjectName="Warehouse"></table> -->

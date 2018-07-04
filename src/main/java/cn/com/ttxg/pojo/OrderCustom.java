@@ -6,6 +6,7 @@ public class OrderCustom extends Order{
 	
 	private User user;
 	private User deliver;
+	private User customer;
 	private List<FlowCustom> flows;
 
 	
@@ -27,6 +28,12 @@ public class OrderCustom extends Order{
 	}
 	public void setFlows(List<FlowCustom> flows) {
 		this.flows = flows;
+	}
+	public User getCustomer() {
+		return customer;
+	}
+	public void setCustomer(User customer) {
+		this.customer = customer;
 	}
 	
 	

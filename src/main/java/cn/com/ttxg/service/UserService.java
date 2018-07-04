@@ -23,5 +23,7 @@ public interface UserService {
 	public int updateUserById(User user);
 	
 	public int getUserIdByName(User user);
+
+	public PageInfo<User> getCustomerPage(Integer pn, String condition, int searchType);
 	
 }

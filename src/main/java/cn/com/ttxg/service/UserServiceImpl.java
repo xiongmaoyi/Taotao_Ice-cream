@@ -19,6 +19,7 @@ import cn.com.ttxg.mapper.UserMapper;
 import cn.com.ttxg.pojo.GoodsCustom;
 import cn.com.ttxg.pojo.User;
 import cn.com.ttxg.pojo.UserExample;
+import cn.com.ttxg.pojo.UserExample.Criteria;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -99,6 +100,34 @@ public class UserServiceImpl implements UserService {
 		List<User> users =  userMapper.selectByExample(example);
 		int userid = users.get(0).getUserid();
 		return userid;
+	}
+
+	@Override
+	public PageInfo<User> getCustomerPage(Integer pn, String condition, int searchType) {
+		UserExample example = new UserExample();
+		List<String> typeList =new ArrayList<String>();
+		typeList.add("3");
+		typeList.add("5");
+		Criteria criteria = example.createCriteria().andUsertypeIn(typeList);
+		if(!StringUtils.isEmpty(condition)){
+			if(searchType==1){
+				criteria.andUseridEqualTo(Integer.parseInt(condition));
+			}else if(searchType==2){
+				criteria.andUsernameLike("%"+condition+"%");
+			}else if(searchType==3){
+				criteria.andNameLike("%"+condition+"%");
+			}else if(searchType==4){
+				criteria.andPhoneLike("%"+condition+"%");
+			}		
+		}
+		
+		// 从pn页开始查，每页显示5个数据，start后面紧跟的查询就是分页查询
+		PageHelper.startPage(pn, 5);
+		List<User> userList = userMapper.selectByExample(example);
+		PageInfo<User> page = new PageInfo<User>(userList, 5);
+		
+		return page;
+
 	}
 
 }

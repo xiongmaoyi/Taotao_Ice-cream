@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          <ul class="nav nav-second-level">
                            
                              <li>
-                                <a href="process_showView" target="mg"><i class="fa fa-cny "></i>线下销售 </a>
+                                <a href="jsp/OfflineSale.jsp" target="mg"><i class="fa fa-cny "></i>线下销售 </a>
                             </li>
                              <li>
                                 <a href="jsp/SearchSale.jsp" target="mg"><i class="fa fa-search"></i>销售单查询 </a>

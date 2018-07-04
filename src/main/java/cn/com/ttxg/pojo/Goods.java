@@ -1,12 +1,10 @@
 package cn.com.ttxg.pojo;
 
-import javax.validation.constraints.Pattern;
-
 public class Goods {
     private Integer goodsid;
-    @Pattern(regexp="^(?!_)(?!.*?_$)[a-zA-Z0-9_\\u4e00-\\u9fa5]+$",message="服务端：请输入正确的商品名")
+
     private String goodsname;
-    @Pattern(regexp="^(0|[1-9][0-9]{0,9})(\\.[0-9]{1,2})?$",message="服务端：请输入正确的商品单价")
+
     private String goodsmoney;
 
     private String goodsremarks;
@@ -16,6 +14,8 @@ public class Goods {
     private Integer brandid;
 
     private String goodspng;
+
+    private String marketprice;
 
     public Integer getGoodsid() {
         return goodsid;
@@ -71,5 +71,13 @@ public class Goods {
 
     public void setGoodspng(String goodspng) {
         this.goodspng = goodspng == null ? null : goodspng.trim();
+    }
+
+    public String getMarketprice() {
+        return marketprice;
+    }
+
+    public void setMarketprice(String marketprice) {
+        this.marketprice = marketprice == null ? null : marketprice.trim();
     }
 }

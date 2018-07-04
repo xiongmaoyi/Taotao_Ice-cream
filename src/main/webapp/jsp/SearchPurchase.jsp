@@ -507,10 +507,10 @@ body {
 							var ordertype_td = $("<td></td>").append("销售");
 						}
 						//防止js为空报错
-						if(item.custom==null){
+						if(item.customer==null){
 							var customer_td = $("<td></td>").append("无"); 
 						}else{
-							var customer_td = $("<td></td>").append(item.custom.username); 
+							var customer_td = $("<td></td>").append(item.customer.username); 
 						}
 						
 						var ordermoney_td = $("<td></td>").append(item.ordermoney);

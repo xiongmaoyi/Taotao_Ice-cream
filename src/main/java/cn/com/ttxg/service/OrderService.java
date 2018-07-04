@@ -29,6 +29,8 @@ public interface OrderService {
 
 	public PageInfo<OrderCustom> findSale(Integer pn, String condition, int searchType, Date date_1, Date date_2);
 
+	public int getMaxId();
+
 
 
 }

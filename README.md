@@ -4,6 +4,7 @@
 前端应用的库
 - BootStrap 4 
 - JQuery 3.3
+- jquery-ui 1.12
 - font-awesome 4.7
 
 后端框架与库

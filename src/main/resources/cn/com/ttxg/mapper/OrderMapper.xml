@@ -327,10 +327,10 @@
     	<result column="name" jdbcType="VARCHAR" property="name" />
     	<result column="state" jdbcType="VARCHAR" property="state" />
     </association>
-    <association property="custom" javaType="User">
+    <association property="customer" javaType="User">
     	<id column="userid" jdbcType="INTEGER" property="userid" />
     	<result column="usertype" jdbcType="VARCHAR" property="usertype" />
-    	<result column="custom" jdbcType="VARCHAR" property="username" />
+    	<result column="customer" jdbcType="VARCHAR" property="username" />
     	<result column="password" jdbcType="VARCHAR" property="password" />
     	<result column="phone" jdbcType="VARCHAR" property="phone" />
     	<result column="address" jdbcType="VARCHAR" property="address" />
@@ -353,6 +353,7 @@
     			<result column="goodsremarks" jdbcType="VARCHAR" property="goodsremarks" />
     			<result column="state" jdbcType="VARCHAR" property="state" />
     			<result column="brandid" jdbcType="INTEGER" property="brandid" />
+    			<result column="marketprice" jdbcType="VARCHAR" property="marketprice" />
     			<association property="brand" javaType="Brand">
     				<id column="brandid" jdbcType="INTEGER" property="brandid" />
     				<result column="brandname" jdbcType="VARCHAR" property="brandname" />
@@ -367,9 +368,11 @@
     
     
     <sql id="orderFive_Column_List">
-		o.orderid,o.ordertype,f.goodsid,o.orderremarks,o.orderstate,g.goodsname,f.goodsnumber,f.subtotal,o.ordermoney,
-		chuliren.username AS username,songhuoren.username AS delivery,kehu.username AS custom,
-		o.orderdate 
+		o.orderid,o.ordertype,o.custom,f.goodsid,o.orderremarks,o.orderstate,g.goodsname,f.goodsnumber,f.subtotal,o.ordermoney,g.marketprice,o.orderdate,  
+		chuliren.username AS username,   
+		songhuoren.username AS delivery,   
+		kehu.username AS customer
+		
 	</sql>
     <select id="selectCompleteOrder" resultMap="withFiveMap" parameterType="OrderExample">
     	select
@@ -397,10 +400,10 @@
 
   
   <sql id="orderTwo_Column_List">
-		o.orderid,o.ordertype,o.ordermoney,o.orderstate,
+		o.orderid,o.ordertype,o.custom,o.ordermoney,o.orderstate,
 		chuliren.username AS username,
 		songhuoren.username AS delivery,o.orderdate,
-		kehu.username AS custom
+		kehu.username AS customer
 	</sql>
     <select id="selectSimpleOrder" resultMap="withFiveMap" parameterType="OrderExample">
     	select
@@ -420,10 +423,11 @@
     	</if>
     
     </select>
-  
-  
-  
 
-  
+	<select id="selectMaxOrderId" resultType="int">
+	SELECT MAX(orderid) FROM `order`
+	</select>
+
+
   
 </mapper>

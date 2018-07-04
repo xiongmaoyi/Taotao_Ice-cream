@@ -77,7 +77,6 @@ public class BrandServiceImpl implements BrandService {
 	}
 	@Override
 	public int updateBrandById(Brand brand) {
-		// TODO Auto-generated method stub
 		return brandMapper.updateByPrimaryKeySelective(brand);
 	}
 

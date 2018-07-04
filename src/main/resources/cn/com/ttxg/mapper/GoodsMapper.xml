@@ -9,6 +9,7 @@
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="brandid" jdbcType="INTEGER" property="brandid" />
     <result column="goodspng" jdbcType="VARCHAR" property="goodspng" />
+    <result column="marketprice" jdbcType="VARCHAR" property="marketprice" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    goodsid, goodsname, goodsmoney, goodsremarks, state, brandid, goodspng
+    goodsid, goodsname, goodsmoney, goodsremarks, state, brandid, goodspng, marketprice
   </sql>
   <select id="selectByExample" parameterType="cn.com.ttxg.pojo.GoodsExample" resultMap="BaseResultMap">
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="cn.com.ttxg.pojo.Goods">
     insert into goods (goodsid, goodsname, goodsmoney, 
       goodsremarks, state, brandid, 
-      goodspng)
+      goodspng, marketprice)
     values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{goodsmoney,jdbcType=VARCHAR}, 
       #{goodsremarks,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{brandid,jdbcType=INTEGER}, 
-      #{goodspng,jdbcType=VARCHAR})
+      #{goodspng,jdbcType=VARCHAR}, #{marketprice,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.ttxg.pojo.Goods">
     insert into goods
@@ -133,6 +134,9 @@
       <if test="goodspng != null">
         goodspng,
       </if>
+      <if test="marketprice != null">
+        marketprice,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="goodsid != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="goodspng != null">
         #{goodspng,jdbcType=VARCHAR},
+      </if>
+      <if test="marketprice != null">
+        #{marketprice,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.goodspng != null">
         goodspng = #{record.goodspng,jdbcType=VARCHAR},
       </if>
+      <if test="record.marketprice != null">
+        marketprice = #{record.marketprice,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       goodsremarks = #{record.goodsremarks,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=VARCHAR},
       brandid = #{record.brandid,jdbcType=INTEGER},
-      goodspng = #{record.goodspng,jdbcType=VARCHAR}
+      goodspng = #{record.goodspng,jdbcType=VARCHAR},
+      marketprice = #{record.marketprice,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="goodspng != null">
         goodspng = #{goodspng,jdbcType=VARCHAR},
       </if>
+      <if test="marketprice != null">
+        marketprice = #{marketprice,jdbcType=VARCHAR},
+      </if>
     </set>
     where goodsid = #{goodsid,jdbcType=INTEGER}
   </update>
@@ -237,21 +251,10 @@
       goodsremarks = #{goodsremarks,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       brandid = #{brandid,jdbcType=INTEGER},
-      goodspng = #{goodspng,jdbcType=VARCHAR}
+      goodspng = #{goodspng,jdbcType=VARCHAR},
+      marketprice = #{marketprice,jdbcType=VARCHAR}
     where goodsid = #{goodsid,jdbcType=INTEGER}
   </update>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -265,6 +268,7 @@
     		<result column="goodsremarks" jdbcType="VARCHAR" property="goodsremarks" />
     		<result column="state" jdbcType="VARCHAR" property="state" />
     		<result column="brandid" jdbcType="INTEGER" property="brandid" />
+    		<result column="marketprice" jdbcType="VARCHAR" property="marketprice" />
     		<association property="brand" javaType="Brand">
     			<id column="brandid" jdbcType="INTEGER" property="brandid" />
     			<result column="brandname" jdbcType="VARCHAR" property="brandname" />
@@ -276,7 +280,7 @@
 	
 
 	<sql id="WithGoods_Column_List">
-		goods.goodsid,goods.goodsname,goods.goodsmoney,brand.brandname,goods.goodsremarks
+		goods.goodsid,goods.goodsname,goods.goodsmoney,brand.brandname,goods.goodsremarks,goods.marketprice
 	</sql>
 
 	<select id="selectWithBrandByExample" parameterType="GoodsExample" resultMap="withBrandResultMap">
@@ -293,12 +297,6 @@
      		order by ${orderByClause}
     	</if>
 	</select>
-  
-  
-  
-  
-  
-  
   
   
 </mapper>

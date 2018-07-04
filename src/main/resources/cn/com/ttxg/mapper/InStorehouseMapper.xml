@@ -204,7 +204,7 @@
 	</update>
 
 
-	<!-- 定制的内容 -->
+	<!-- **************************************************************************定制的内容*************************************************************** -->
 	
 	<resultMap type="InStorehouseCustom" id="withGoodsAndBrandResultMap">
   		<id column="messageid" jdbcType="INTEGER" property="messageid" />
@@ -218,6 +218,7 @@
     		<result column="goodsremarks" jdbcType="VARCHAR" property="goodsremarks" />
     		<result column="state" jdbcType="VARCHAR" property="state" />
     		<result column="brandid" jdbcType="INTEGER" property="brandid" />
+    		<result column="marketprice" jdbcType="VARCHAR" property="marketprice" />
     		<association property="brand" javaType="Brand">
     			<id column="brandid" jdbcType="INTEGER" property="brandid" />
     			<result column="brandname" jdbcType="VARCHAR" property="brandname" />
@@ -233,7 +234,7 @@
 	
 
 	<sql id="WithGoods_Column_List">
-		instorehouse.goodsid,goods.goodsname,instorehouse.goodscount,goods.goodsmoney,brand.brandname,goods.goodsremarks
+		instorehouse.goodsid,goods.goodsname,instorehouse.goodscount,goods.goodsmoney,brand.brandname,goods.goodsremarks,goods.marketprice
 	</sql>
 
 	<select id="selectWithGoodsAndBrandByExample" parameterType="InStorehouseExample" resultMap="withGoodsAndBrandResultMap">

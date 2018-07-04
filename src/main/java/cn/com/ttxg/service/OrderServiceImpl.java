@@ -186,6 +186,12 @@ public class OrderServiceImpl implements OrderService {
 		return page;
 	}
 
+	@Override
+	public int getMaxId() {
+	
+		return orderMapper.selectMaxOrderId();
+	}
+
 
 	
 

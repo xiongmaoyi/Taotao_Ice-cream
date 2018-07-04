@@ -1,7 +1,5 @@
 package cn.com.ttxg.controller;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -198,5 +196,13 @@ public class OrderController {
 		return ReturnMsg.success();
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "findMaxOrderId", method = RequestMethod.GET)
+	public ReturnMsg findMaxOrderId() {
+		int maxOrderId = orderService.getMaxId();
+		return ReturnMsg.success().add("maxOrderId", maxOrderId);
+	}
+	
 
 }
