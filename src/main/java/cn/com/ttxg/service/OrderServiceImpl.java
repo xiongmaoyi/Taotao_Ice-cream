@@ -13,19 +13,20 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.com.ttxg.mapper.OrderMapper;
-import cn.com.ttxg.pojo.GoodsCustom;
-import cn.com.ttxg.pojo.GoodsExample;
+import cn.com.ttxg.mapper.UserMapper;
 import cn.com.ttxg.pojo.Order;
 import cn.com.ttxg.pojo.OrderCustom;
 import cn.com.ttxg.pojo.OrderExample;
-import cn.com.ttxg.pojo.GoodsExample.Criteria;
+import cn.com.ttxg.pojo.User;
+import cn.com.ttxg.pojo.UserExample;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
-	
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Override
 	public int insertOrder(Order order) {
@@ -217,8 +218,12 @@ public class OrderServiceImpl implements OrderService {
 	public PageInfo<OrderCustom> findPageByDelivery(Integer pn, String condition, int searchType, Date date_1,
 			Date date_2, String delivery) {
 		OrderExample example = new OrderExample();
+		UserExample example2 = new UserExample();
+		example2.createCriteria().andUsernameEqualTo(delivery);
 		//按订单编号，时间
-		cn.com.ttxg.pojo.OrderExample.Criteria criteria = example.createCriteria().andDeliveryEqualTo(delivery);
+		int userid = userMapper.selectByExample(example2).get(0).getUserid();
+		
+		cn.com.ttxg.pojo.OrderExample.Criteria criteria = example.createCriteria().andDeliveryEqualTo(Integer.toString(userid));
 		
 			if(searchType==1){
 				if(!StringUtils.isEmpty(condition)){

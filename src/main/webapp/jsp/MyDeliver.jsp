@@ -214,12 +214,12 @@ body {
 
 
 
-	<!-- **************************************************** -->
+	<!-- *************yi*************************************** -->
 
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>未接订单</h3>
+				<h3>已接订单</h3>
 
 			</div>
 		</div>
@@ -235,7 +235,7 @@ body {
 
 					<thead>
 						<tr>
-							<td colspan="9" align="center">未接订单</td>
+							<td colspan="9" align="center">已接订单</td>
 						</tr>
 
 						<tr>
@@ -244,6 +244,7 @@ body {
 								id="searchType" name="searchType">
 									<option selected value="1">按订单编号搜索</option>
 									<option value="2">按日期搜索</option>
+									<option value="3">按订单状态搜索</option>
 							
 							
 
@@ -326,9 +327,10 @@ body {
 		
 		//转到第pn页
 		function toPage(pn) {
+			var username = $("#login-name").html();
 			$.ajax({
-				url : "/TTXG/findUnDeliverOrderByCondition",
-				data : {"pn":pn,"condition":condition,"searchType":searchType,"date1":date1,"date2":date2},
+				url : "/TTXG/findOrderByDelivery",
+				data : {"pn":pn,"condition":condition,"searchType":searchType,"date1":date1,"date2":date2,"delivery":username},
 				type : "GET",
 				success : function(result) {
 					console.log(result);
@@ -380,6 +382,9 @@ body {
 				
 				});	
 				searchType=2;
+			}else if(optionValue==3){
+				$("#search-condition").empty().append('<div class="input-group"><input type="text" class="form-control" placeholder="请输入状态码  配送中：2，已完成：3  " id="searchText"><div class="input-group-append"><button class="btn btn-success search-btn" type="button" id="searchBtn"><i class="fa fa-search fa-lg"></i> 搜索订单</button></div></div>');
+				searchType=3;
 			}
 			
 			
@@ -399,9 +404,10 @@ body {
 		//搜索按钮
 		$(document).on("click",".search-btn",function(){
 			console.log("chaxun");
-			  var data ={"pn":"1","condition":condition,"searchType":searchType,"date1":date1,"date2":date2};
+			var username = $("#login-name").html();
+			  var data ={"pn":"1","condition":condition,"searchType":searchType,"date1":date1,"date2":date2,"delivery":username};
 			  $.ajax({
-				url : "/TTXG/findUnDeliverOrderByCondition",
+				url : "/TTXG/findOrderByDelivery",
 				data : data,
 				type : "GET",
 				success : function(result) {
@@ -425,37 +431,23 @@ body {
 		
 		
 		
-//---------------------------------------------------------------------接单---------------------------------------------------------------------------***********************
+//---------------------------------------------------------------------送达---------------------------------------------------------------------------***********************
 
 	
-	$(document).on("click",".order-take-btn",function(){
+	$(document).on("click",".order-finish-btn",function(){
 			var orderid = $(this).attr("order-id");
-			username = $("#login-name").html();
-			if(confirm("是否接受并配送订单？")){
-				getUserIdAndTakeOrder(username,orderid);
+			if(confirm("请确认订单已送达？")){
+				finishOrder(orderid);;
 			}
 	});
 	
 
-function getUserIdAndTakeOrder(username,orderid){
-		$.ajax({
-				url : "/TTXG/getUserIdByName",
-				data : {"username":username},
-				type : "GET",
-				success : function(result) {
-					console.log(result);
-					console.log(result.extend.userid);
-					userid = result.extend.userid;
-					takeOrder(orderid);
-				}
-			});	
-}
 		
-function takeOrder(orderid){
+function finishOrder(orderid){
 	console.log(userid+"idididiididididididiid");
 	var data = "&_method=PUT";
 	$.ajax({
-				url : "/TTXG/takeOrderById/"+orderid+"/"+userid,
+				url : "/TTXG/finishOrderById/"+orderid,
 				data : data,
 				type : "POST",
 				success : function(result) {
@@ -584,12 +576,14 @@ function takeOrder(orderid){
 						var username_td = $("<td></td>").append(item.user.username);
 						console.log(index);
 						
-						//var delete_button= $('<button></button>').append("<i class='fa fa-trash-o'></i> 删除").addClass("btn btn-danger delete-btn").val(item.orderid).attr("order-id",item.orderid);
-						var take_button= $("<button></button>").append("<i class='fa fa-motorcycle'></i> 接单").addClass("btn btn-info order-take-btn").val(item.orderid).attr("order-id",item.orderid);
+						
+						var finish_button= $("<button></button>").append("<i class='fa fa-check'></i> 送达").addClass("btn btn-warning order-finish-btn").val(item.orderid).attr("order-id",item.orderid);
 						var see_button= $("<button></button>").append("<i class='fa fa-eye'></i> 查看").addClass("btn btn-secondary see-btn").val(item.orderid).attr("order-id",item.orderid);
 				
-						var xxx_td = $("<td></td>").append(" ").append(take_button).append(" ").append(see_button);
-						
+						var xxx_td = $("<td></td>").append(" ").append(see_button);
+						 if(item.orderstate!=3){
+						 	xxx_td.append(" ").append(finish_button);
+						 }
 						$("<tr></tr>")
 							.append(orderid_td)
 							.append(ordertype_td)

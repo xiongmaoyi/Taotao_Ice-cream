@@ -84,7 +84,7 @@ body {
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"> <input type="checkbox" id="check_all"/> </th>
+			
 							<th scope="row">商品编号</th>
 							<th scope="row">商品名称</th>
 							<!-- <th scope="row">商品数量</th> -->
@@ -409,22 +409,6 @@ body {
 		
 		});
 		
-	
-		//--------------------------------全选全不选-------------------------------------------------
-		$("#check_all").click(function(){
-			//prop读取dom原生属性
-			var isCheckAll = $(this).prop("checked");
-			$(".check_item").prop("checked",isCheckAll);
-		});
-		
-		//给每一个check_item绑定点击事件
-		$(document).on("click",".check_item",function(){
-			var flag = $(".check_item:checked").length==$(".check_item").length;
-			$("#check_all").prop("checked",flag);
-		
-		});
-		
-		
 		
 		
 //---------------------------------------------------------添加------------------------------------------------
@@ -451,14 +435,6 @@ body {
 	
 		});
 		
-		//实时监控雪糕数量，并实时计算subtotal
-		$(document).on("input porpertychange",".gnumber",function(){
-			console.log("雪糕数量变化");
-			var gmoney =$(this).parent().parent().parent().find($(".gmn")).html();
-			var gnumber =$(this).val();
-
-			$(this).parent().parent().parent().find($(".subtotal")).html(gmoney*gnumber);
-		});
 		
 		
 		//点击添加，进行判断，主界面无该商品时添加商品；
@@ -499,7 +475,8 @@ body {
 				$('#addGoodsModal').modal('hide');			
 			}
 		});
-		
+//----------------------------------------------------移除按钮----------------------------------------------------------
+
 		//点击移除，移除相应数据
 		$(document).on("click",".rm-btn",function(){
 			 $(this).parent().parent().remove();
@@ -514,7 +491,17 @@ body {
     			$("#total-money").text(total); 
 		
 		});
-		
+	
+	//-------------------------------------------------价格计算----------------------------------------------------
+	
+		//实时监控雪糕数量，并实时计算subtotal
+		$(document).on("input porpertychange",".gnumber",function(){
+			console.log("雪糕数量变化");
+			var gmoney =$(this).parent().parent().parent().find($(".gmn")).html();
+			var gnumber =$(this).val();
+
+			$(this).parent().parent().parent().find($(".subtotal")).html(gmoney*gnumber);
+		});
 		
 	
 		
@@ -533,7 +520,8 @@ body {
     			
     			console.log(total);
     			$("#total-money").text(total);
-    			//---------------------------------------------------按用户优惠--------------------------------------*****************************************************
+    			
+           //-------------------按用户优惠----------------------
     			
     			if(usertype==3){
     				//批发商
@@ -704,19 +692,19 @@ var goodsid;
 				var shl = result.extend.page.list;
 				//jQuery自带的遍历each
 				$.each(shl, function(index, item) {
-						var checkbox_td = $('<td><input type="checkbox" class="check_item"></td>');
+						
 						var goodsid_td = $("<td></td>").append(item.goodsid);
 						var goodsname_td = $("<td></td>").append(item.goodsname);
 						var goodsmoney_td = $("<td></td>").append(item.marketprice);
 						var brand_td = $("<td></td>").append(item.brand.brandname);
 						var goodsremarks_td = $("<td></td>").append(item.goodsremarks);
-						console.log(index);
+						
 
 						var add_button= $("<button></button>").append("<i class='fa fa-plus'></i> 添加").addClass("btn btn-info add-to-table-btn").val(item.goodsid).attr("goods-id",item.goodsid).attr("goods-name",item.goodsname).attr("goods-money",item.marketprice).attr("brand-name",item.brand.brandname).attr("goods-remarks",item.goodsremarks);
 						
 						var xxx_td = $("<td></td>").append(" ").append(add_button);
 						
-						$("<tr></tr>").append(checkbox_td)
+						$("<tr></tr>")
 							.append(goodsid_td)
 							.append(goodsname_td)
 							.append(goodsmoney_td)

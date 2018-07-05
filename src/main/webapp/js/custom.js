@@ -62,24 +62,24 @@
             /*====================================
             //horizontal wizrd code section
              ======================================*/
-            $(function () {
+            /*$(function () {
                 $("#wizard").steps({
                     headerTag: "h2",
                     bodyTag: "section",
                     transitionEffect: "slideLeft"
                 });
-            });
+            });*/
             /*====================================
             //vertical wizrd  code section
             ======================================*/
-            $(function () {
+           /* $(function () {
                 $("#wizardV").steps({
                     headerTag: "h2",
                     bodyTag: "section",
                     transitionEffect: "slideLeft",
                     stepsOrientation: "vertical"
                 });
-            });
+            });*/
         },
        
         

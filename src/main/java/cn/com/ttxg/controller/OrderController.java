@@ -239,6 +239,9 @@ public class OrderController {
 
 	}
 	
+	
+	
+	//获取送货员接单信息
 	@ResponseBody
 	@RequestMapping(value = "findOrderByDelivery", method = RequestMethod.GET)
 	public ReturnMsg findOrderByDelivery(@RequestParam(value = "pn", defaultValue = "1") Integer pn, String condition,
@@ -270,7 +273,7 @@ public class OrderController {
 		return ReturnMsg.success().add("page", page);
 
 	}
-	
+	//填充订单送货人
 	@ResponseBody
 	@RequestMapping(value = "takeOrderById/{orderid}/{delivery}", method = RequestMethod.PUT)
 	public ReturnMsg takeOrderById(Order order) {
@@ -280,7 +283,16 @@ public class OrderController {
 		return ReturnMsg.success();
 
 	}
-	
+	//更改订单状态为已完成
+		@ResponseBody
+		@RequestMapping(value = "finishOrderById/{orderid}", method = RequestMethod.PUT)
+		public ReturnMsg finishOrderById(Order order) {
+
+			order.setOrderstate("3");
+			int a = orderService.updateByid(order);
+			return ReturnMsg.success();
+
+		}
 	
 	
 	

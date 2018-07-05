@@ -86,7 +86,7 @@ body {
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"> <input type="checkbox" id="check_all"/> </th>
+							
 							<th scope="row">商品编号</th>
 							<th scope="row">商品名称</th>
 							<!-- <th scope="row">商品数量</th> -->
@@ -363,13 +363,8 @@ body {
 		
 		
 		
-//---------------------------------------------------------添加------------------------------------------------
-		//传入表id，清除表内容、红绿、提示。
-		function reset_form(id){
-			$(id)[0].reset();
-			$(id+" input").removeClass("is-invalid is-valid");
-			$(id+" .invalid-feedback").empty()
-		}
+//---------------------------------------------------------添加到主界面------------------------------------------------
+	
 		
 		//弹出添加框按钮
 		$("#addGoods").click(function(){
@@ -383,14 +378,7 @@ body {
 			});	
 		});
 		
-		//实时监控雪糕数量，并实时计算subtotal
-		$(document).on("input porpertychange",".gnumber",function(){
-			console.log("雪糕数量变化");
-			var gmoney =$(this).parent().parent().parent().find($(".gmn")).html();
-			var gnumber =$(this).val();
-
-			$(this).parent().parent().parent().find($(".subtotal")).html(gmoney*gnumber);
-		});
+		
 		
 		
 		//点击添加，进行判断，主界面无该商品时添加商品；
@@ -409,7 +397,7 @@ body {
 			var delete_btn = $("<button></button>").append("<i class='fa fa-delete'></i> 移除").addClass("btn btn-info rm-btn").attr("goods-id",$(this).attr("goods-id"));
 			
 			var delete_btn_td = $("<td></td>").append(" ").append(delete_btn);
-			//遍历提前绑定在按钮上的goods-id 检查是否存在
+			//遍历提前绑定在按钮上的goods-id 检查主界面是否存在该雪糕
 			$(".rm-btn").each(function(i,item){	
 				if(item.getAttribute("goods-id")==gid){
 					console.log("存在");
@@ -432,6 +420,9 @@ body {
 			}
 		});
 		
+		
+//-------------------------------------------------------------------------移除按钮--------------------------------------------------------
+		
 		//点击移除，移除相应数据
 		$(document).on("click",".rm-btn",function(){
 			 $(this).parent().parent().remove();
@@ -448,14 +439,18 @@ body {
 		});
 		
 		
+//-------------------------------------------------------------------------界面价格实时计算----------------------------------------------------------------------
+
 		
-		
-		//确认添加按钮
-		$("#insertGoods_btn").click(function(){					
-			//jquery获得表单数据的方法（获得表单提交的数据key：name value：value）
-			var data = $("#addGoodsModal form").serialize();
-	
+		//实时监控雪糕数量，并实时计算subtotal
+		$(document).on("input porpertychange",".gnumber",function(){
+			console.log("雪糕数量变化");
+			var gmoney =$(this).parent().parent().parent().find($(".gmn")).html();
+			var gnumber =$(this).val();
+
+			$(this).parent().parent().parent().find($(".subtotal")).html(gmoney*gnumber);
 		});
+		
 		
 		
 		//监控内容改变与节点改变，实时更新总价
@@ -502,7 +497,8 @@ body {
 				var dd = $(this).parent().parent().parent().parent().find($(".subtotal")).html(gmoney*num);
 			}
 		});
-//------------------------------------------------------------提交订单部分-------------------------------------------
+//------------------------------------------------------------提交订单部分-----------------------------------------------------
+
 //*******************全局变量*****************************************************
 var username;
 var userid;
@@ -628,7 +624,7 @@ var goodsid;
 				var shl = result.extend.page.list;
 				//jQuery自带的遍历each
 				$.each(shl, function(index, item) {
-						var checkbox_td = $('<td><input type="checkbox" class="check_item"></td>');
+						//var checkbox_td = $('<td><input type="checkbox" class="check_item"></td>');
 						var goodsid_td = $("<td></td>").append(item.goodsid);
 						var goodsname_td = $("<td></td>").append(item.goodsname);
 						var goodsmoney_td = $("<td></td>").append(item.goodsmoney);
@@ -640,7 +636,7 @@ var goodsid;
 						
 						var xxx_td = $("<td></td>").append(" ").append(add_button);
 						
-						$("<tr></tr>").append(checkbox_td)
+						$("<tr></tr>")
 							.append(goodsid_td)
 							.append(goodsname_td)
 							.append(goodsmoney_td)
