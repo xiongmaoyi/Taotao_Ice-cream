@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">涛涛雪糕管理系统</a>
+                <a class="navbar-brand" href="ttxg_main.jsp">涛涛雪糕管理系统</a>
             </div>
 
             <div class="header-right">
@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
 
 
-                   
+                   <shiro:hasAnyRoles name="admin">
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>进货管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
@@ -98,32 +98,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             
                         </ul>
                     </li>
-                     
+                    </shiro:hasAnyRoles>
                      
                     <!--  
                     	hasRole有就显示
                     	hasAnyRoles有任何一个角色就能显示
-                    	lacksRole 没有时显示
-                    	
+                    	lacksRole 没有时显示	
                     	hasPermition name=“user：creat” 有权限则显示
                     	lacksPermission 没有这个权限时显示
                      -->
-                     <shiro:hasAnyRoles name="admin,user">
+                     <shiro:hasAnyRoles name="admin,sale">
                      <li>
                         <a href="#"><i class="fa fa-yelp "></i>仓库管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
                                 <a href="jsp/InStorehouse.jsp" target="mg"><i class="fa fa-search"></i>查询仓库</a>
                             </li>
-                            
-                            
-                            
-                           
                         </ul>
                     </li>
-                    
-                   </shiro:hasAnyRoles>
-                    
+                    </shiro:hasAnyRoles>
+              
+                    <shiro:hasAnyRoles name="admin,sale">
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>批发销售管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
@@ -138,7 +133,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                         </ul>
                     </li>
+                    </shiro:hasAnyRoles>
                     
+                    <shiro:hasAnyRoles name="admin,delivery">
                      <li>
                         <a href="#"><i class="fa fa-yelp "></i>送货管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
@@ -153,44 +150,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                         </ul>
                     </li>
-                    
+                    </shiro:hasAnyRoles>
                     
 
                     
-                    
+                    <shiro:hasAnyRoles name="admin">
                      <li>
                         <a href="#"><i class="fa fa-yelp "></i>收支统计 <span class="fa arrow"></span></a>
-                         <ul class="nav nav-second-level">
-                           
+                         <ul class="nav nav-second-level">                 
                              <li>
                                 <a href="jsp/OfflineSale.jsp" target="mg"><i class="fa fa-bar-chart-o  "></i>统计报表 </a>
-                            </li>
-                      
-                                     
+                            </li>                              
                         </ul>
                     </li>
                     
-                     
+                    <li>
+                        <a href="#"><i class="fa fa-yelp "></i>订单管理 <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">                 
+                            <li>
+                                <a href="jsp/OrderManage.jsp" target="mg"><i class="fa fa-search"></i>订单管理</a>
+                            </li>                              
+                        </ul>
+                    </li>
+                    </shiro:hasAnyRoles>
+                    
+                     <shiro:hasAnyRoles name="admin,sale">
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>系统管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
                                 <a href="jsp/UserManage.jsp" target="mg"><i class="fa fa-users "></i>用户管理</a>
                             </li>
-                            <li>
-                                <a href="jsp/OrderManage.jsp" target="mg"><i class="fa fa-search"></i>订单管理</a>
-                            </li>
+
                             <li>
                                 <a href="jsp/GoodsManage.jsp" target="mg"><i class="fa fa-cubes"></i>商品管理</a>
                             </li>
                             <li>
                                 <a href="jsp/BrandManage.jsp" target="mg"><i class="fa fa-cc-diners-club"></i>品牌管理</a>
-                            </li>
-                           
-                             
+                            </li> 
                         </ul>
-                    </li>
-                    
+                   </li>
+                    </shiro:hasAnyRoles>
                     
                     
                     
@@ -214,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-md-12">
                         <div class="alert alert-info" style="padding: 0;border: 0;">
                             
-                           <iframe name="mg" width="100%" height="600px" frameborder="0" style="padding: 0;" >
+                           <iframe src="index.jsp" name="mg" width="100%" height="600px" frameborder="0" style="padding: 0;" >
 							</iframe>
 
                         </div>
@@ -227,7 +227,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
-    <div id="footer-sec">
+    <div id="footer-sec" align="center">
         &copy; 2018 Practice 1 groups | 期末实训 - Practical operation - 实训作业
     </div>
     <!-- /. FOOTER  -->

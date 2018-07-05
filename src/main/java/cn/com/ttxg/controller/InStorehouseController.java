@@ -23,11 +23,7 @@ public class InStorehouseController {
 	@RequestMapping("inStorehouseJsonByCondition")
 	@ResponseBody
 	public ReturnMsg showWarehoseJsonByName(@RequestParam(value = "pn", defaultValue = "1") Integer pn,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType) {
-		
-		
-		
-		PageInfo<InStorehouseCustom> page = inStorehouseService.getInStorehouseCustomsPage(pn, condition, searchType);
-		
+		PageInfo<InStorehouseCustom> page = inStorehouseService.getInStorehouseCustomsPage(pn, condition, searchType);		
 		return ReturnMsg.success().add("page", page);
 
 	}

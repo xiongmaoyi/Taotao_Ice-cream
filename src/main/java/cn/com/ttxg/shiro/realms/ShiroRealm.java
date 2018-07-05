@@ -71,12 +71,15 @@ public class ShiroRealm extends AuthorizingRealm  {
 			roles.add("sale");
 			roles.add("delivery");
 			roles.add("customer");
+			roles.add("ssm");
 		}else if(usertype==2){
 			roles.add("sale");
+			roles.add("ssm");
 		}else if(usertype==3){
 			roles.add("lv3");
 		}else if(usertype==4){
 			roles.add("delivery");
+			roles.add("ssm");
 		}else if(usertype==5){
 			roles.add("customer");
 		}

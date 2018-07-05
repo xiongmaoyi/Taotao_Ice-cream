@@ -23,10 +23,17 @@
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<!-- 引入jquery -->
+<script src="${basePath}js/jquery-3.3.1.js"></script>
+<!-- 引入bootstrap -->
+<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.js"></script>
 <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css"
 	rel="stylesheet">
-<script src="${basePath}js/jquery-3.3.1.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.js"></script>
+<!-- 引入fileinput -->
+<link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/css/fileinput.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/fileinput.js"></script>
+
+
 <style>
 body {
 	font-family: 微软雅黑;
@@ -50,7 +57,7 @@ body {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
+					<form class="form-horizontal" id="addForm">
 
 						<div class="form-group row">
 							<label for="write_goodsname" class="col-sm-3 col-form-label"
@@ -89,8 +96,15 @@ body {
 						<div class="form-group row">
 							<label for="upload_goodspng" class="col-sm-3 col-form-label">上传图片</label>
 							<div class="col-sm-9">
-								<input type="file" class="form-control-file"
-									id="upload_goodspng" name="goodspng">
+							
+								<input name="file" class="form-control-file" type="file" id="file"/>
+								<!-- 上传到指定相册所需的token -->								
+								<input name="Token" type="hidden" id="Token" value="6262b3db9806129a9c9006e17b411e2ab77ab9a6:IhetRcHXL6BdjvHUW23XbAeAnuI=:eyJkZWFkbGluZSI6MTUzMDc5NTU5MSwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNjUyNTk1IiwiYWlkIjoiMTQ2NTE1MyIsImZyb20iOiJmaWxlIn0=" />
+								<!-- 进度条 -->							
+								<progress style="display:none" max="329105" value="0"></progress>							
+								<input type="hidden" name="goodspng" value="" id="add-png">
+								<!-- <input type="file" class="form-control-file"
+									id="upload_goodspng" name="goodspng"> -->
 							</div>
 						</div>
 
@@ -107,6 +121,7 @@ body {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-info upbtn" id="addUploadBtn" value="Upload" >上传图片</button>
 					<button type="button" class="btn btn-primary"
 						id="insertGoods_btn" >添加</button>
 				</div>
@@ -135,7 +150,7 @@ body {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
+					<form class="form-horizontal" id="updateForm"  enctype="multipart/form-data">
 						
 						<div class="form-group row">
 							<label for="goodsid-static" class="col-sm-3 col-form-label"
@@ -182,8 +197,15 @@ body {
 						<div class="form-group row">
 							<label for="update_goodspng" class="col-sm-3 col-form-label">上传图片</label>
 							<div class="col-sm-9">
-								<input type="file" class="form-control-file"
-									id="update_goodspng" name="goodspng">
+							
+								<input name="file" class="form-control-file" type="file" id="file"/>								
+								<input name="Token" type="hidden" id="Token" value="6262b3db9806129a9c9006e17b411e2ab77ab9a6:IhetRcHXL6BdjvHUW23XbAeAnuI=:eyJkZWFkbGluZSI6MTUzMDc5NTU5MSwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNjUyNTk1IiwiYWlkIjoiMTQ2NTE1MyIsImZyb20iOiJmaWxlIn0=" />
+								<!-- 进度条 -->							
+								<progress style="display:none" max="329105" value="0"></progress>
+								<input type="hidden" name="goodspng" value="" id="update-png">
+								
+								<!-- <input type="file" class="form-control-file"
+									id="update_goodspng" name="goodspng"> -->
 							</div>
 						</div>
 
@@ -196,10 +218,14 @@ body {
 
 						</div>
 					</form>
+					<!-- 上传成功后返回的数据 -->
+					<!-- <div id="res"></div> -->
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-info upbtn" id="updateUploadBtn" value="Upload" >上传图片</button>
 					<button type="button" class="btn btn-primary"
 						id="updateGoods_btn">修改</button>
 				</div>
@@ -475,6 +501,9 @@ body {
 		//弹出添加框按钮
 		$("#addGoods").click(function(){
 			//初始化
+			pngUrl=null;
+			//jindutiao
+			$("progress").val(0);	
 			reset_form("#addGoodsModal form");	
 			//查询品牌信息
 			getBrand("#addGoodsModal select");		
@@ -644,7 +673,9 @@ body {
 			//显示修改模态框
 			
 			//初始化
-			reset_form("#updateGoodsModal form");	
+			pngUrl=null;
+			reset_form("#updateGoodsModal form");
+			$("progress").val(0);	
 			//$("#goodsid-static").empty();
 			//查询品牌信息
 			getBrand("#updateGoodsModal select");
@@ -742,6 +773,121 @@ body {
 					
 			return r;
 		}
+		
+//-----------------------------------------------------------上传图片---------------------------------------------------------
+/* $("#upload_goodspng").fileinput({
+
+                language:"zh", //设置语言
+
+                uploadUrl:"http://up.imgapi.com/", //上传的地址
+
+               allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+
+               //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+
+                uploadAsync: true, //默认异步上传
+
+                showUpload:true, //是否显示上传按钮
+
+                showRemove :true, //显示移除按钮
+
+                showPreview :true, //是否显示预览
+
+                showCaption:false,//是否显示标题
+
+                browseClass:"btn btn-primary", //按钮样式    
+
+               dropZoneEnabled: false,//是否显示拖拽区域
+
+               //minImageWidth: 50, //图片的最小宽度
+
+               //minImageHeight: 50,//图片的最小高度
+
+               //maxImageWidth: 1000,//图片的最大宽度
+
+               //maxImageHeight: 1000,//图片的最大高度
+
+                //maxFileSize:0,//单位为kb，如果为0表示不限制文件大小
+
+               //minFileCount: 0,
+
+                maxFileCount:10, //表示允许同时上传的最大文件个数
+
+                enctype:'multipart/form-data',
+
+               validateInitialCount:true,
+
+                previewFileIcon: "<iclass='glyphicon glyphicon-king'></i>",
+
+               msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+           }).on("fileuploaded", function (event, data, previewId, index){
+				
+                 console.log(data);
+
+			});		 */
+
+var pngUrl;
+$('#addUploadBtn').click(function(){
+	//序列化带文件的表单
+    var formData = new FormData($('#addForm')[0]);
+    var $id = "#add-png";
+    console.log('fffffffffffffffffffff');
+    console.log(formData);
+    uploadFile(formData,$id);
+});
+$('#updateUploadBtn').click(function(){
+	//序列化带文件的表单
+    var formData = new FormData($('#updateForm')[0]);
+    var $id ="#update-png";
+    console.log('fffffffffffffffffffff');
+    console.log(formData);
+    uploadFile(formData,$id);
+});
+
+//上传文件
+function uploadFile(formData,$id){
+	 $.ajax({
+        url: 'http://up.imgapi.com/',
+        type: 'POST',
+        data:formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        xhr: function() {
+            myXhr = $.ajaxSettings.xhr();
+            if(myXhr.upload){
+                myXhr.upload.addEventListener('progress',progressHandlingFunction, false);
+            }
+            return myXhr;
+        },
+        beforeSend: function(){
+			$('progress').show();
+		},
+        success: function(data){
+			console.log(data);
+			$('#res').html(JSON.stringify(data));
+			alert("上传成功，linkurl:"+data.linkurl);
+			pngUrl = data.linkurl;
+			//window.location.reload();
+			$($id).val(pngUrl);	
+		},
+        error: function(data){
+			console.log(data);
+		}
+        
+    });
+
+}
+
+function progressHandlingFunction(e){
+    if(e.lengthComputable){
+        $('progress').attr({value:e.loaded,max:e.total});
+    }
+}
+		
+		
+		
 		
 //------------------------------------------------------------显示表格-----------------------------------------
 		function buid_goods_table(result) {

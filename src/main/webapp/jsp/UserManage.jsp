@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -58,6 +59,7 @@ body {
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="write_username" name="username" maxlength="20"
 									placeholder="请输入用户名">
+								<input type="hidden" name = "state" value="1"> 
 								<div class="invalid-feedback" id="username-feedback"></div>
 							</div>
 						</div>
@@ -297,9 +299,12 @@ body {
 							<button class="btn btn-success" type="button" id="addUser">
 								<i class="fa fa-plus fa-lg"></i> 添加用户
 							</button>
+							<!-- 只有管理员才能删除用户 -->
+				
 							<button class="btn btn-danger" type="button" id="deleteSelectedUser">
 								<i class="fa fa-trash-o fa-lg"></i> 删除用户
 							</button>
+						
 						</td>
 					</tr>
 
@@ -480,7 +485,7 @@ body {
 		function reset_form(id){
 			$(id)[0].reset();
 			$(id+" input").removeClass("is-invalid is-valid");
-			$(id+" .invalid-feedback").empty()
+			$(id+" .invalid-feedback").empty();
 		}
 		
 		//弹出添加框按钮
@@ -819,6 +824,7 @@ body {
 						var update_button= $("<button></button>").append("<i class='fa fa-pencil'></i> 修改").addClass("btn btn-info update-btn").val(item.userid).attr("user-id",item.userid);
 						console.log(delete_button);
 						var xxx_td = $("<td></td>").append(delete_button).append(" ").append(update_button);
+						
 						
 						$("<tr></tr>").append(checkbox_td)
 							.append(userid_td)

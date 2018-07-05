@@ -172,7 +172,6 @@
             <value>
             	# 匿名可访问
                 /ttxg_login.jsp = anon
-                /index.jsp =anon
                 /js/** = anon
                 /css/** = anon
                 /imges/** = anon               
@@ -180,12 +179,12 @@
                   
                 # 注销过滤器
                 /user/logout = logout
-                              
+                
                 # allow WebStart to pull the jars for the swing app:
                 /*.jar = anon
                 # everything else requires authentication:
                 /unauthorized.jsp=authc
-                /** = roles["sale"]
+                /** = roles["ssm"]
             </value>
         </property>
     </bean>

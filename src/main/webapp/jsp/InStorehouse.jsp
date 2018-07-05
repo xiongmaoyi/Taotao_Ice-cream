@@ -95,7 +95,7 @@
 								<th scope="row">商品进价</th>
 								<th scope="row">品牌名称</th>
 								<th scope="row">商品备注</th>
-								<th scope="row">xx</th>
+								
 							</tr>
 						</thead>
 
@@ -198,8 +198,12 @@
 					buid_inStorehouse_table(result);
 					buid_page_info(result);
 					buid_page_nav(result);
+					
 				}
 			});
+			
+		
+			
 	
 		}
 	
@@ -211,11 +215,17 @@
 						
 						var goodsid_td = $("<td></td>").append(item.goodsid);
 						var goodsname_td = $("<td></td>").append(item.goodsCustom.goodsname);
-						var goodscount_td = $("<td></td>").append(item.goodscount);
+						if(item.goodscount<=50){
+							var goodscount_span = $("<span style='color:red'></span>").append(item.goodscount);
+							var goodscount_td = $("<td class='goods-count'></td>").append(goodscount_span);
+						}else{
+							var goodscount_td = $("<td class='goods-count'></td>").append(item.goodscount);
+						}
+					
 						var goodsmoney_td = $("<td></td>").append(item.goodsCustom.goodsmoney);
 						var brand_td = $("<td></td>").append(item.goodsCustom.brand.brandname);
 						var goodsremarks_td = $("<td></td>").append(item.goodsCustom.goodsremarks);
-						var xxx_td = $("<td></td>").append(item.goodsid);
+					
 						
 						$("<tr></tr>").append(goodsid_td)
 							.append(goodsname_td)
@@ -223,7 +233,6 @@
 							.append(goodsmoney_td)
 							.append(brand_td)
 							.append(goodsremarks_td)
-							.append(xxx_td)
 							.appendTo("#inStorehouse_tbody");
 	
 	
