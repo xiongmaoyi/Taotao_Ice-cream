@@ -138,6 +138,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                         </ul>
                     </li>
+                    
+                     <li>
+                        <a href="#"><i class="fa fa-yelp "></i>送货管理 <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                           
+                             <li>
+                                <a href="jsp/UnDeliver.jsp" target="mg"><i class="fa fa-newspaper-o "></i>未接订单 </a>
+                            </li>
+                             <li>
+                                <a href="jsp/MyDeliver.jsp" target="mg"><i class="fa fa-motorcycle"></i>我接的订单</a>
+                            </li>
+                             
+                           
+                        </ul>
+                    </li>
+                    
+                    
+
+                    
+                    
+                     <li>
+                        <a href="#"><i class="fa fa-yelp "></i>收支统计 <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                           
+                             <li>
+                                <a href="jsp/OfflineSale.jsp" target="mg"><i class="fa fa-bar-chart-o  "></i>统计报表 </a>
+                            </li>
+                      
+                                     
+                        </ul>
+                    </li>
+                    
                      
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>系统管理 <span class="fa arrow"></span></a>

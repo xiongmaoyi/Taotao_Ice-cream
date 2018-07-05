@@ -31,6 +31,12 @@ public interface OrderService {
 
 	public int getMaxId();
 
+	public PageInfo<OrderCustom> findUnDeliverPageByCondition(Integer pn, String condition, int searchType, Date date_1,
+			Date date_2);
+
+	public PageInfo<OrderCustom> findPageByDelivery(Integer pn, String condition, int searchType, Date date_1,
+			Date date_2, String delivery);
+
 
 
 }

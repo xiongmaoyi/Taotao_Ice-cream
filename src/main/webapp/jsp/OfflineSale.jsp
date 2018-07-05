@@ -615,7 +615,7 @@ var goodsid;
 		//将用户id设置到全局变量
 			
 		
-		var data ={"ordermoney":lastmoney,"orderremarks":orderremarks,"userid":userid,"ordertype":"2","orderstate":"3","custom":custom};
+		var data ={"ordermoney":lastmoney.toFixed(2),"orderremarks":orderremarks,"userid":userid,"ordertype":"2","orderstate":"3","custom":custom};
 		
 		$.ajax({
 				url : "/TTXG/insertOrder",

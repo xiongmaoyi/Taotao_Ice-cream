@@ -591,42 +591,7 @@ var goodsid;
 	}
 	
 	function toMsgPage(){
-		/* var flowList = new Array(); 
-
-		for(var i =0 ;i<$(".added-item").length;i++){
-			var flow = new Object();
-			flow.goodsid = $(".added-item").eq(i).find(".goods-id").html();
-			flow.goodsnumber = $(".added-item").eq(i).find(".gnumber").val();
-			flow.subtotal = $(".added-item").eq(i).find(".subtotal").html();
-			flow.orderid =orderid;
-			flow.state = 1;	
-			
-			flow.username = username;
-			flow.ordermoney =totalmoney;
-			flowList.push(flow);
-		}
-
-		var data =JSON.stringify(flowList);
 		
-		console.log(flowList);
-
-		$.ajax({
-				headers: {
-        			'Accept': 'application/json',
-        			'Content-Type': 'application/json'
-    			 },
-				url : "/TTXG/toPurchaseMsg",
-				data : data,
-				type : "POST",
-				traditional:true,
-				success : function(result) {
-				console.log(8555);
-					console.log(result);
-			
-				//	window.location.href ="/TTXG/jsp/PurchaseMsg.jsp?resultJson="+result;								
-				}
-		});
-	 */
 	 window.location.href ="/TTXG/jsp/PurchaseMsg.jsp?orderid="+orderid;
 	}
 	
@@ -649,8 +614,6 @@ var goodsid;
 		if(confirm("是否提交订单？")){
 			getUserIdAndInsertOrder(username);
 		}
-		
-
 	});
 
 

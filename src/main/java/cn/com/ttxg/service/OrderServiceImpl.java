@@ -192,6 +192,53 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.selectMaxOrderId();
 	}
 
+	@Override
+	public PageInfo<OrderCustom> findUnDeliverPageByCondition(Integer pn, String condition, int searchType, Date date_1,
+			Date date_2) {
+		OrderExample example = new OrderExample();
+		//按订单编号，时间
+		cn.com.ttxg.pojo.OrderExample.Criteria criteria = example.createCriteria().andOrderstateEqualTo("1");
+		criteria.andOrdertypeEqualTo("2");
+			if(searchType==1){
+				if(!StringUtils.isEmpty(condition)){
+				criteria.andOrderidEqualTo(condition);
+				}
+			}else if(searchType==2){
+				criteria.andOrderdateBetween(date_1, date_2);
+			}
+		
+		PageHelper.startPage(pn, 5);
+		List<OrderCustom> orderCustoms = orderMapper.selectSimpleOrder(example);
+		PageInfo<OrderCustom> page = new PageInfo<OrderCustom>(orderCustoms,5);
+		return page;
+	}
+
+	@Override
+	public PageInfo<OrderCustom> findPageByDelivery(Integer pn, String condition, int searchType, Date date_1,
+			Date date_2, String delivery) {
+		OrderExample example = new OrderExample();
+		//按订单编号，时间
+		cn.com.ttxg.pojo.OrderExample.Criteria criteria = example.createCriteria().andDeliveryEqualTo(delivery);
+		
+			if(searchType==1){
+				if(!StringUtils.isEmpty(condition)){
+				criteria.andOrderidEqualTo(condition);
+				}
+			}else if(searchType==2){
+				criteria.andOrderdateBetween(date_1, date_2);
+			}else if(searchType==3){
+				if(!StringUtils.isEmpty(condition)){
+				
+				criteria.andOrderstateEqualTo(condition).andOrdertypeEqualTo("2");
+				}
+			}
+		
+		PageHelper.startPage(pn, 5);
+		List<OrderCustom> orderCustoms = orderMapper.selectSimpleOrder(example);
+		PageInfo<OrderCustom> page = new PageInfo<OrderCustom>(orderCustoms,5);
+		return page;
+	}
+
 
 	
 

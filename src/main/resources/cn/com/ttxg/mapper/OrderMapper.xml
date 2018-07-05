@@ -369,6 +369,7 @@
     
     <sql id="orderFive_Column_List">
 		o.orderid,o.ordertype,o.custom,f.goodsid,o.orderremarks,o.orderstate,g.goodsname,f.goodsnumber,f.subtotal,o.ordermoney,g.marketprice,o.orderdate,  
+		kehu.userid,kehu.name,kehu.phone,kehu.address,
 		chuliren.username AS username,   
 		songhuoren.username AS delivery,   
 		kehu.username AS customer

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -203,6 +204,86 @@ public class OrderController {
 		int maxOrderId = orderService.getMaxId();
 		return ReturnMsg.success().add("maxOrderId", maxOrderId);
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "findUnDeliverOrderByCondition", method = RequestMethod.GET)
+	public ReturnMsg findUnDeliverOrderByCondition(@RequestParam(value = "pn", defaultValue = "1") Integer pn, String condition,
+			String date1, String date2, @RequestParam(value = "searchType", defaultValue = "1") int searchType)
+			throws ParseException {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date date_1 = null, date_2 = null;
+
+		try {
+			if (date1 == null) {
+				date_1 = sf.parse("1999-1-1");
+			} else {
+				date_1 = sf.parse(date1);
+			}
+			if (date2 == null) {
+				date_2 = sf.parse("2500-1-1");
+			} else {
+				date_2 = sf.parse(date2);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			// 抛出异常之后默认搜索所有
+			date_1 = sf.parse("1999-1-1");
+			date_2 = sf.parse("2500-1-1");
+		}
+
+		PageInfo<OrderCustom> page = orderService.findUnDeliverPageByCondition(pn, condition, searchType, date_1, date_2);
+		return ReturnMsg.success().add("page", page);
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "findOrderByDelivery", method = RequestMethod.GET)
+	public ReturnMsg findOrderByDelivery(@RequestParam(value = "pn", defaultValue = "1") Integer pn, String condition,
+			String date1, String date2, @RequestParam(value = "searchType", defaultValue = "1") int searchType,String delivery)
+			throws ParseException {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date date_1 = null, date_2 = null;
+
+		try {
+			if (date1 == null) {
+				date_1 = sf.parse("1999-1-1");
+			} else {
+				date_1 = sf.parse(date1);
+			}
+			if (date2 == null) {
+				date_2 = sf.parse("2500-1-1");
+			} else {
+				date_2 = sf.parse(date2);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			// 抛出异常之后默认搜索所有
+			date_1 = sf.parse("1999-1-1");
+			date_2 = sf.parse("2500-1-1");
+		}
+
+		PageInfo<OrderCustom> page = orderService.findPageByDelivery(pn, condition, searchType, date_1, date_2,delivery);
+		return ReturnMsg.success().add("page", page);
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "takeOrderById/{orderid}/{delivery}", method = RequestMethod.PUT)
+	public ReturnMsg takeOrderById(Order order) {
+		System.out.println("uuuuuuuuuuuupppppppppppppppppppp"+order.getDelivery());
+		order.setOrderstate("2");
+		int a = orderService.updateByid(order);
+		return ReturnMsg.success();
+
+	}
+	
+	
+	
+	
 	
 
 }
