@@ -2,6 +2,7 @@ package cn.com.ttxg.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 
@@ -36,6 +37,12 @@ public interface OrderService {
 
 	public PageInfo<OrderCustom> findPageByDelivery(Integer pn, String condition, int searchType, Date date_1,
 			Date date_2, String delivery);
+
+	public List<Map<String, Object>> findThreeTotal();
+
+	public List<Map<String, Object>> findThreeTotalChartBar();
+
+	public List<Map<String, Object>> findThreeTotalMonths();
 
 
 

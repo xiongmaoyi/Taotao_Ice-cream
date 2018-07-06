@@ -3,7 +3,9 @@ package cn.com.ttxg.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -287,12 +289,31 @@ public class OrderController {
 		@ResponseBody
 		@RequestMapping(value = "finishOrderById/{orderid}", method = RequestMethod.PUT)
 		public ReturnMsg finishOrderById(Order order) {
-
 			order.setOrderstate("3");
 			int a = orderService.updateByid(order);
 			return ReturnMsg.success();
 
 		}
+	//总统计
+		@ResponseBody
+		@RequestMapping(value = "findThreeTotal", method = RequestMethod.GET)
+		public ReturnMsg findThreeTotal(Order order) {
+			List<Map<String, Object>> threeTotal;
+			threeTotal = orderService.findThreeTotal();
+			return ReturnMsg.success().add("threeTotal", threeTotal);
+		}
+		
+		//tiaoxingtu
+		@ResponseBody
+		@RequestMapping(value = "findThreeTotalWithMonths", method = RequestMethod.GET)
+		public ReturnMsg findThreeTotalWithMonths(Order order) {
+			List<Map<String, Object>> chartBar;
+		
+			chartBar = orderService.findThreeTotalChartBar();
+		
+			return ReturnMsg.success().add("chartBar", chartBar);
+		}
+		
 	
 	
 	

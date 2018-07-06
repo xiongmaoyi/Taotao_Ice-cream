@@ -78,7 +78,7 @@ body {
 					</table>
 					
 					<p class="card-text"><span id="order-remarks"></span></p>
-					<a href="#!" class="btn btn-primary">返回</a>
+					<a href="/TTXG/index.jsp" class="btn btn-primary">返回</a>
 				</div>
 			</div>
 

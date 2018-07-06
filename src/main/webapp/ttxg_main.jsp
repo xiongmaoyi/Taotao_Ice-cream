@@ -159,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><i class="fa fa-yelp "></i>收支统计 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">                 
                              <li>
-                                <a href="jsp/OfflineSale.jsp" target="mg"><i class="fa fa-bar-chart-o  "></i>统计报表 </a>
+                                <a href="jsp/Statistics.jsp" target="mg"><i class="fa fa-bar-chart-o  "></i>统计报表 </a>
                             </li>                              
                         </ul>
                     </li>

@@ -428,7 +428,90 @@
 	<select id="selectMaxOrderId" resultType="int">
 	SELECT MAX(orderid) FROM `order`
 	</select>
-
+	
+	
+	
+	<resultMap id="orderStatistics" type="java.util.Map">
+        <result column="summoney" property="summoney" jdbcType="VARCHAR"/>
+        <result column="ordercount" property="ordercount" jdbcType="VARCHAR"/>
+        <result column="ordertype" property="ordertype" jdbcType="VARCHAR"/>
+    </resultMap>
+	
+	<!-- 根据类型及example的其他条件统计订单金额 数量  -->
+	<select id="selectStatistics" resultMap="orderStatistics" parameterType="OrderExample">
+    	SELECT SUM(`order`.ordermoney) summoney,count(*) ordercount, `order`.ordertype
+		<if test="distinct">
+			distinct
+		</if>
+			FROM `order`
+		<if test="_parameter != null">
+      		<include refid="Example_Where_Clause" />
+    	</if>
+    	
+    	GROUP BY ordertype
+    	
+		 <if test="orderByClause != null">
+     		order by ${orderByClause}
+    	</if>
+    	
+    </select>
+    
+    
+    
+    <!-- 按月份统计订单金额 数量 （近6个月）  -->
+    
+    
+    <resultMap id="orderStatisticsWithMonth" type="java.util.Map">
+        <result column="time" property="time" jdbcType="VARCHAR"/>
+        <result column="summoney" property="summoney" jdbcType="VARCHAR"/>
+        <result column="ordercount" property="ordercount" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+	<select id="selectStatisticsWithMonths" resultMap="orderStatisticsWithMonth" parameterType="OrderExample">
+    	SELECT DATE_FORMAT(orderdate,'%Y-%m') as time,SUM(`order`.ordermoney) summoney,COUNT(*)  ordercount
+		<if test="distinct">
+			distinct
+		</if>
+			FROM `order`
+		<if test="_parameter != null">
+      		<include refid="Example_Where_Clause" />
+    	</if>
+		 
+    	GROUP BY  time 
+    	ORDER BY time desc 
+    	
+    	LIMIT 6
+    </select>
+    
+     <!-- （得到一个表）按月份统计订单金额 数量 （近6个月）  -->
+    
+    
+    <resultMap id="chartBar" type="java.util.Map">
+        <result column="time" property="time" jdbcType="VARCHAR"/>
+        <result column="summoneyp" property="summoneyp" jdbcType="VARCHAR"/>
+        <result column="ordercountp" property="ordercountp" jdbcType="VARCHAR"/>
+        <result column="summoneys" property="summoneys" jdbcType="VARCHAR"/>
+        <result column="ordercounts" property="ordercounts" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+	<select id="selectChartBar" resultMap="chartBar" parameterType="OrderExample">
+	select * FROM (SELECT DATE_FORMAT(orderdate,'%Y-%m') as
+	time,SUM(`order`.ordermoney) summoneyp,COUNT(*) ordercountp
+	FROM `order` where ordertype=1 GROUP BY time
+	ORDER BY time desc
+	LIMIT 6) as p
+	left JOIN (SELECT DATE_FORMAT(orderdate,'%Y-%m') as
+	time2,SUM(`order`.ordermoney) summoneys,COUNT(*) ordercounts
+	FROM `order` where ordertype=2 GROUP BY time2
+	ORDER BY time2 desc
+	LIMIT 6) as s on p.time = s.time2
+    </select>
+    
+    
+    
+    
 
   
 </mapper>

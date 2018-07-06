@@ -519,20 +519,26 @@ body {
     			});	
     			
     			console.log(total);
-    			$("#total-money").text(total);
+    			$("#total-money").text(total.toFixed(2));
     			
            //-------------------按用户优惠----------------------
     			
     			if(usertype==3){
     				//批发商
     				lastmoney = total*0.8;
+    				lastmoney = lastmoney.toFixed(2);
     				savemoney = total - lastmoney ;
-    				$("#last-money").text(lastmoney.toFixed(2));
-    				$("#save-money").text(savemoney.toFixed(2));
+    				savemoney = savemoney.toFixed(2);
+    				$("#last-money").text(lastmoney);
+    				$("#save-money").text(savemoney);
     			}else if(usertype==5){
     				//个体客户
-    				$("#last-money").text(total*0.9.toFixed(2));
-    				$("#save-money").text(total*0.1.toFixed(2));
+    				lastmoney = total*0.9;
+    				lastmoney = lastmoney.toFixed(2);
+    				savemoney = total - lastmoney ;
+    				savemoney = savemoney.toFixed(2);
+    				$("#last-money").text(lastmoney);
+    				$("#save-money").text(savemoney);
     			}
     			
     			   			
@@ -603,7 +609,7 @@ var goodsid;
 		//将用户id设置到全局变量
 			
 		
-		var data ={"ordermoney":lastmoney.toFixed(2),"orderremarks":orderremarks,"userid":userid,"ordertype":"2","orderstate":"1","custom":custom};
+		var data ={"ordermoney":lastmoney,"orderremarks":orderremarks,"userid":userid,"ordertype":"2","orderstate":"1","custom":custom};
 		
 		$.ajax({
 				url : "/TTXG/insertOrder",

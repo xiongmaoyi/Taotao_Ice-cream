@@ -65,6 +65,7 @@ body {
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="write_goodsname" name="goodsname" maxlength="20"
 									placeholder="请输入商品名称">
+								<input type="hidden" name="state" value="1">
 								<div class="invalid-feedback" id="goodsname-feedback"></div>
 							</div>
 						</div>
@@ -73,7 +74,6 @@ body {
 							<div class="col-sm-9">
 								<select class="custom-select" id="brand_select" name="brandid">
 									
-
 								</select>
 							</div>
 						</div>
@@ -701,6 +701,7 @@ body {
 					$("#update_goodsmoney").val(result.extend.goods.goodsmoney);
 					$("#update_marketprice").val(result.extend.goods.marketprice);
 					$("#update_goodsremarks").val(result.extend.goods.goodsremarks);
+					$("#update_marketprice").val(result.extend.goods.marketprice);
 					$("#updateGoodsModal select").val(result.extend.goods.brandid);
 				}
 			

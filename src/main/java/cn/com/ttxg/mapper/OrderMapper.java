@@ -6,6 +6,8 @@ import cn.com.ttxg.pojo.OrderExample;
 import net.sf.ehcache.search.impl.OrderComparator;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
@@ -34,4 +36,7 @@ public interface OrderMapper {
     List<OrderCustom> selectCompleteOrder(OrderExample example);
     List<OrderCustom> selectSimpleOrder(OrderExample example );
     int selectMaxOrderId();
+    List<Map<String, Object>> selectStatistics(OrderExample example);
+    List<Map<String, Object>> selectStatisticsWithMonths(OrderExample example);
+    List<Map<String, Object>> selectChartBar();
 }

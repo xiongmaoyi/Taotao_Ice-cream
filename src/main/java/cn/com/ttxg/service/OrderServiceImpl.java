@@ -3,7 +3,9 @@ package cn.com.ttxg.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -242,6 +244,27 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderCustom> orderCustoms = orderMapper.selectSimpleOrder(example);
 		PageInfo<OrderCustom> page = new PageInfo<OrderCustom>(orderCustoms,5);
 		return page;
+	}
+
+	@Override
+	public List<Map<String, Object>> findThreeTotal() {
+		OrderExample example = new OrderExample();
+		//查总支出收入数量
+		return orderMapper.selectStatistics(example);
+	}
+
+	@Override
+	public List<Map<String, Object>> findThreeTotalChartBar() {
+		OrderExample example = new OrderExample();
+		example.createCriteria().andOrdertypeEqualTo("1");
+		return orderMapper.selectChartBar();
+	}
+
+	@Override
+	public List<Map<String, Object>> findThreeTotalMonths() {
+		OrderExample example = new OrderExample();
+		example.createCriteria().andOrdertypeEqualTo("2");
+		return orderMapper.selectStatisticsWithMonths(example);
 	}
 
 
