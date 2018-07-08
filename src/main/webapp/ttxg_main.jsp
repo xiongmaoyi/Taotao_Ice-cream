@@ -178,8 +178,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li>
                         <a href="#"><i class="fa fa-yelp "></i>系统管理 <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
+                          <shiro:hasAnyRoles name="admin">
                             <li>
                                 <a href="jsp/UserManage.jsp" target="mg"><i class="fa fa-users "></i>用户管理</a>
+                            </li>
+                            </shiro:hasAnyRoles>
+                            <li>
+                                <a href="jsp/CustomerManage.jsp" target="mg"><i class="fa fa-users "></i>客户管理</a>
                             </li>
 
                             <li>

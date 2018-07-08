@@ -307,7 +307,7 @@ body {
 
 					<tbody id="goods_tbody">
 
-
+					
 					</tbody>
 
 					<tr style="background-color: white">

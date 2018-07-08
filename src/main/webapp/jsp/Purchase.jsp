@@ -309,59 +309,7 @@ body {
 				}
 			});
 		
-		});
-		
-//-------------------------------------------删除--------------------------------------------------------------------
-		//绑定删除按钮点击事件
-		$(document).on("click",".delete-btn",function(){
-			//父元素tr的第二个td内的内容
-			var goodsname = $(this).parents("tr").find("td:eq(2)").text();
-			//1、显示是否删除
-			if(confirm("确认删除【"+goodsname+"】？")){
-				deleteById($(this).attr("goods-id"));
-			}
-		
-		});
-			
-		//删除函数
-		function deleteById(goodsid){
-		
-			$.ajax({
-				url : "/TTXG/deleteGoodsById/"+goodsid,
-				type : "DELETE",
-				success : function(result) {				
-					toPage(currentPage);
-				}
-			});
-		}
-		//批量删除函数
-		function deleteByIds(ids){
-		
-			$.ajax({
-				url : "/TTXG/deleteGoodsById/"+ids,
-				type : "DELETE",
-				success : function(result) {	
-					toPage(currentPage);
-				}
-			});
-		}
-		
-		//--------------------------------全选全不选--批量删除-----------------------------------------------
-		$("#check_all").click(function(){
-			//prop读取dom原生属性
-			var isCheckAll = $(this).prop("checked");
-			$(".check_item").prop("checked",isCheckAll);
-		});
-		
-		//给每一个check_item绑定点击事件
-		$(document).on("click",".check_item",function(){
-			var flag = $(".check_item:checked").length==$(".check_item").length;
-			$("#check_all").prop("checked",flag);
-		
-		});
-		
-		
-		
+		});		
 		
 //---------------------------------------------------------添加到主界面------------------------------------------------
 	

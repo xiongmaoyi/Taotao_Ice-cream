@@ -514,7 +514,7 @@ function takeOrder(orderid){
 				$("#order-remarks").html("备注："+result.extend.orderCustoms[0].orderremarks);
 			}
 			
-			if(result.extend.orderCustoms[0].custom!=null){
+			if(result.extend.orderCustoms[0].custom!=null ||result.extend.orderCustoms[0].customer!=null){
 				$("#custom-name").html("客户: "+result.extend.orderCustoms[0].customer.username);
 				$("#customer-phone").html(result.extend.orderCustoms[0].customer.phone);
 				$("#customer-name").html(result.extend.orderCustoms[0].customer.name);
@@ -559,7 +559,7 @@ function takeOrder(orderid){
 							var ordertype_td = $("<td></td>").append("销售");
 						}
 						//防止js为空报错
-						if(item.custom==null){
+						if(item.custom==null || item.customer==null){
 							var customer_td = $("<td></td>").append("无"); 
 						}else{
 							var customer_td = $("<td></td>").append(item.customer.username); 

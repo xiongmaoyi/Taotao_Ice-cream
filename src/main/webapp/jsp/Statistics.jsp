@@ -55,8 +55,8 @@ body {
 				总收入: <span id="total-in" class="badge badge-secondary fa fa-rmb"></span> |
 				总支出: <span id="total-out" class="badge badge-secondary fa fa-rmb"></span> |
 				总利润: <span id="total-my" class="badge badge-secondary fa fa-rmb"></span> |
-				总销售订单数：<span id="total-sale" class="badge badge-secondary fa fa-rmb"></span> |
-				总进货订单数：<span id="total-purchase" class="badge badge-secondary fa fa-rmb"></span>
+				总销售订单数：<span id="total-sale" class="badge badge-secondary fa fa-file-text-o"></span> |
+				总进货订单数：<span id="total-purchase" class="badge badge-secondary fa fa-file-text-o"></span>
 				</div>
 </h6>
 			</div>
@@ -152,9 +152,9 @@ $(function() {
 					var totalMy = totalIn - totalOut;
 					var totalSale = result.extend.threeTotal[1].ordercount;
 					var totalPurchase = result.extend.threeTotal[0].ordercount;
-					$("#total-in").text(totalIn);
-					$("#total-out").text(totalOut);
-					$("#total-my").text(totalMy);
+					$("#total-in").text(totalIn.toFixed(2));
+					$("#total-out").text(totalOut.toFixed(2));
+					$("#total-my").text(totalMy.toFixed(2));
 					$("#total-sale").text(totalSale);
 					$("#total-purchase").text(totalPurchase);
 				}

@@ -183,6 +183,8 @@
                 # allow WebStart to pull the jars for the swing app:
                 /*.jar = anon
                 # everything else requires authentication:
+              
+                
                 /unauthorized.jsp=authc
                 /** = roles["ssm"]
             </value>

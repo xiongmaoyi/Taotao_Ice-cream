@@ -174,10 +174,10 @@ body {
 							<label for="select_usertype" class="col-sm-3 col-form-label">用户类型</label>
 							<div class="col-sm-9">
 								<select class="custom-select " id="user_select" name="usertype">
-									<option value =1>管理员</option>
-									<option value =2>售货员</option>
+									<shiro:hasAnyRoles name="admin">	<option value =1>管理员</option>
+									<option value =2>售货员</option></shiro:hasAnyRoles>
 									<option value =3>三级经销商</option>
-									<option value =4>送货员</option>
+								<shiro:hasAnyRoles name="admin">	<option value =4>送货员</option></shiro:hasAnyRoles>
 									<option value =5>个体客户</option>
 								</select>
 							</div>
@@ -343,7 +343,7 @@ body {
 		//转到第pn页
 		function toPage(pn) {
 			$.ajax({
-				url : "/TTXG/showUserByCondition",
+				url : "/TTXG/showCustomerByCondition",
 				data : {"pn":pn,"condition":condition,"searchType":searchType},
 				type : "GET",
 				success : function(result) {
@@ -394,7 +394,7 @@ body {
 		
 			var data ={"pn":"1","condition":condition,"searchType":searchType};
 			$.ajax({
-				url : "/TTXG/showUserByCondition",
+				url : "/TTXG/showCustomerByCondition",
 				data : data,
 				type : "GET",
 				success : function(result) {
