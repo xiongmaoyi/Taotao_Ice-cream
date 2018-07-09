@@ -172,6 +172,7 @@
             <value>
             	# 匿名可访问
                 /ttxg_login.jsp = anon
+                
                 /js/** = anon
                 /css/** = anon
                 /imges/** = anon               

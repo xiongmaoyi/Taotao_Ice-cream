@@ -12,7 +12,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>涛涛雪糕管理系统</title>
-    
+    <!-- 网站小图标 -->
+	<link rel="shortcut icon" href="imges/Ice_cream.ico" type="image/x-icon" />
+	
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    

@@ -614,7 +614,7 @@ body {
 					
 			//jquery获得表单数据的方法（获得表单提交的数据key：name value：value）
 			var data = $("#addUserModal form").serialize();
-			
+			//console.log(data);
 			//执行函数，qianduan校验通过才能继续执行
 			if(!validate_addUser()){
 				return false;
