@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.com.ttxg.pojo.Banner;
 import cn.com.ttxg.pojo.Goods;
 import cn.com.ttxg.pojo.GoodsCustom;
+import cn.com.ttxg.service.BannerService;
 import cn.com.ttxg.service.GoodsService;
 
 
@@ -29,6 +31,10 @@ public class GoodsController {
 	
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private BannerService bannerService;
+	
+	
 	
 	@ResponseBody
 	@RequestMapping("showGoodsJsonByCondition")
@@ -36,6 +42,23 @@ public class GoodsController {
 		PageInfo<GoodsCustom> page = goodsService.getGoodsCustomsPage(pn, condition, searchType);	
 		return ReturnMsg.success().add("page", page);	
 	}
+	
+	//app获取商品信息
+	
+	@ResponseBody
+	@RequestMapping("/goodsWith")
+	public ReturnMsg getGoodsWithBanner(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,String condition,@RequestParam(value = "searchType", defaultValue = "1")int searchType) {
+		List<Banner> listb = bannerService.findBanner();
+		PageInfo<GoodsCustom> page = goodsService.getAllGoods(pageNo, condition, searchType);
+		if(pageNo==1) {
+			return ReturnMsg.success().add("banner_info", listb).add("page", page);
+		}
+		return ReturnMsg.success().add("page", page);
+	}
+
+	
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value="addGoods",method=RequestMethod.POST)

@@ -347,7 +347,6 @@ body {
 		$(document).on("click",".check_item",function(){
 			var flag = $(".check_item:checked").length==$(".check_item").length;
 			$("#check_all").prop("checked",flag);
-		
 		});
 		
 		//批量删除按钮绑定单击事件

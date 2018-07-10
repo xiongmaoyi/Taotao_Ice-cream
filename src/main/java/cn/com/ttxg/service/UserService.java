@@ -25,5 +25,7 @@ public interface UserService {
 	public int getUserIdByName(User user);
 
 	public PageInfo<User> getCustomerPage(Integer pn, String condition, int searchType);
+
+	public User checkUser(String username, String password);
 	
 }
