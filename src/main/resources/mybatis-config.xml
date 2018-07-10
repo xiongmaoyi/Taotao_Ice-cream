@@ -14,8 +14,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <!-- 扫描pojo包，定义其中的类名为别名 -->
 <package name="cn.com.ttxg.pojo"/>
 </typeAliases>
-
-
 <!-- pagehelper插件配置 -->
 <plugins>
     <plugin interceptor="com.github.pagehelper.PageInterceptor">

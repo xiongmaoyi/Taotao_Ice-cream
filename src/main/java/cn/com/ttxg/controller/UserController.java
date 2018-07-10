@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +35,13 @@ public class UserController{
 	
 	@RequestMapping(value="loginByUser",method=RequestMethod.POST)
 	public String loginByUser(String username,String password) {
+//		 //1、获取securityManager factory
+//        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+//        //2、根据factory得到 securityManager实例
+//        SecurityManager securityManager = factory.getInstance();
+//        //3、把实例绑定给securityUtils
+//        SecurityUtils.setSecurityManager(securityManager);
+//        //4、从securitytils获得subject(重要)
         
 		Subject subject = SecurityUtils.getSubject();
         
@@ -68,17 +74,7 @@ public class UserController{
 		
 	}
 	
-	// APP登录方法
-		@RequestMapping("/login2")
-		@ResponseBody
-		public ReturnMsg login2(@RequestBody User user) {
-			user = userService.checkUser(user.getUsername(), user.getPassword());
-			System.out.println("user" + user);
-			if (user != null) {
-				return ReturnMsg.success().add("user", user);
-			}
-			return ReturnMsg.fail();
-		}
+	
 	
 	
 	
@@ -99,7 +95,7 @@ public class UserController{
 	
 	
 	
-
+	
 	@ResponseBody
 	@RequestMapping("checkUserName")
 	public ReturnMsg checkGoodsName(String username){

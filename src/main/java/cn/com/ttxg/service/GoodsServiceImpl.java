@@ -95,30 +95,5 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		return goodsMapper.deleteByExample(example);
 	}
-	
-	
-	//app
-	@Override
-	public PageInfo<GoodsCustom> getAllGoods(Integer pageNo, String condition, int searchType) {
-GoodsExample example = new GoodsExample();
-		
-		example.setOrderByClause("`goodsid`");
-		//条件不为空的时候在example中插入条件
-		if(!StringUtils.isEmpty(condition)){
-			if(searchType==1){
-				example.createCriteria().andGoodsNameLike("%"+condition+"%");
-			}else if(searchType==2){
-				example.createCriteria().andGoodsidEqualTo(condition);
-			}else if(searchType==3){
-				example.createCriteria().andBrandNameLike("%"+condition+"%");
-			}
-			
-		}	
-		// 从pn页开始查，每页显示5个数据，start后面紧跟的查询就是分页查询
-		List<GoodsCustom> goodsCustoms = goodsMapper.selectWithBrandByExample(example);
-		PageInfo<GoodsCustom> page = new PageInfo<GoodsCustom>(goodsCustoms, 5);
-		
-		return page;
-	}
 
 }

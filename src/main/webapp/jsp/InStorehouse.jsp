@@ -137,7 +137,7 @@
 	<script>
 		//
 		$(function() {
-			toPage(1);
+			toPage(1)
 			
 			
 		});

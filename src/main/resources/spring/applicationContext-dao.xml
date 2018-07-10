@@ -172,16 +172,11 @@
             <value>
             	# 匿名可访问
                 /ttxg_login.jsp = anon
+                
                 /js/** = anon
                 /css/** = anon
                 /imges/** = anon               
                 /loginByUser =anon
-                  
-                 # app 请求放行
-                 /login2 = anon
-                 /goodsWith = anon
-                 
-                 
                   
                 # 注销过滤器
                 /user/logout = logout
@@ -192,7 +187,7 @@
               
                 
                 /unauthorized.jsp=authc
-                /ttxg_main.jsp = roles["ssm"]
+                /** = roles["ssm"]
             </value>
         </property>
     </bean>
