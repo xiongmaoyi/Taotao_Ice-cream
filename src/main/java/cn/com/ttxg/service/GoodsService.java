@@ -13,4 +13,5 @@ public interface GoodsService {
 	public Goods getGoosById(Integer id);
 	public int updateGoodsById(Goods record);
 	public int deleteByIds(String ids);
+	public PageInfo<GoodsCustom> getAllGoods(Integer pageNo, String condition, int searchType);
 }

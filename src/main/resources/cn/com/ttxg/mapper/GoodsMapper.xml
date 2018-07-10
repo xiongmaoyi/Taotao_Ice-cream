@@ -280,7 +280,7 @@
 	
 
 	<sql id="WithGoods_Column_List">
-		goods.goodsid,goods.goodsname,goods.goodsmoney,brand.brandname,goods.goodsremarks,goods.marketprice
+		*
 	</sql>
 
 	<select id="selectWithBrandByExample" parameterType="GoodsExample" resultMap="withBrandResultMap">

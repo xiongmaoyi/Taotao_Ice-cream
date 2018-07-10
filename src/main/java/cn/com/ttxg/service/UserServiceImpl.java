@@ -129,5 +129,19 @@ public class UserServiceImpl implements UserService {
 		return page;
 
 	}
+	
+	
+	@Override
+	public User checkUser(String userName, String password) {
+		//User user = userMapper.selectByUserName(userName);
+		UserExample example = new UserExample();
+		example.createCriteria().andUsernameEqualTo(userName);
+		User user = userMapper.selectByExample(example).get(0);
+		if(user != null && user.getPassword().equals(password)) {
+			return user;
+		}
+		return null;
+	}
+
 
 }
