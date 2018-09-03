@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入jquery -->
+    <script src="/js/jquery-3.3.1.js"></script>
+    <!-- 引入bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <!-- 引入aewsome图标库 -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入jquery UI -->
+    <link href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+    <!-- 引入fileinput -->
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/css/fileinput.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/fileinput.js"></script>
+    <!-- show-page -->
+    <script src="/js/utils/show-page.js"></script>
+
+</head>
+<body>
+
+<!-- ******************html页面********************************** -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3></h3>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="card" style="margin: auto">
+            <!-- <img class="card-img-top" src="/images/pathToYourImage.png"
+                alt="Card image cap"> -->
+            <div class="card-body">
+                <h4 class="card-title">订单信息</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Order Massage</h6>
+                <table class="table table-striped table-borderless"
+                       id='msg_table'>
+                    <tr>
+                        <td colspan="4">订单编号: <span id="order-id" th:text="${orderid}"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">订单类型: <span id="order-type"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">商品列表</td>
+                    </tr>
+                    <tr>
+                        <td>商品编号</td>
+                        <td>商品名称</td>
+                        <td>数量</td>
+                        <td>小计</td>
+                    </tr>
+                    <tbody id="flows_tbody">
+                    </tbody>
+
+
+                    <tr>
+                        <td colspan="4" align="right">总计：<span id="total-money"></span> 元</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">处理人：<span id="user-name"></span></td>
+                        <td colspan="2"><span id="custom-name"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span></span></td>
+                        <td colspan="2" align="right">日期：<span id="order-date"></span></td>
+                    </tr>
+
+                </table>
+
+                <p class="card-text"><span id="order-remarks"></span></p>
+                <a href="/main-img" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- ***************************************************************************************************************** -->
+
+
+<script th:inline="javascript">
+    //--------------------------------------------刷新页面入口--------------------------------------------------------
+    $(function () {
+        var orderid;
+        //thymeleaf js中取值
+        orderid = [[${orderid}]]
+            console.log(orderid);
+        $("#order-id").html(orderid);
+        getOrderById(orderid);
+    });
+
+    function getOrderById(orderid) {
+        $.ajax({
+            url: "/findOrderById",
+            data: {"orderid": orderid},
+            type: "GET",
+            success: function (result) {
+                console.log(result);
+                buildTable(result);
+            }
+        });
+    }
+
+    function buildTable(result) {
+
+        if (result.data.orderCustoms[0].ordertype == 1) {
+            $("#order-type").html(" 进货");
+        } else if (result.data.orderCustoms[0].ordertype == 2) {
+            $("#order-type").html(" 销售");
+        }
+
+        $("#total-money").html(result.data.orderCustoms[0].ordermoney);
+        $("#user-name").html(result.data.orderCustoms[0].user.username);
+        if (result.data.orderCustoms[0].orderremarks != null) {
+            $("#order-remarks").html("备注：" + result.data.orderCustoms[0].orderremarks);
+        }
+        if (result.data.orderCustoms[0].custom != null) {
+            $("#custom-name").html("客户: " + result.data.orderCustoms[0].customer.username);
+        }
+
+        var newDate = new Date(result.data.orderCustoms[0].orderdate);
+        $("#order-date").html(newDate.toLocaleDateString());
+
+
+        $.each(result.data.orderCustoms[0].flows, function (i, item) {
+            var goodsid_td = $("<td></td>").append(item.goodsid);
+            var goodsname_td = $("<td></td>").append(item.goods.goodsname);
+            var goodsnumber_td = $("<td></td>").append(item.goodsnumber);
+            var subtotal_td = $("<td></td>").append(item.subtotal + " 元");
+
+            $("<tr></tr>").append(goodsid_td)
+                .append(goodsname_td)
+                .append(goodsnumber_td)
+                .append(subtotal_td)
+                .appendTo("#flows_tbody");
+        });
+
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.g12.ttxg.mapper.FlowMapper" >
+  <resultMap id="BaseResultMap" type="com.g12.ttxg.pojo.Flow" >
+    <id column="flowid" property="flowid" jdbcType="INTEGER" />
+    <result column="goodsid" property="goodsid" jdbcType="INTEGER" />
+    <result column="goodsnumber" property="goodsnumber" jdbcType="VARCHAR" />
+    <result column="subtotal" property="subtotal" jdbcType="VARCHAR" />
+    <result column="orderid" property="orderid" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    flowid, goodsid, goodsnumber, subtotal, orderid, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.g12.ttxg.pojo.FlowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from flow
+    where flowid = #{flowid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from flow
+    where flowid = #{flowid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.g12.ttxg.pojo.FlowExample" >
+    delete from flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.g12.ttxg.pojo.Flow" >
+    insert into flow (flowid, goodsid, goodsnumber, 
+      subtotal, orderid, state
+      )
+    values (#{flowid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{goodsnumber,jdbcType=VARCHAR}, 
+      #{subtotal,jdbcType=VARCHAR}, #{orderid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.g12.ttxg.pojo.Flow" >
+    insert into flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowid != null" >
+        flowid,
+      </if>
+      <if test="goodsid != null" >
+        goodsid,
+      </if>
+      <if test="goodsnumber != null" >
+        goodsnumber,
+      </if>
+      <if test="subtotal != null" >
+        subtotal,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowid != null" >
+        #{flowid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsnumber != null" >
+        #{goodsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subtotal != null" >
+        #{subtotal,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.g12.ttxg.pojo.FlowExample" resultType="java.lang.Integer" >
+    select count(*) from flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update flow
+    <set >
+      <if test="record.flowid != null" >
+        flowid = #{record.flowid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null" >
+        goodsid = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsnumber != null" >
+        goodsnumber = #{record.goodsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtotal != null" >
+        subtotal = #{record.subtotal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null" >
+        orderid = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update flow
+    set flowid = #{record.flowid,jdbcType=INTEGER},
+      goodsid = #{record.goodsid,jdbcType=INTEGER},
+      goodsnumber = #{record.goodsnumber,jdbcType=VARCHAR},
+      subtotal = #{record.subtotal,jdbcType=VARCHAR},
+      orderid = #{record.orderid,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.g12.ttxg.pojo.Flow" >
+    update flow
+    <set >
+      <if test="goodsid != null" >
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsnumber != null" >
+        goodsnumber = #{goodsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subtotal != null" >
+        subtotal = #{subtotal,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where flowid = #{flowid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.g12.ttxg.pojo.Flow" >
+    update flow
+    set goodsid = #{goodsid,jdbcType=INTEGER},
+      goodsnumber = #{goodsnumber,jdbcType=VARCHAR},
+      subtotal = #{subtotal,jdbcType=VARCHAR},
+      orderid = #{orderid,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR}
+    where flowid = #{flowid,jdbcType=INTEGER}
+  </update>
+
+
+  <!-- ***********批量插入************ -->
+  <insert id="insertFlows" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="flowid" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into flow (goodsid,goodsnumber,subtotal,orderid,state)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.goodsid},#{item.goodsnumber},#{item.subtotal},#{item.orderid},#{item.state})
+    </foreach>
+  </insert>
+
+</mapper>

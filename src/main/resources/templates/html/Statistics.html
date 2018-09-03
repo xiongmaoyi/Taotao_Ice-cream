@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入jquery -->
+    <script src="/js/jquery-3.3.1.js"></script>
+    <!-- 引入bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <!-- 引入aewsome图标库 -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入jquery UI -->
+    <link href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+    <!-- 引入fileinput -->
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/css/fileinput.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/fileinput.js"></script>
+    <!-- 引入frappe-charts 图表插件 -->
+    <script src="https://cdn.bootcss.com/frappe-charts/1.1.0/frappe-charts.min.iife.js"></script>
+    <link href="https://cdn.bootcss.com/frappe-charts/1.1.0/frappe-charts.min.css" rel="stylesheet">
+    <!-- show-page -->
+    <script src="/js/utils/show-page.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded" align="center">
+                <h6>
+                    总收入: <span id="total-in" class="badge badge-secondary fa fa-rmb"></span> |
+                    总支出: <span id="total-out" class="badge badge-secondary fa fa-rmb"></span> |
+                    总利润: <span id="total-my" class="badge badge-secondary fa fa-rmb"></span> |
+                    总销售订单数：<span id="total-sale" class="badge badge-secondary fa fa-file-text-o"></span> |
+                    总进货订单数：<span id="total-purchase" class="badge badge-secondary fa fa-file-text-o"></span>
+                </h6>
+            </div>
+
+        </div>
+    </div>
+    <div class="row"></div>
+    <!-- 卡片包裹图表 -->
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+
+            <div id="chart01"></div>
+
+        </div>
+    </div>
+    <div class="row"></div>
+
+    <!--第二个chart-->
+    <!-- <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+                <div id="chart02"></div>
+        </div>
+    </div> -->
+
+</div>
+
+
+<div class="row"></div>
+
+<!-- ***************************************************************************************************************** -->
+
+
+<!-- ***************************************************************************************************************** -->
+
+
+<script>
+    //--------------------------------------------刷新页面入口--------------------------------------------------------
+
+    var labelsdata = new Array();
+    var ordercount = new Array();
+    var salemoney = new Array();
+
+
+
+
+
+    $(function () {
+        findThreeTotal();
+        findThreeTotalWithMonths();
+        const data_01 = {
+            labels: labelsdata,//labelsdata,
+            datasets: [
+                {
+                    name: "收入",
+                    type: "bar",
+                    values: salemoney,
+                },
+                {
+                    name: "订单数",
+                    type: "bar",
+                    values: ordercount,
+                }/*,
+                {
+                    name: "sale",
+                    type: "line",
+                    values: salemoney,
+                }*/
+            ]
+        }
+
+        const chart_1 = new frappe.Chart("#chart01", { // or a DOM element,
+            // new Chart() in case of ES6 module with above usage
+            title: "近月雪糕营收",
+            data: data_01,
+            type: 'bar', // 条形图 'bar',折线图 'line', 'scatter', 屏图'pie', 条形占比 'percentage'，axis-mixed
+            height: 250,
+            colors: ['#7cd6fd', '#743ee2'/*,'#7cd6fd'*/]
+        })
+
+
+    });
+
+    /**
+     * 展示收入支出利润订单数
+     */
+    function findThreeTotal() {
+        $.ajax({
+            url: "/findThreeTotal",
+            type: "GET",
+            success: function (result) {
+                console.log(result);
+                var totalIn = result.data.threeTotal[1].summoney;
+                var totalOut = result.data.threeTotal[0].summoney;
+                var totalMy = totalIn - totalOut;
+                var totalSale = result.data.threeTotal[1].ordercount;
+                var totalPurchase = result.data.threeTotal[0].ordercount;
+                $("#total-in").text(totalIn.toFixed(2));
+                $("#total-out").text(totalOut.toFixed(2));
+                $("#total-my").text(totalMy.toFixed(2));
+                $("#total-sale").text(totalSale);
+                $("#total-purchase").text(totalPurchase);
+            }
+        });
+    }
+
+
+    /**
+     * 显示图标
+     */
+    function findThreeTotalWithMonths() {
+        $.ajax({
+            url: "/findThreeTotalWithMonths",
+            type: "GET",
+            success: function (result) {
+                console.log(result);
+
+                $.each(result.data.chartBar, function (i, item) {
+                    //向列表开头插入元素		
+                    labelsdata.unshift(item.time);
+
+                    ordercount.unshift(item.ordercount);
+                    salemoney.unshift(item.summoney.toFixed(2));
+
+                });
+                console.log(salemoney);
+               // console.log(ordercount);
+                console.log(labelsdata);
+            }
+        });
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

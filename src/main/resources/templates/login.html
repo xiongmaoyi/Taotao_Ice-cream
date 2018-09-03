@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>用户登录</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <script src="js/bootstrap.js"></script>
+
+    <!--小图标-->
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet">
+
+</head>
+<body>
+<h4 th:text="${msg}"></h4>
+<div class="htmleaf-container" id="ctctn">
+    <div
+            style="text-align:center;margin:0 0; font:normal 14px/24px 'MicroSoft YaHei';color:#000000;padding: 50px">
+        <h1>涛涛雪糕管理系统</h1>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <h1>Taotao ice-cream factory management system</h1>
+
+            <form action="/login" method="post">
+                <input type="text" id="username" placeholder="Username"
+                       name="username"> <input type="password" id="password"
+                                               placeholder="Password" name="password">
+                <button type="submit" class="login-button">Login</button>
+                <br>
+                <br>
+                <a href="user/logout"><span class="badge badge-info">Logout</span></a>
+            </form>
+
+        </div>
+
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+
+<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+    $('#login-button').click(function (event) {
+        event.preventDefault();
+        $('form').fadeOut(500);
+        $('.wrapper').addClass('form-success');
+    });
+</script>
+
+
+<script>
+    function notNullFunction() {
+        var x = document.getElementById("username").value;
+        var y = document.getElementById("password").value;
+
+        if (x == "" || y == "" || z == "") {
+            alert("请输入用户名和密码");
+            return false;
+        }
+    }
+
+    $(function () {
+
+        $("div").css("height", "100%");
+
+    })
+
+
+</script>
+
+
+</body>
+</html>
