@@ -307,7 +307,7 @@
     function deleteByIds(ids) {
 
         $.ajax({
-            url: "/TTXG/deleteBrandById/" + ids,
+            url: "/deleteBrandById/" + ids,
             type: "DELETE",
             success: function (result) {
                 toPage(currentPage);
@@ -413,7 +413,7 @@
     function validate_brandName() {
         var data = {"brandname": $("#write_brandname").val()};
         $.ajax({
-            url: "/TTXG/checkBrandName",
+            url: "/checkBrandName",
             data: data,
             type: "POST",
             success: function (result) {
@@ -450,7 +450,7 @@
         }
 
         $.ajax({
-            url: "/TTXG/addBrand",
+            url: "/addBrand",
             data: data,
             type: "POST",
             success: function (result) {
@@ -504,7 +504,7 @@
 
     function getBrandById(id) {
         $.ajax({
-            url: "/TTXG/getBrandById/" + id,
+            url: "/getBrandById/" + id,
             type: "GET",
             success: function (result) {
                 //数据回显
@@ -525,7 +525,7 @@
         }
         //发送put请求
         $.ajax({
-            url: "/TTXG/updateBrandById/" + $(this).attr("brand-id"),
+            url: "/updateBrandById/" + $(this).attr("brand-id"),
             data: data,
             type: "POST",
             success: function (result) {
