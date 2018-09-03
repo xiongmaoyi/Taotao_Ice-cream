@@ -19,8 +19,4 @@
 - Spring 5.0.8
 - MyBatis 3.4.6
 - Shiro 1.4.0
-<<<<<<< HEAD
-- Pagehelper 1.3.2
-=======
-- Pagehelper 1.3.2
->>>>>>> f0004ed0bc5436a4460cfe01077c985397064f73
+- pagehelper 1.3.2
