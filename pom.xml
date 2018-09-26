@@ -143,6 +143,30 @@
 					<includeSystemScope>true</includeSystemScope>
 				</configuration>
 			</plugin>
+			<!--assembly 服务化打包插件-->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+
+
 
 
 			<!-- mybatis generator 自动生成代码插件 不用的时候记得注释掉 -->
