@@ -1,4 +1,5 @@
-# 配置git忽略文件
-.idea
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+logs/
+target/
 *.iml
-target
