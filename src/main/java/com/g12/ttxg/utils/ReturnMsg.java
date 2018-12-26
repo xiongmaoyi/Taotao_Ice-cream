@@ -10,11 +10,17 @@ import java.util.Map;
  */
 
 public class ReturnMsg {
-	//自己定义的状态吗
+	/**
+	 * 自己定义的状态吗
+	 */
 	private int code;
-	//提示信息
+	/**
+	 * 提示信息
+	 */
 	private String msg;
-	//用户要返回浏览器的数据
+	/**
+	 * 用户要返回浏览器的数据
+	 */
 	private Map<String,Object> data = new HashMap<String, Object>();
 
 	/**
@@ -40,7 +46,6 @@ public class ReturnMsg {
 		resultMsg.setMsg("处理失败");
 		return resultMsg;
 	}
-
 	/**
 	 * 添加数据
 	 * @param key
@@ -48,13 +53,11 @@ public class ReturnMsg {
 	 * @return
 	 */
 
-
 	public ReturnMsg add(String key,Object value){
 		this.data.put(key, value);
 		return this;
 	}
-	
-	
+
 	public int getCode() {
 		return code;
 	}
