@@ -73,28 +73,20 @@
 		</dependency>
 		<!--thymeleaf中使用shiro标签-->
 		<!-- https://mvnrepository.com/artifact/com.github.theborakompanioni/thymeleaf-extras-shiro -->
-		<!--<dependency>
+		<dependency>
 			<groupId>com.github.theborakompanioni</groupId>
 			<artifactId>thymeleaf-extras-shiro</artifactId>
 			<version>2.0.0</version>
-		</dependency>-->
+		</dependency>
 		<!--maven仓库引入失败，自己下载引入-->
-		<dependency>
+		<!--<dependency>
 			<groupId>com.github.theborakompanioni</groupId>
 			<artifactId>thymeleaf-extras-shiro</artifactId>
 			<version>2.0.0</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/lib/thymeleaf-extras-shiro-2.0.0.jar</systemPath>
-		</dependency>
+		</dependency>-->
 
-
-
-
-		<!--thymeleaf-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
@@ -142,16 +134,16 @@
 
 
 		<!-- =================================SpringCloud 微服务支持============================== -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-		<!--@EnableFeignClients-->
+		&lt;!&ndash;@EnableFeignClients&ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
-		<!--熔断相关-->
+		&lt;!&ndash;熔断相关&ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
@@ -160,16 +152,16 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
 		</dependency>
-		<!--获取分布式配置信息-->
+		&lt;!&ndash;获取分布式配置信息&ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
-		<!--refresh主动感知分布式配置的变化-->
+		&lt;!&ndash;refresh主动感知分布式配置的变化&ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+		</dependency>-->
 		<!-- ================================= cloud-end  ============================== -->
 
 
@@ -193,19 +185,56 @@
 
 
 	<build>
+
+		<!--打包时的配置 平时开发时注释掉-->
+		<finalName>${project.name}-${project.version}</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.directory}</targetPath>
+				<excludes>
+					<exclude>**/*.xml</exclude>
+					<exclude>**/*.properties</exclude>
+					<exclude>**/*</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+
+
+
+
 		<plugins>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<includeSystemScope>true</includeSystemScope>
 				</configuration>
+			</plugin>-->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
 			</plugin>
 			<!--assembly 服务化打包插件-->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>2.4.1</version>
 				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
 					<descriptors>
 						<descriptor>src/main/assembly/assembly.xml</descriptor>
 					</descriptors>

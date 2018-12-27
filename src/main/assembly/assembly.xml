@@ -1,33 +1,46 @@
 <assembly>
-    <id>1.0</id>
+    <id>bin</id>
     <formats>
-        <format>tar.gz</format>
+        <format>tar</format>
     </formats>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
     <fileSets>
         <fileSet>
-            <directory>src/main/assembly/bin</directory>
-            <outputDirectory>bin</outputDirectory>
-            <fileMode>0755</fileMode>
-        </fileSet>
-        <fileSet>
-            <directory>src/main/assembly/config</directory>
-            <outputDirectory>config</outputDirectory>
-            <fileMode>0644</fileMode>
-        </fileSet>
-        <fileSet>
-            <directory>target</directory>
-            <outputDirectory>lib</outputDirectory>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>/conf</outputDirectory>
             <includes>
-                <include>*.jar</include>
+                <include>**/*</include>
+                <include>*</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>src/main/resources</directory>
-            <outputDirectory>logs</outputDirectory>
-            <fileMode>0755</fileMode>
-            <excludes>
-                <exclude>**/*</exclude>
-            </excludes>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>/errBackup</outputDirectory>
+            <includes>
+                <include>readme.md</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <fileMode>755</fileMode>
+            <directory>${project.basedir}/src/main/scripts</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>startup.sh</include>
+                <include>shutdown.sh</include>
+            </includes>
         </fileSet>
     </fileSets>
 </assembly>
