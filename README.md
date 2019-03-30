@@ -1,5 +1,5 @@
 # Taotao_Ice-cream
-
+<a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg"></a>
 #### Maven管理的基于SSM框架的 涛涛糕管理系统
 
 前端应用的库与接口
